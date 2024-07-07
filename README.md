@@ -364,7 +364,7 @@ The correct answer is:
 
 **[⬆ Back to Top](#table-of-contents)**
 
-### You want to run a single caching HTTP reverse proxy on GCP for a latency-sensitive website. This specific reverse proxy consumes almost no CPU. You want to have a 30-GB in-memory cache, and need an additional 2 GB of memory for the rest of the processes. You want to minimize cost. How should you run this reverse proxy?
+### You want to run a single caching HTTP reverse proxy on GCP for a latency-sensitive website. This specific reverse proxy consumes almost no CPU. You want to have a 30-GB in-memory cache, and need an additional 2 GB of memory for the rest of the processes. You want to minimize cost. How should you run this reverse proxy?  -----------------Issue
 
 - [x] Create a Cloud Memorystore for Redis instance with 32-GB capacity.
 - [ ] Run it on Compute Engine, and choose a custom instance type with 6 vCPUs and 32 GB of memory.
@@ -455,6 +455,25 @@ The correct answer is:
 - [ ] Configure the storage bucket as a static website and furnish the object's URL to the company. Delete the object from the storage bucket after four hours.
 - [ ] Create a new Cloud Storage bucket specifically for the external company to access. Copy the object to that bucket. Delete the bucket after four hours have passed.
 
+The correct answer is:
+
+1. **Create a signed URL with a four-hour expiration and share the URL with the company**.
+
+### Explanation of why other options are wrong:
+
+2. **Set object access to 'public' and use object lifecycle management to remove the object after four hours**:
+   - **Reason for being wrong**: Setting the object access to 'public' exposes the sensitive data to anyone with the object's URL, not just the intended external company. This approach violates the requirement to securely share the data and does not provide fine-grained access control. Object lifecycle management alone does not revoke public access after a specified time.
+
+3. **Configure the storage bucket as a static website and furnish the object's URL to the company. Delete the object from the storage bucket after four hours**:
+   - **Reason for being wrong**: Similar to option 2, configuring the bucket as a static website makes the object publicly accessible. Deleting the object after four hours does not prevent unauthorized access during the initial sharing period. This method does not ensure the secure sharing of sensitive data.
+
+4. **Create a new Cloud Storage bucket specifically for the external company to access. Copy the object to that bucket. Delete the bucket after four hours have passed**:
+   - **Reason for being wrong**: This option involves unnecessary steps and complexity. Creating a new bucket and copying the object introduces additional management overhead and does not guarantee secure sharing or automatic revocation of access after four hours. It's not the most straightforward or efficient method for temporary access to a single object.
+
+### Why Option 1 is correct:
+
+- **Create a signed URL with a four-hour expiration and share the URL with the company**: A signed URL is a secure method to grant time-limited access to individual objects in Cloud Storage without requiring the recipient to have a Google account. By creating a signed URL with a four-hour expiration, you ensure that the external company can access the object securely and only within the specified time frame. This method adheres to best practices for securely sharing sensitive data while minimizing administrative steps and ensuring access control.
+  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to create an autoscaling Managed Instance Group for an HTTPS web application. You want to make sure that unhealthy VMs are recreated. What should you do?
@@ -463,6 +482,25 @@ The correct answer is:
 - [ ] Select Multi-Zone instead of Single-Zone when creating the Managed Instance Group.
 - [ ] In the Instance Template, add the label 'health-check'.
 - [ ] In the Instance Template, add a startup script that sends a heartbeat to the metadata server.
+
+The correct answer is:
+
+1. **Create a health check on port 443 and use that when creating the Managed Instance Group**.
+
+### Explanation of why other options are wrong:
+
+2. **Select Multi-Zone instead of Single-Zone when creating the Managed Instance Group**:
+   - **Reason for being wrong**: Choosing Multi-Zone instead of Single-Zone affects the availability and distribution of instances across multiple zones, but it does not directly address the requirement to recreate unhealthy VMs. Multi-Zone configuration improves availability but does not ensure VM replacement or health monitoring directly.
+
+3. **In the Instance Template, add the label 'health-check'**:
+   - **Reason for being wrong**: Adding a label to the instance template does not configure health checks or provide mechanisms for monitoring instance health. Labels are metadata tags used for organizational purposes and do not influence autoscaling behavior or VM health monitoring directly.
+
+4. **In the Instance Template, add a startup script that sends a heartbeat to the metadata server**:
+   - **Reason for being wrong**: While a startup script could potentially be used to monitor instance health, it is not a recommended method for managing VM health checks and autoscaling. Google Cloud Platform provides dedicated health check mechanisms (such as HTTP/S health checks) that are specifically designed for monitoring the health of instances in Managed Instance Groups. Using custom scripts for health monitoring adds complexity and does not leverage built-in Google Cloud services effectively.
+
+### Why Option 1 is correct:
+
+- **Create a health check on port 443 and use that when creating the Managed Instance Group**: Google Cloud allows you to create HTTP or HTTPS health checks that periodically verify that instances are responding to requests correctly. When you associate such a health check with a Managed Instance Group, instances failing health checks are automatically detected as unhealthy. The Managed Instance Group then terminates unhealthy instances and creates new ones to maintain the desired number of healthy instances, ensuring the availability and reliability of the HTTPS web application. This approach is the recommended way to handle VM replacement for unhealthy instances in autoscaling Managed Instance Groups.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -473,6 +511,13 @@ The correct answer is:
 - [ ] Set autoscaling to On, set the minimum number of instances to 1, and then set the maximum number of instances to 2.
 - [ ] Set autoscaling to Off, set the minimum number of instances to 1, and then set the maximum number of instances to 2.
 
+**Option 1: Set autoscaling to On, set the minimum number of instances to 1, and then set the maximum number of instances to 1**
+**Autoscaling Behavior:** Even though both the minimum and maximum instances are set to 1, having autoscaling enabled means that if the single instance in the Managed Instance Group fails (becomes unhealthy), Google Cloud Platform (GCP) will automatically detect this and replace the failed instance with a new one.
+
+**Failure Recovery:** This configuration ensures that your application remains resilient to instance failures. The autoscaler continuously monitors the health of instances using health checks. If it detects that the instance has failed or is unhealthy based on the configured health checks, it terminates the failed instance and starts a new one to maintain the desired instance count.
+
+**Operational Continuity:** By utilizing autoscaling in this way, you benefit from automated instance replacement without manual intervention. This helps in maintaining the application's availability and ensures that the instance group always runs the specified number of instances.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have production and test workloads that you want to deploy on Compute Engine. Production VMs need to be in a different subnet than the test VMs. All the VMs must be able to reach each other over internal IP without creating additional routes. You need to set up VPC and the 2 subnets. Which configuration meets these requirements?
@@ -482,14 +527,66 @@ The correct answer is:
 - [ ] Create 2 custom VPCs, each with a single subnet. Create each subnet is a different region and with a different CIDR range.
 - [ ] Create 2 custom VPCs, each with a single subnet. Create each subnet in the same region and with the same CIDR range.
 
+The correct answer is:
+
+1. **Create a single custom VPC with 2 subnets. Create each subnet in a different region and with a different CIDR range.**
+
+### Explanation of why other options are wrong:
+
+2. **Create a single custom VPC with 2 subnets. Create each subnet in the same region and with the same CIDR range**:
+   - **Reason for being wrong**: Subnets within the same region must have unique CIDR ranges to avoid overlap. Having the same CIDR range for both subnets would result in an overlapping IP address space, which is not allowed within a single VPC.
+
+3. **Create 2 custom VPCs, each with a single subnet. Create each subnet in a different region and with a different CIDR range**:
+   - **Reason for being wrong**: This option unnecessarily creates two separate VPCs, which complicates network administration and does not meet the requirement of having all VMs (production and test) within the same network for internal communication. The requirement specifies using a single VPC.
+
+4. **Create 2 custom VPCs, each with a single subnet. Create each subnet in the same region and with the same CIDR range**:
+   - **Reason for being wrong**: Similar to option 2, having the same CIDR range for subnets in the same region would lead to overlapping IP address spaces, which is not allowed within a single VPC. This configuration does not satisfy the requirement of having distinct subnets for production and test workloads within the same VPC.
+
+### Why Option 1 is correct:
+
+- **Single VPC**: By creating a single custom VPC, you centralize network management and allow all VMs (both production and test) to communicate internally using internal IP addresses without additional routes.
+
+- **Different Regions**: Placing each subnet in a different region ensures geographical separation, which might be necessary for disaster recovery or compliance reasons.
+
+- **Different CIDR Ranges**: Assigning different CIDR ranges to each subnet within the VPC prevents IP address conflicts and ensures that each subnet has its own unique address space, meeting the requirement for separate subnets for production and test workloads.
+
+### Conclusion:
+
+Option 1 is the correct choice because it aligns with best practices for VPC design by using a single VPC with multiple subnets, each with unique CIDR ranges and potentially located in different regions. This setup facilitates internal communication between VMs while maintaining network isolation and addressing requirements for both production and test environments.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### You have an instance group that you want to load balance. You want the load balancer to terminate the client SSL session. The instance group is used to serve a public web application over HTTPS. You want to follow Google-recommended practices. What should you do?
+### You have an instance group that you want to load balance. You want the load balancer to terminate the client SSL session. The instance group is used to serve a public web application over HTTPS. You want to follow Google-recommended practices. What should you do?   -----------------Issue
 
 - [x] Configure an HTTP(S) load balancer.
 - [ ] Configure an internal TCP load balancer.
 - [ ] Configure an external SSL proxy load balancer.
 - [ ] Configure an external TCP proxy load balancer.
+
+The correct answer is:
+
+3. **Configure an external SSL proxy load balancer.**
+
+### Explanation of why other options are wrong:
+
+1. **Configure an HTTP(S) load balancer**:
+   - **Reason for being wrong**: While an HTTP(S) load balancer can terminate SSL/TLS connections, it terminates them at the load balancer level itself. If you specifically want the load balancer to terminate the SSL session and pass unencrypted traffic to the backend instances (often for performance or security inspection reasons), an external SSL proxy load balancer is more appropriate.
+
+2. **Configure an internal TCP load balancer**:
+   - **Reason for being wrong**: Internal TCP load balancers are used for internal, non-public facing applications where SSL termination is typically handled by the backend instances themselves. It doesn't terminate SSL sessions at the load balancer level.
+
+4. **Configure an external TCP proxy load balancer**:
+   - **Reason for being wrong**: TCP proxy load balancers do not terminate SSL sessions; they pass SSL traffic through without inspecting or modifying it. If SSL termination at the load balancer level is required, an SSL proxy load balancer is the correct choice.
+
+### Why Option 3 is correct:
+
+- **External SSL Proxy Load Balancer**: This type of load balancer is designed to terminate SSL/TLS sessions at the load balancer itself. It decrypts incoming HTTPS requests, inspects or modifies them if necessary, and then forwards the traffic to the backend instances over a separate, possibly unencrypted connection. This setup allows for central management of SSL certificates, offloading SSL processing from backend instances, and potentially improving performance by reducing the workload on the instances.
+
+- **Google-recommended Practice**: Google Cloud Platform recommends using SSL proxy load balancers for terminating SSL/TLS sessions at the load balancer level, especially for public-facing web applications that require HTTPS. It provides enhanced security features and flexibility in managing SSL certificates and traffic.
+
+### Conclusion:
+
+Configuring an external SSL proxy load balancer ensures that SSL/TLS sessions are terminated at the load balancer, adhering to Google-recommended practices for managing SSL/TLS termination in a scalable and secure manner for public web applications served over HTTPS.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -499,6 +596,33 @@ The correct answer is:
 - [x] Perform a rolling-action start-update with maxSurge set to 1 and maxUnavailable set to 0.
 - [ ] Create a new Managed Instance Group with an updated instance template. Add the group to the backend service for the load balancer. When all instances in the new Managed Instance Group are healthy, delete the old Managed Instance Group.
 - [ ] Create a new instance template with the new application version. Update the existing Managed Instance Group with the new instance template. Delete the instances in the Managed Instance Group to allow the Managed Instance Group to recreate the instance using the new instance template.
+
+The correct answer is:
+
+2. **Perform a rolling-action start-update with maxSurge set to 1 and maxUnavailable set to 0.**
+
+### Explanation of why other options are wrong:
+
+1. **Perform a rolling-action start-update with maxSurge set to 0 and maxUnavailable set to 1**:
+   - **Reason for being wrong**: Setting `maxSurge` to 0 means no additional instances can be created beyond the current capacity, which prevents scaling up to accommodate the new version. Additionally, setting `maxUnavailable` to 1 would allow one instance to be unavailable at a time, potentially reducing capacity during the deployment.
+
+3. **Create a new Managed Instance Group with an updated instance template**:
+   - **Reason for being wrong**: This approach involves creating a completely new Managed Instance Group and adding it to the backend service. It does not ensure that the available capacity remains constant during deployment, as the new group would need to scale up and the old group would likely be deleted after all instances are healthy in the new group, causing potential fluctuations in capacity.
+
+4. **Create a new instance template and update the existing Managed Instance Group**:
+   - **Reason for being wrong**: This option involves updating the instance template of the existing Managed Instance Group and deleting instances to recreate them with the new template. This process can lead to temporary decreases in available capacity during the deployment, which is contrary to the requirement of maintaining constant capacity.
+
+### Why Option 2 is correct:
+
+- **Rolling Update with `maxSurge` and `maxUnavailable` settings**: This approach allows for a controlled deployment of the new application version while ensuring that the available capacity does not decrease:
+  - `maxSurge` set to 1 allows the Managed Instance Group to temporarily increase its size by one instance above the desired capacity, ensuring that there is room to deploy new instances with the updated application version.
+  - `maxUnavailable` set to 0 ensures that no instances are taken offline at any time during the update process, maintaining the current capacity of the Managed Instance Group.
+
+- **Gradual Deployment**: The rolling update strategy ensures that new instances with the updated application version are gradually rolled out, while old instances are gradually replaced. This minimizes disruption to the availability and capacity of the web application during the deployment process.
+
+### Conclusion:
+
+Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavailable` set to 0 is the recommended approach to ensure a smooth deployment of a new application version in a Managed Instance Group while maintaining constant available capacity. This method adheres to best practices for minimizing downtime and ensuring service continuity during updates.
 
 **[⬆ Back to Top](#table-of-contents)**
 
