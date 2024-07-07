@@ -288,6 +288,26 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
 - [ ] Execute the Deployment Manager template against a separate project with the same configuration, and monitor for failures.
 - [x] Execute the Deployment Manager template using the C-preview option in the same project, and observe the state of interdependent resources.
 
+The correct answer is:
+
+4. **Execute the Deployment Manager template using the `--preview` option in the same project, and observe the state of interdependent resources**.
+
+### Explanation of why other options are less optimal:
+
+1. **Use granular logging statements within a Deployment Manager template authored in Python**:
+   - **Reason for being less optimal**: Granular logging can help understand the flow and catch specific errors, but it does not provide a high-level overview of the entire deployment's state or the dependencies between resources. It also requires going through potentially large amounts of log data, which is not the quickest method for confirming dependencies.
+
+2. **Monitor activity of the Deployment Manager execution on the Stackdriver Logging page of the GCP Console**:
+   - **Reason for being less optimal**: This method helps monitor deployments in real-time but only after the deployment has started. It doesn't provide a pre-deployment check to ensure that all dependencies are properly configured, meaning issues are only detected during or after the deployment process, not before.
+
+3. **Execute the Deployment Manager template against a separate project with the same configuration, and monitor for failures**:
+   - **Reason for being less optimal**: While testing in a separate project can help identify issues, it involves setting up and maintaining a duplicate project environment, which is time-consuming and complex. This approach also delays feedback compared to using the `--preview` option, which provides immediate insights within the same project environment without actual changes.
+
+4. **Execute the Deployment Manager template using the `--preview` option in the same project, and observe the state of interdependent resources**:
+   - **Reason for being optimal**: The `--preview` option is specifically designed to provide a dry-run of the deployment, showing what changes would be made and how resources would be affected without actually applying those changes. This allows for rapid feedback on the overall deployment plan and ensures that all resource dependencies are correctly defined and met before any actual deployment occurs.
+
+In summary, the `--preview` option gives the fastest and most effective way to confirm resource dependencies and deployment outcomes without making any real changes to the project, making it the best choice for this scenario.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company has a 3-tier solution running on Compute Engine. The configuration of the current infrastructure is shown below. Each tier has a service account that is associated with all instances within it. You need to enable communication on TCP port 8080 between tiers as follows: Instances in tier #1 must communicate with tier #2. Instances in tier #2 must communicate with tier #3. What should you do?
