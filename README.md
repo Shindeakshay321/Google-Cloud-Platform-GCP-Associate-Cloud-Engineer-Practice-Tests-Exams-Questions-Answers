@@ -1990,6 +1990,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a new service with the new version of the application. Add HTTP Load Balancer in front of both services.
 - [ ] Create a new revision with the new version of the application. Add HTTP Load Balancer in front of both revisions.
 
+
+The correct answer is:
+
+**2. Create a new revision with the new version of the application. Split traffic between this version and the version that is currently running.**
+
+### Explanation:
+
+**Option 2: Create a new revision with the new version of the application. Split traffic between this version and the version that is currently running.**
+- **Revision and Traffic Split:** Cloud Run allows you to deploy multiple revisions of your application. You can create a new revision with the updated version of your application. When you deploy a new revision, you can control the amount of traffic that is routed to it using traffic splitting.
+- **Canary Deployment:** By splitting traffic, you can gradually increase the percentage of users who are directed to the new revision (canary deployment). This allows you to evaluate the new version in production with a subset of users before rolling it out fully.
+- **Managed Traffic Splitting:** Cloud Run manages the traffic splitting for you, making it easy to control how much traffic goes to each revision.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Create a new service with the new version of the application. Split traffic between this version and the version that is currently running.**
+- In Cloud Run, services are logical groupings of revisions. You typically use services to represent different components or functionalities of your application. Creating a new service would not directly allow you to split traffic between different versions (revisions) of the same application.
+
+**Option 3: Create a new service with the new version of the application. Add HTTP Load Balancer in front of both services.**
+- While you can use HTTP Load Balancer with Cloud Run, it is typically used to distribute traffic across multiple Cloud Run services or to expose Cloud Run services externally. This option is not necessary for performing canary deployments within a single service with multiple revisions.
+
+**Option 4: Create a new revision with the new version of the application. Add HTTP Load Balancer in front of both revisions.**
+- Cloud Run itself manages traffic routing and load balancing for revisions within a service. There is no need to manually add an HTTP Load Balancer in front of individual revisions. Cloud Run's built-in traffic splitting feature handles this functionality.
+
+### Conclusion:
+
+Option 2 is the correct approach because it leverages Cloud Run's built-in capabilities to create and manage revisions of your application, allowing you to perform canary deployments by controlling traffic splitting between versions. This method is straightforward, aligns with best practices for deploying applications on Cloud Run, and provides the flexibility to evaluate updates with a subset of production users before full deployment.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company developed a mobile game that is deployed on Google Cloud. Gamers are connecting to the game with their personal phones over the Internet. The game sends UDP packets to update the servers about the gamers' actions while they are playing in multiplayer mode. Your game backend can scale over multiple Virtual Machines (VMs), and you want to expose the VMs over a single IP address. What should you do?
@@ -1998,6 +2025,40 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Configure an Internal UDP load balancer in front of the application servers.
 - [ ] Configure an External HTTP(s) load balancer in front of the application servers.
 - [x] Configure an External Network load balancer in front of the application servers.
+
+The most suitable option for your scenario is:
+
+**D. Configure an External Network load balancer in front of the application servers.**
+
+### Explanation:
+
+**Option D: Configure an External Network load balancer:**
+- **UDP Protocol Support:** External Network load balancers in Google Cloud support UDP traffic, which is essential for handling the UDP packets sent by gamers' phones to update the game servers about their actions.
+- **Single IP Address:** This type of load balancer provides a single global IP address, which can simplify the configuration for gamers connecting from personal phones over the Internet.
+- **Scalability:** Network load balancers are designed to handle high-performance, scalable applications, making them suitable for a game backend that needs to scale across multiple VM instances.
+
+**Why Option D is the Best Choice:**
+- **UDP Protocol:** Since your game sends UDP packets to update servers about gamers' actions, you specifically need a load balancer that can handle UDP traffic.
+- **Single IP Address:** It provides a consistent endpoint for gamers to connect to, simplifying client configuration and management.
+- **Performance:** Network load balancers are optimized for handling network traffic with minimal latency, which is crucial for real-time applications like multiplayer games.
+
+**Why Other Options are Wrong:**
+
+**Option A: Configure an SSL Proxy load balancer:**
+- SSL Proxy load balancers are designed for handling SSL/TLS traffic and terminating SSL connections. They are not suitable for UDP traffic, as they do not support UDP protocol.
+- This option would not meet your requirement to handle UDP packets from gamers' phones.
+
+**Option B: Configure an Internal UDP load balancer:**
+- Internal UDP load balancers are designed for routing UDP traffic within a Virtual Private Cloud (VPC) network. They are not intended for handling UDP traffic from external clients over the Internet.
+- This option is not suitable because it does not expose the VMs to external clients like gamers' phones.
+
+**Option C: Configure an External HTTP(s) load balancer:**
+- HTTP(s) load balancers are designed for HTTP/HTTPS traffic and do not support UDP protocol.
+- This option would not work for your game backend, which relies on UDP packets for real-time updates.
+
+### Conclusion:
+
+Configuring an External Network load balancer (Option D) ensures that your game backend can efficiently handle UDP traffic from gamers' phones over the Internet, while providing scalability and a single IP address endpoint. This solution aligns with the requirements of exposing your VMs over a single IP address for your multiplayer game deployed on Google Cloud.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -2008,6 +2069,46 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Create a script that uses the gsutil command line interface to synchronize the on-premises storage with Cloud Storage. Schedule the script as a cron job.
 - [ ] In the Cloud Console, go to Cloud Storage. Upload the relevant images to the appropriate bucket.
 
+
+Given the scenario, the most suitable solution is:
+
+**3. Create a script that uses the `gsutil` command line interface to synchronize the on-premises storage with Cloud Storage. Schedule the script as a cron job.**
+
+### Explanation:
+
+**Option 1:** Creating a Pub/Sub topic and enabling a Cloud Storage trigger is more suited for real-time event-driven architectures and assumes you have a cloud-native way to send images to Pub/Sub. It does not directly address the need for an automated process to handle new images from an on-premises environment.
+
+**Option 2:** Deploying a Dataflow job from Datastore to Cloud Storage is not suitable since your images are stored on-premises and not in Datastore. Dataflow is also more complex and generally used for large-scale data processing pipelines, which may be overkill for this task.
+
+**Option 3:** This involves creating a script that uses the `gsutil` command to synchronize files between your on-premises storage and Cloud Storage. Scheduling this script as a cron job ensures that the synchronization happens at regular intervals automatically. This is a straightforward and efficient way to automate the upload of new images from your on-premises environment to Cloud Storage.
+
+**Option 4:** Manually uploading images through the Cloud Console does not automate the process and is not practical for ongoing operations.
+
+### Why Option 3 is the Best Choice:
+- **Automation:** Scheduling the script ensures that the process runs automatically without manual intervention.
+- **Ease of Use:** The `gsutil` command is specifically designed for interacting with Cloud Storage and can efficiently handle file uploads.
+- **Synchronization:** The `gsutil rsync` command can synchronize directories, making sure only new or changed files are uploaded.
+- **Scalability:** This method can easily scale with the number of images, as the `gsutil` command is capable of handling large volumes of data.
+
+### Implementation Steps:
+1. **Write the Script:**
+    ```bash
+    #!/bin/bash
+    gsutil rsync -r /path/to/local/images gs://your-cloud-storage-bucket
+    ```
+
+2. **Schedule the Script:**
+   - Open the crontab file:
+     ```bash
+     crontab -e
+     ```
+   - Add a cron job to run the script at your desired interval, for example, daily at midnight:
+     ```bash
+     0 0 * * * /path/to/your/script.sh
+     ```
+
+This will ensure that your medical images are regularly uploaded to Cloud Storage, automating the archival process as required.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your auditor wants to view your organization's use of data in Google Cloud. The auditor is most interested in auditing who accessed data in Cloud Storage buckets. You need to help the auditor access the data they need. What should you do?
@@ -2016,6 +2117,22 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Assign the appropriate permissions, and then create a Data Studio report on Admin Activity Audit Logs.
 - [ ] Assign the appropriate permissions, and the use Cloud Monitoring to review metrics.
 - [ ] Use the export logs API to provide the Admin Activity Audit Logs in the format they want.
+
+To help the auditor view your organization's use of data in Google Cloud, particularly who accessed data in Cloud Storage buckets, the most appropriate action would be:
+
+**1. Turn on Data Access Logs for the buckets they want to audit, and then build a query in the log viewer that filters on Cloud Storage.**
+
+**Explanation:**
+- **Data Access Logs:** By enabling Data Access Logs for Cloud Storage buckets, you can capture detailed information about operations performed on objects within those buckets. This includes who accessed the data, when they accessed it, and from where.
+- **Log Viewer Query:** After enabling Data Access Logs, you can use the Google Cloud Console's Log Viewer to filter and query these logs specifically for Cloud Storage operations. This allows you to generate reports and queries that detail access to data within the specified buckets.
+- This method directly addresses the auditor's interest in auditing who accessed data in Cloud Storage, providing granular visibility into access events.
+
+**Why the Other Options are Not Suitable:**
+- **Option 2 (Admin Activity Audit Logs in Data Studio):** Admin Activity Audit Logs primarily focus on administrative actions related to Google Cloud resources and services, rather than granular data access events within Cloud Storage.
+- **Option 3 (Cloud Monitoring for Metrics):** Cloud Monitoring provides metrics and monitoring data related to performance and health of Google Cloud resources, but it does not provide detailed logs specifically tailored for auditing data access in Cloud Storage.
+- **Option 4 (Export Logs API for Admin Activity Audit Logs):** While you can export logs using APIs, Admin Activity Audit Logs focus on administrative actions rather than data access in Cloud Storage, which may not meet the auditor's specific requirement for data access auditing.
+
+Therefore, **Option 1** is the most appropriate choice as it directly enables and utilizes Data Access Logs for Cloud Storage to facilitate auditing of data access events, aligning closely with the auditor's needs.
 
 **[⬆ Back to Top](#table-of-contents)**
 
