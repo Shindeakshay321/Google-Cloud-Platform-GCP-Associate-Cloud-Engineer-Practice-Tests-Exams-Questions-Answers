@@ -258,7 +258,26 @@ By using BigQuery, you can perform sophisticated analysis with high performance 
 - [ ] Use Deployment Manager to deploy your application. Rely on the automatic enablement of all APIs used by the application being deployed.
 - [ ] Grant the App Engine Default service account the role of Cloud Pub/Sub Admin. Have your application enable the API on the first connection to Cloud Pub/Sub.
 
+The correct answer is:
 
+1. **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**.
+
+### Explanation of why other options are wrong:
+
+2. **Rely on the automatic enablement of the Cloud Pub/Sub API when the Service Account accesses it**:
+   - **Reason for being wrong**: APIs are not automatically enabled when a service account accesses them. Service accounts authenticate requests, but they do not enable APIs. You must manually enable the Cloud Pub/Sub API in the API Library.
+
+3. **Use Deployment Manager to deploy your application. Rely on the automatic enablement of all APIs used by the application being deployed**:
+   - **Reason for being wrong**: Deployment Manager can deploy resources and set up configurations, but it does not automatically enable APIs that are required by your application. You need to explicitly enable the Cloud Pub/Sub API regardless of how you deploy your application.
+
+4. **Grant the App Engine Default service account the role of Cloud Pub/Sub Admin. Have your application enable the API on the first connection to Cloud Pub/Sub**:
+   - **Reason for being wrong**: Granting the Cloud Pub/Sub Admin role to the service account is excessive privilege for enabling an API. Additionally, there is no mechanism for an application to dynamically enable an API upon its first connection. Enabling APIs is a manual administrative task that needs to be performed through the GCP Console or API.
+
+### Why Option 1 is correct:
+
+- **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**: This is the correct action because enabling APIs must be done manually through the GCP Console or programmatically via API calls. Once the Cloud Pub/Sub API is enabled, your App Engine application, using the appropriate service account with the necessary IAM roles (such as Pub/Sub Publisher or Subscriber), can send and consume messages from Cloud Pub/Sub without issues.
+
+  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have a website hosted on App Engine standard environment. You want 1% of your users to see a new test version of the website. You want to minimize complexity.
@@ -268,6 +287,25 @@ By using BigQuery, you can perform sophisticated analysis with high performance 
 - [ ] Create a new App Engine application in the same project. Deploy the new version in that application. Use the App Engine library to proxy 1% of the requests to the new version.
 - [ ] Create a new App Engine application in the same project. Deploy the new version in that application. Configure your network load balancer to send 1% of the traffic to that new application.
 
+The correct answer is:
+
+2. **Deploy the new version in the same application and use the `--split` option to give a weight of 99 to the current version and a weight of 1 to the new version**.
+
+### Explanation of why other options are wrong:
+
+1. **Deploy the new version in the same application and use the `--migrate` option**:
+   - **Reason for being wrong**: The `--migrate` option in App Engine is used for performing traffic splitting during deployment, but it does not allow you to specify a precise percentage split. It typically migrates 100% of traffic to the new version, which is not suitable for directing only 1% of traffic to a test version.
+
+3. **Create a new App Engine application in the same project. Deploy the new version in that application. Use the App Engine library to proxy 1% of the requests to the new version**:
+   - **Reason for being wrong**: Creating a new App Engine application introduces unnecessary complexity. Proxying requests from one App Engine application to another using the App Engine library is not a standard approach for traffic splitting within the same application. It adds overhead and maintenance complexity without providing significant benefits compared to using built-in traffic splitting features.
+
+4. **Create a new App Engine application in the same project. Deploy the new version in that application. Configure your network load balancer to send 1% of the traffic to that new application**:
+   - **Reason for being wrong**: Configuring a network load balancer to split traffic between different App Engine applications in the same project is not a standard or recommended approach. App Engine provides built-in traffic splitting functionality (`--split` option) that is designed specifically for this purpose and integrates seamlessly with the platform's deployment capabilities.
+
+### Why Option 2 is correct:
+
+- **Deploy the new version in the same application and use the `--split` option to give a weight of 99 to the current version and a weight of 1 to the new version**: This option leverages App Engine's native traffic splitting feature (`--split` option during deployment). By specifying a 99:1 split, you ensure that only 1% of incoming traffic is routed to the new version, allowing you to test it without affecting the majority of users. This approach minimizes complexity by keeping both versions within the same App Engine application and using standard platform features for traffic management.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your organization is a financial company that needs to store audit log files for 3 years. Your organization has hundreds of Google Cloud projects. You need to implement a cost-effective approach for log file retention.
@@ -276,6 +314,25 @@ By using BigQuery, you can perform sophisticated analysis with high performance 
 - [x] Create an export to the sink that saves logs from Cloud Audit to a Coldline Storage bucket.
 - [ ] Write a custom script that uses logging API to copy the logs from Stackdriver logs to BigQuery.
 - [ ] Export these logs to Cloud Pub/Sub and write a Cloud Dataflow pipeline to store logs to Cloud SQL.
+
+The correct answer is:
+
+2. **Create an export to the sink that saves logs from Cloud Audit to a Coldline Storage bucket**.
+
+### Explanation of why other options are wrong:
+
+1. **Create an export to the sink that saves logs from Cloud Audit to BigQuery**:
+   - **Reason for being wrong**: While exporting logs to BigQuery allows for powerful querying and analysis capabilities, it is not the most cost-effective option for long-term storage of audit logs. BigQuery storage costs can be higher compared to storing data in Coldline Storage, especially when considering the retention period of 3 years.
+
+3. **Write a custom script that uses logging API to copy the logs from Stackdriver logs to BigQuery**:
+   - **Reason for being wrong**: Manually copying logs using a custom script adds complexity and maintenance overhead. It also doesn't address the cost-effectiveness of storage over a 3-year period, as storing logs directly in BigQuery for such a long retention period can be expensive.
+
+4. **Export these logs to Cloud Pub/Sub and write a Cloud Dataflow pipeline to store logs to Cloud SQL**:
+   - **Reason for being wrong**: Cloud Pub/Sub and Cloud Dataflow are not optimal for long-term storage of audit logs due to the need for continuous processing and transformation of data. Storing logs in Cloud SQL is also not suitable for large-scale log storage over a 3-year period due to scalability and cost considerations.
+
+### Why Option 2 is correct:
+
+- **Create an export to the sink that saves logs from Cloud Audit to a Coldline Storage bucket**: Coldline Storage (now called Archive Storage) is designed for long-term, infrequently accessed data storage at a lower cost compared to active storage options like BigQuery or standard Cloud Storage. Storing audit logs in Coldline Storage ensures cost-effectiveness while meeting the requirement of retaining logs for 3 years. This option is straightforward to implement and manages the storage costs efficiently over the retention period.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -295,25 +352,7 @@ By using BigQuery, you can perform sophisticated analysis with high performance 
 - [ ] Package it in a container image, and run it on Kubernetes Engine, using n1-standard-32 instances as nodes.
 - [ ] Run it on Compute Engine, choose the instance type n1-standard-1, and add an SSD persistent disk of 32 GB.
 
-The correct answer is:
 
-1. **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**.
-
-### Explanation of why other options are wrong:
-
-2. **Rely on the automatic enablement of the Cloud Pub/Sub API when the Service Account accesses it**:
-   - **Reason for being wrong**: APIs are not automatically enabled when a service account accesses them. Service accounts authenticate requests, but they do not enable APIs. You must manually enable the Cloud Pub/Sub API in the API Library.
-
-3. **Use Deployment Manager to deploy your application. Rely on the automatic enablement of all APIs used by the application being deployed**:
-   - **Reason for being wrong**: Deployment Manager can deploy resources and set up configurations, but it does not automatically enable APIs that are required by your application. You need to explicitly enable the Cloud Pub/Sub API regardless of how you deploy your application.
-
-4. **Grant the App Engine Default service account the role of Cloud Pub/Sub Admin. Have your application enable the API on the first connection to Cloud Pub/Sub**:
-   - **Reason for being wrong**: Granting the Cloud Pub/Sub Admin role to the service account is excessive privilege for enabling an API. Additionally, there is no mechanism for an application to dynamically enable an API upon its first connection. Enabling APIs is a manual administrative task that needs to be performed through the GCP Console or API.
-
-### Why Option 1 is correct:
-
-- **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**: This is the correct action because enabling APIs must be done manually through the GCP Console or programmatically via API calls. Once the Cloud Pub/Sub API is enabled, your App Engine application, using the appropriate service account with the necessary IAM roles (such as Pub/Sub Publisher or Subscriber), can send and consume messages from Cloud Pub/Sub without issues.
-  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have a single binary application that you want to run on Google Cloud Platform. You decided to automatically scale the application based on underlying infrastructure CPU usage. Your organizational policies require you to use Virtual Machines directly. You need to ensure that the application scaling is operationally efficient and completed as quickly as possible. What should you do?
