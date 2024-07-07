@@ -343,6 +343,25 @@ The correct answer is:
 - [ ] Add the support team group to the roles/spanner.databaseReader role.
 - [ ] Add the support team group to the roles/stackdriver.accounts.viewer role.
 
+The correct answer is:
+
+3. **Add the support team group to the roles/spanner.databaseReader role**.
+
+### Explanation of why other options are wrong:
+
+1. **Add the support team group to the roles/monitoring.viewer role**:
+   - **Reason for being wrong**: The `roles/monitoring.viewer` role provides permissions to view monitoring data (metrics, dashboards) in Stackdriver Monitoring. It does not provide access to Cloud Spanner resources or data. This role is not suitable for granting access to monitor Cloud Spanner environments.
+
+2. **Add the support team group to the roles/spanner.databaseUser role**:
+   - **Reason for being wrong**: The `roles/spanner.databaseUser` role grants permissions to read and write data in Cloud Spanner databases. While this role allows for interaction with the database (querying data), it does not align with the requirement to monitor the environment without access to table data. It provides more permissions than necessary for monitoring purposes.
+
+4. **Add the support team group to the roles/stackdriver.accounts.viewer role**:
+   - **Reason for being wrong**: The `roles/stackdriver.accounts.viewer` role provides permissions to view Stackdriver accounts and their configurations. It does not grant access to Cloud Spanner resources or data. This role is focused on Stackdriver monitoring and does not address the specific requirement to monitor Cloud Spanner without accessing table data.
+
+### Why Option 3 is correct:
+
+- **Add the support team group to the roles/spanner.databaseReader role**: The `roles/spanner.databaseReader` role is designed to provide read-only access to Cloud Spanner databases. Users with this role can view database schemas, read metadata, and monitor the health and performance of Cloud Spanner databases without accessing table data. This aligns perfectly with the requirement to monitor the environment while maintaining data confidentiality. It follows Google-recommended practices by granting the least privilege necessary for the support team to perform their monitoring tasks effectively without exposing sensitive data.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to run a single caching HTTP reverse proxy on GCP for a latency-sensitive website. This specific reverse proxy consumes almost no CPU. You want to have a 30-GB in-memory cache, and need an additional 2 GB of memory for the rest of the processes. You want to minimize cost. How should you run this reverse proxy?
@@ -352,6 +371,24 @@ The correct answer is:
 - [ ] Package it in a container image, and run it on Kubernetes Engine, using n1-standard-32 instances as nodes.
 - [ ] Run it on Compute Engine, choose the instance type n1-standard-1, and add an SSD persistent disk of 32 GB.
 
+The correct answer is:
+
+1. **Create a Cloud Memorystore for Redis instance with 32-GB capacity**.
+
+### Explanation of why other options are wrong:
+
+2. **Run it on Compute Engine, and choose a custom instance type with 6 vCPUs and 32 GB of memory**:
+   - **Reason for being wrong**: This option provides more resources (6 vCPUs) than necessary for a caching HTTP reverse proxy that consumes almost no CPU. It also does not guarantee the same level of in-memory caching performance and reliability as a managed Redis service like Cloud Memorystore.
+
+3. **Package it in a container image, and run it on Kubernetes Engine, using n1-standard-32 instances as nodes**:
+   - **Reason for being wrong**: Using Kubernetes Engine with n1-standard-32 instances introduces unnecessary complexity and over-provisioning of resources. It's not cost-effective to use such large nodes for a low-CPU usage caching proxy, especially when considering Kubernetes orchestration overhead.
+
+4. **Run it on Compute Engine, choose the instance type n1-standard-1, and add an SSD persistent disk of 32 GB**:
+   - **Reason for being wrong**: While n1-standard-1 instances are smaller and cheaper, adding an SSD persistent disk for caching still requires management overhead for caching mechanisms and data persistence. It's not as straightforward or cost-effective as using a managed caching solution like Cloud Memorystore.
+
+### Why Option 1 is correct:
+
+- **Create a Cloud Memorystore for Redis instance with 32-GB capacity**: Cloud Memorystore for Redis is a fully managed Redis service on Google Cloud Platform. It provides a scalable and reliable in-memory caching solution with low latency access to data. By choosing a 32-GB instance, you can allocate 30 GB for the in-memory cache and have 2 GB for other processes, exactly meeting your requirements. This option minimizes management overhead, ensures optimal performance for caching, and is cost-effective compared to managing your own caching solution on Compute Engine or Kubernetes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -362,6 +399,25 @@ The correct answer is:
 - [ ] Create an instance template, and use the template in a Managed Instance Group that scales up and down based on the time of day.
 - [ ] Use a set of third-party tools to build automation around scaling the application up and down, based on Stackdriver CPU usage monitoring.
 
+The correct answer is:
+
+2. **Create an instance template, and use the template in a Managed Instance Group with autoscaling configured**.
+
+### Explanation of why other options are wrong:
+
+1. **Create a Google Kubernetes Engine cluster, and use horizontal pod autoscaling to scale the application**:
+   - **Reason for being wrong**: While Kubernetes Engine provides horizontal pod autoscaling, it is not aligned with the requirement to use Virtual Machines directly, as Kubernetes abstracts the underlying VMs. This option would introduce unnecessary complexity and doesn't adhere to the organizational policy of using VMs directly.
+
+3. **Create an instance template, and use the template in a Managed Instance Group that scales up and down based on the time of day**:
+   - **Reason for being wrong**: Scaling based on time of day is useful for predictable workload patterns but does not dynamically scale based on underlying infrastructure CPU usage, as required. This option may not efficiently utilize resources during unexpected workload spikes or changes in CPU usage.
+
+4. **Use a set of third-party tools to build automation around scaling the application up and down, based on Stackdriver CPU usage monitoring**:
+   - **Reason for being wrong**: While third-party tools can provide customization, they often require additional setup, management, and potential integration challenges. Using built-in GCP services like Managed Instance Groups with autoscaling is generally more operationally efficient and aligns better with managing resources directly on Google Cloud Platform.
+
+### Why Option 2 is correct:
+
+- **Create an instance template, and use the template in a Managed Instance Group with autoscaling configured**: This option leverages Managed Instance Groups (MIGs) which allow you to create a group of identical VM instances from a common instance template. Autoscaling configured on the MIGs ensures that the number of VM instances automatically scales based on CPU usage, which aligns with the requirement to scale based on underlying infrastructure CPU usage. It's operationally efficient because GCP manages the scaling process based on predefined policies, ensuring the application can quickly respond to changes in workload demand while adhering to organizational policies of using VMs directly.
+  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to set up permissions for a set of Compute Engine instances to enable them to write data into a particular Cloud Storage bucket. You want to follow Google-recommended practices. What should you do?
@@ -371,6 +427,25 @@ The correct answer is:
 - [x] Create a service account and add it to the IAM role 'storage.objectCreator' for that bucket.
 - [ ] Create a service account and add it to the IAM role 'storage.objectAdmin' for that bucket.
 
+The correct answer is:
+
+4. **Create a service account and add it to the IAM role 'storage.objectAdmin' for that bucket**.
+
+### Explanation of why other options are wrong:
+
+1. **Create a service account with an access scope. Use the access scope 'https://www.googleapis.com/auth/devstorage.write_only'**:
+   - **Reason for being wrong**: Access scopes are not used for defining permissions to specific resources like Cloud Storage buckets. Access scopes control what API actions are allowed when an instance uses the default service account. However, they do not grant fine-grained access to specific buckets or objects within Cloud Storage.
+
+2. **Create a service account with an access scope. Use the access scope 'https://www.googleapis.com/auth/cloud-platform'**:
+   - **Reason for being wrong**: The `cloud-platform` scope is broad and grants access to all Google Cloud services. While this would technically allow the instance to interact with Cloud Storage, it provides much broader permissions than necessary and does not follow the principle of least privilege, which is a Google-recommended practice.
+
+3. **Create a service account and add it to the IAM role 'storage.objectCreator' for that bucket**:
+   - **Reason for being wrong**: The `storage.objectCreator` role grants permission to create objects (write) in the specified bucket, but it does not provide broader access such as listing objects or modifying existing objects. Since the question specifies enabling instances to write data into the bucket, `storage.objectCreator` would allow creation of objects but does not cover other potential actions needed.
+
+### Why Option 4 is correct:
+
+- **Create a service account and add it to the IAM role 'storage.objectAdmin' for that bucket**: The `storage.objectAdmin` role provides full control over objects in the specified Cloud Storage bucket. This includes permissions to read, write, and manage objects within the bucket. By assigning the service account to this role, you ensure that the Compute Engine instances have all necessary permissions to write data into the bucket, adhering to Google-recommended practices by granting the least privilege necessary for the task.
+  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have an object in a Cloud Storage bucket that you want to share with an external company. The object contains sensitive data. You want access to the content to be removed after four hours. The external company does not have a Google account to which you can grant specific user-based access privileges. You want to use the most secure method that requires the fewest steps. What should you do?
