@@ -2089,6 +2089,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Download a MongoDB installation package, and run it on Compute Engine instances.
 - [ ] Download a MongoDB installation package, and run it on a Managed Instance Group.
 
+The correct answer is:
+
+- **Deploy MongoDB Atlas from the Google Cloud Marketplace.**
+
+### Explanation:
+
+1. **Deploy MongoDB Atlas from the Google Cloud Marketplace**:
+   - MongoDB Atlas is a fully managed database service provided by MongoDB, Inc. It offers a managed MongoDB environment with features like automated backups, scaling, and support SLAs.
+   - By deploying MongoDB Atlas from the Google Cloud Marketplace, you get a managed MongoDB service that is integrated with Google Cloud Platform (GCP). This means you can manage and scale your MongoDB clusters easily using familiar GCP tools and interfaces.
+   - MongoDB Atlas also provides support SLAs, ensuring that you have access to MongoDB experts for assistance and issue resolution.
+
+2. **Why other options are wrong:**
+
+   - **Create a Cloud Bigtable cluster, and use the HBase API:**
+     - Cloud Bigtable is a NoSQL Big Data database service, but it is not suitable as a drop-in replacement for MongoDB. It uses a different data model and API (HBase API), which is not compatible with MongoDB's document-based model.
+
+   - **Download a MongoDB installation package, and run it on Compute Engine instances:**
+     - This option involves self-managing MongoDB on Compute Engine VM instances. While possible, it lacks the benefits of a managed service such as automatic scaling, backups, and SLAs. Managing MongoDB manually on Compute Engine also requires significant effort in terms of monitoring, maintenance, and scalability.
+
+   - **Download a MongoDB installation package, and run it on a Managed Instance Group:**
+     - Similar to running MongoDB on Compute Engine instances, this approach involves managing MongoDB manually on Managed Instance Groups (MIGs). While MIGs provide some automation for managing VM instances, it still requires manual setup and maintenance of MongoDB, lacking the benefits of a fully managed service like MongoDB Atlas.
+
+### Conclusion:
+
+Deploying MongoDB Atlas from the Google Cloud Marketplace is the recommended approach for deploying a managed MongoDB environment on Google Kubernetes Engine (GKE). It provides the benefits of a fully managed service with support SLAs, ensuring reliability, scalability, and ease of management for your application's database needs.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are managing a project for the Business Intelligence (BI) department in your company. A data pipeline ingests data into BigQuery via streaming. You want the users in the BI department to be able to run the custom SQL queries against the latest data in BigQuery. What should you do?
@@ -2098,6 +2124,64 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use Cloud Scheduler to schedule a batch Dataflow job to copy the data from BigQuery to the BI team's internal data warehouse.
 - [x] Assign the IAM role of BigQuery User to a Google Group that contains the members of the BI team.
 
+The correct approach is:
+
+- **Assign the IAM role of BigQuery User to a Google Group that contains the members of the BI team.**
+
+### Explanation of why other options are wrong:
+
+1. **Create a Data Studio dashboard that uses the related BigQuery tables as a source and give the BI team view access to the Data Studio dashboard.**
+   - **Reason for being wrong:** While Data Studio can visualize data from BigQuery and provide interactive dashboards, it doesn't directly enable running custom SQL queries. Users interact with predefined visualizations rather than writing their own SQL queries.
+
+2. **Create a Service Account for the BI team and distribute a new private key to each member of the BI team.**
+   - **Reason for being wrong:** Distributing private keys to individual team members is not a scalable or secure approach. Service Accounts are typically used for automated processes or applications accessing Google Cloud services, not for individual user access to BigQuery.
+
+3. **Use Cloud Scheduler to schedule a batch Dataflow job to copy the data from BigQuery to the BI team's internal data warehouse.**
+   - **Reason for being wrong:** This option involves copying data from BigQuery to another data warehouse, which may not provide real-time access to the latest data in BigQuery. It introduces complexity and latency in data access, which is not suitable for scenarios requiring querying the latest data in BigQuery directly.
+
+### Why Option 4 is correct:
+
+- **Assigning IAM role of BigQuery User to a Google Group:**
+  - By assigning the BigQuery User role to a Google Group containing BI team members, you grant them the necessary permissions to run custom SQL queries directly against BigQuery datasets.
+  - This approach adheres to the principle of least privilege by granting access at the group level rather than individually managing permissions for each user.
+  - It ensures that BI team members have the flexibility to query the latest data in BigQuery and leverage its powerful querying capabilities without the need for additional infrastructure or tools.
+
+### Conclusion:
+
+Assigning the IAM role of BigQuery User to a Google Group is the correct approach because it provides secure and scalable access for BI team members to run custom SQL queries against the latest data in BigQuery, aligning with best practices for managing permissions in Google Cloud Platform.
+
+In Google BigQuery, IAM roles are used to manage permissions that control access to datasets, tables, views, and other resources within BigQuery. Here are some of the key IAM roles available in BigQuery and their typical use cases:
+
+1. **BigQuery Admin (`roles/bigquery.admin`)**:
+   - **Permissions**: Full control over BigQuery resources including datasets, tables, jobs, and permissions.
+   - **Use Case**: Typically assigned to administrators who need to manage all aspects of BigQuery, including creating and deleting datasets, managing IAM policies, and running any type of job.
+
+2. **BigQuery Data Editor (`roles/bigquery.dataEditor`)**:
+   - **Permissions**: Edit and delete data within datasets and tables, but cannot manage IAM policies or view job logs.
+   - **Use Case**: Useful for users who need to modify data in existing datasets, create new tables, and manage schema changes.
+
+3. **BigQuery Data Viewer (`roles/bigquery.dataViewer`)**:
+   - **Permissions**: View data within datasets and tables, but cannot make changes to data or schema.
+   - **Use Case**: Typically assigned to users who need read-only access to BigQuery resources for querying and analysis purposes.
+
+4. **BigQuery Job User (`roles/bigquery.jobUser`)**:
+   - **Permissions**: Submit and manage jobs, including queries, but cannot create or modify datasets or tables.
+   - **Use Case**: Suitable for users who need to run queries and manage their own jobs within existing datasets without administrative privileges.
+
+5. **BigQuery User (`roles/bigquery.user`)**:
+   - **Permissions**: Query data and run jobs, but cannot create datasets or tables.
+   - **Use Case**: Provides minimal access for users who only need to run queries against existing datasets and do not require any administrative capabilities.
+
+6. **BigQuery Metadata Viewer (`roles/bigquery.metadataViewer`)**:
+   - **Permissions**: View dataset and table metadata, including schema information and ACLs, but cannot view data.
+   - **Use Case**: Useful for auditing purposes or for users who need to understand the structure and access controls of datasets without accessing the actual data.
+
+7. **BigQuery Data Owner (`roles/bigquery.dataOwner`)**:
+   - **Permissions**: All permissions of `bigquery.dataEditor` and `bigquery.jobUser`, plus the ability to manage dataset IAM policies.
+   - **Use Case**: Provides full control over data within datasets, including modifying data, schema, and managing access permissions.
+
+These roles can be assigned at the project level or directly to specific datasets or tables within BigQuery, allowing fine-grained control over who can access and manipulate data. It's essential to assign roles based on the principle of least privilege to ensure that users have only the permissions necessary to perform their tasks.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company is moving its entire workload to Compute Engine. Some servers should be accessible through the Internet, and other servers should only be accessible over the internal network. All servers need to be able to talk to each other over specific ports and protocols. The current on-premises network relies on a demilitarized zone (DMZ) for the public servers and a Local Area Network (LAN) for the private servers. You need to design the networking infrastructure on Google Cloud to match these requirements. What should you do?
@@ -2106,5 +2190,36 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Create a single VPC with a subnet for the DMZ and a subnet for the LAN. 2. Set up firewall rules to open up relevant traffic between the DMZ and the LAN subnets, and another firewall rule to allow public egress traffic for the DMZ.
 - [ ] 1. Create a VPC with a subnet for the DMZ and another VPC with a subnet for the LAN. 2. Set up firewall rules to open up relevant traffic between the DMZ and the LAN subnets, and another firewall rule to allow public ingress traffic for the DMZ.
 - [ ] 1. Create a VPC with a subnet for the DMZ and another VPC with a subnet for the LAN. 2. Set up firewall rules to open up relevant traffic between the DMZ and the LAN subnets, and another firewall rule to allow public egress traffic for the DMZ.
+
+The correct answer is:
+
+1. **Create a single VPC with a subnet for the DMZ and a subnet for the LAN. Set up firewall rules to open up relevant traffic between the DMZ and the LAN subnets, and another firewall rule to allow public ingress traffic for the DMZ.**
+
+### Explanation of why other options are wrong:
+
+- Option 2: 
+  1. **Create a single VPC with a subnet for the DMZ and a subnet for the LAN.**
+     - This part is correct as it aligns with the requirement to have both DMZ (public servers) and LAN (private servers) within the same VPC.
+
+  2. **Set up firewall rules to open up relevant traffic between the DMZ and the LAN subnets, and another firewall rule to allow public egress traffic for the DMZ.**
+     - This option incorrectly mentions allowing public egress traffic for the DMZ. Egress traffic refers to traffic leaving a network, typically to the internet. The requirement states that public servers in the DMZ should allow ingress traffic (incoming traffic from the internet), not egress traffic (outgoing traffic to the internet).
+
+- Option 3 and 4:
+  - **Create a VPC with a subnet for the DMZ and another VPC with a subnet for the LAN.**
+  - These options involve creating separate VPCs for DMZ and LAN. While this setup can work, it complicates network configuration and management by requiring peering or VPN connections between VPCs to allow communication between DMZ and LAN. The requirement specifies using a single VPC, so these options are less aligned with best practices and may introduce unnecessary complexity.
+
+### Why Option 1 is correct:
+
+- **Single VPC with Subnets**: Using a single VPC simplifies network management and allows for straightforward communication between DMZ and LAN subnets using internal IPs.
+
+- **Firewall Rules**: By setting up firewall rules:
+  - **Between DMZ and LAN subnets**: You can control and restrict traffic flow between public (DMZ) and private (LAN) servers based on specific ports and protocols.
+  - **For Public Ingress Traffic**: You can define firewall rules to allow incoming traffic from the internet to the DMZ, ensuring that public servers are accessible as needed.
+
+- **Security and Isolation**: This design mirrors the on-premises DMZ and LAN setup, ensuring that public-facing servers are securely isolated from internal servers while allowing controlled communication between them.
+
+### Conclusion:
+
+Option 1 is the correct choice because it adheres to best practices by using a single VPC with segregated subnets for DMZ and LAN, and it correctly implements firewall rules to meet the specified requirements for both internal communication and public accessibility. This design ensures security, scalability, and ease of management for your workload on Google Cloud Platform.
 
 **[⬆ Back to Top](#table-of-contents)**
