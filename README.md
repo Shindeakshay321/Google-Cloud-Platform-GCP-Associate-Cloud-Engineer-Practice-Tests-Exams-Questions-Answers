@@ -1,102 +1,3 @@
-# ⬆️ Google Cloud Platform (GCP) Associate Cloud Engineer (ACE) Practice Tests Exams Questions & Answers
-
-![Promotional image](images/promotional.png)
-
-## Udemy & Etsy
-
-❣️ Please support us by purchasing this course on Udemy in an interactive version with the [discounted link](https://www.udemy.com/course/gcp-associate-cloud-engineer-ace-practice-tests-exams/?referralCode=534254458B74E5C1839B). If you're working for a company, you could most probably easily claim this expense during preparation for your exam. For us, it's to be, or not to be, in the game.
-
-🛍️ Alternatively, you can buy the PDF with those questions on [Etsy](https://ditectrev.etsy.com/listing/1476792526).
-
-## ✨ This course is unlike any GCP Associate Cloud Engineer (ACE) course you will find online.
-
-✋ Join a live online community and a course taught by industry experts and pass the GCP Associate Cloud Engineer (ACE) confidently. We aim to build an ecosystem of Information Technology (IT) certifications and online courses in cooperation with the technology industry. We believe it will give our students 100% confidence in the pacing market in an open-source environment. We are just at the beginning of our way, so it's even better for you to join now!
-
-[![Join our Discord](images/discord.png 'Join our Discord')](https://discord.gg/RFjtXKfJy3)
-
-## ⌛️ Short and to the point; why should you take the course:
-
-1. Always happy to answer your questions on Udemy's Q&A's and outside :)
-2. Failed? Please submit a screenshot of your exam result and request a refund (via our upcoming platform, not possible on Udemy); we'll always accept it.
-3. Learn about topics, such as:
-   - BigQuery;
-   - Billing Administrator;
-   - Cloud Audit;
-   - Cloud Bigtable;
-   - Cloud Concepts;
-   - Cloud Dataflow;
-   - Cloud Datastore;
-   - Cloud Identity and Access Management (Cloud IAM);
-   - Cloud Logging;
-   - Cloud Pub/Sub;
-   - Cloud Run;
-   - Cloud SDK;
-   - Cloud Shell;
-   - Cloud Spanner;
-   - Cloud SQL;
-   - Cloud Storage;
-   - Coldline Storage;
-   - Compute Engine;
-   - Deployment Manager;
-   - Google Cloud Platform Console (GCP Console);
-   - Google App Engine;
-   - Google Cloud Marketplace;
-   - Google Kubernetes Engine (GKE);
-   - Nearline Storage;
-   - Project Billing Manager;
-   - Stackdriver;
-   - Virtual Private Cloud (VPC);
-   - **Much More!**
-4. Questions are similar to the actual exam, without duplications (like in other courses ;-)).
-5. The Practice Tests Exams simulate the actual exam's content, timing, and percentage required to pass the exam.
-6. This course is **not** GCP Associate Cloud Engineer (ACE) Exam Dump. Some people use brain dumps or exam dumps, but that's absurd, which we don't practice.
-7. 179 **unique** questions.
-
-## ☝️ Course Updates
-
-**[v1.0.0](../../releases/tag/v1.0.0): May 25, 2023.**
-
-- Launch of the course.
-
-**[v1.1.0](../../releases/tag/v1.1.0): June 9, 2023.**
-
-- Proofreading & deleted 1 repeated question.
-
-## 🙋‍♀️ & 🙋‍♂️ Contribution
-
-We are so thankful for every contribution, which makes sure we can deliver top-notch content. Whenever you find a missing resource, broken link in a [Table of Contents](#table-of-contents), the wrong answer, please submit an [issue](../../issues). Even better would be a [Pull Request (PR)](../../pulls).
-
-## Who this course is for:
-
-- 👨‍🎓 Students preparing for the Google Cloud Platform (GCP) Associate Cloud Engineer (ACE) Exam;
-- 👨‍🎓 AWS Engineers;
-- 👨‍🎓 Azure Engineers;
-- 👨‍🎓 Cloud Architects;
-- 👨‍🎓 Cloud Engineers;
-- 👨‍🎓 DevOps Engineers;
-- 👨‍🎓 Enterprise Architects;
-- 👨‍🎓 Google Cloud Platform (GCP) Engineers;
-- 👨‍🎓 Infrastructure Engineers;
-- 👨‍🎓 IT Professionals;
-- 👨‍🎓 Lead Engineers;
-- 👨‍🎓 Product Architects;
-- 👨‍🎓 Product Managers;
-- 👨‍🎓 Product Owners;
-- 👨‍🎓 Project Managers;
-- 👨‍🎓 Scrum Masters;
-- 👨‍🎓 Security Engineers;
-- 👨‍🎓 Site Reliability Engineers;
-- 👨‍🎓 Software Developers/Engineers;
-- 👨‍🎓 Software Testers;
-- 👨‍🎓 Solution Architects;
-- 👨‍🎓 Team Leaders.
-
-## Requirements
-
-- 🤩 Excitement to learn!
-- 0️⃣ Prior knowledge is required;
-- ✅ You can pass the Google Cloud Platform (GCP) Associate Cloud Engineer (ACE) Exam solely based on our Practice Tests Exams.
-
 ## Table of Contents
 
 | No. | Questions |
@@ -328,6 +229,26 @@ In summary, the `--preview` option gives the fastest and most effective way to c
 - [ ] Export your transactions to a local file, and perform analysis with a desktop tool.
 - [x] Export your bill to a BigQuery dataset, and then write time window-based SQL queries for analysis.
 
+The correct answer is:
+
+4. **Export your bill to a BigQuery dataset, and then write time window-based SQL queries for analysis**.
+
+### Explanation of why other options are less optimal:
+
+1. **Export your bill to a Cloud Storage bucket, and then import into Cloud Bigtable for analysis**:
+   - **Reason for being less optimal**: Cloud Bigtable is a NoSQL database that is designed for low-latency reads and writes. It is not optimized for the kind of analytical queries required for this task, such as aggregations and time window-based analysis. BigQuery, on the other hand, is specifically designed for such analytical queries and can handle large datasets efficiently.
+
+2. **Export your bill to a Cloud Storage bucket, and then import into Google Sheets for analysis**:
+   - **Reason for being less optimal**: Google Sheets is a spreadsheet tool and is not well-suited for handling large datasets or performing complex, time window-based SQL queries. While it is useful for basic analysis and small datasets, it lacks the scalability and performance needed for detailed cost analysis over multiple projects and long time periods.
+
+3. **Export your transactions to a local file, and perform analysis with a desktop tool**:
+   - **Reason for being less optimal**: Desktop tools may not handle large datasets efficiently and can be cumbersome for performing complex queries across multiple projects. Additionally, this approach lacks the scalability and automation capabilities provided by cloud-based solutions like BigQuery.
+
+4. **Export your bill to a BigQuery dataset, and then write time window-based SQL queries for analysis**:
+   - **Reason for being optimal**: BigQuery is a highly scalable, fully-managed data warehouse designed for large-scale data analysis. It supports complex SQL queries, including time window-based analysis, and can efficiently handle large datasets from multiple projects. Exporting billing data to BigQuery allows you to leverage its powerful querying capabilities to create detailed service cost estimates by service type, daily and monthly, for the next six months.
+
+By using BigQuery, you can perform sophisticated analysis with high performance and scalability, making it the best choice for this task.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to send and consume Cloud Pub/Sub messages from your App Engine application. The Cloud Pub/Sub API is currently disabled. You will use a service account to authenticate your application to the API. You want to make sure your application can use Cloud Pub/Sub. What should you do?
@@ -336,6 +257,7 @@ In summary, the `--preview` option gives the fastest and most effective way to c
 - [ ] Rely on the automatic enablement of the Cloud Pub/Sub API when the Service Account accesses it.
 - [ ] Use Deployment Manager to deploy your application. Rely on the automatic enablement of all APIs used by the application being deployed.
 - [ ] Grant the App Engine Default service account the role of Cloud Pub/Sub Admin. Have your application enable the API on the first connection to Cloud Pub/Sub.
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -373,6 +295,25 @@ In summary, the `--preview` option gives the fastest and most effective way to c
 - [ ] Package it in a container image, and run it on Kubernetes Engine, using n1-standard-32 instances as nodes.
 - [ ] Run it on Compute Engine, choose the instance type n1-standard-1, and add an SSD persistent disk of 32 GB.
 
+The correct answer is:
+
+1. **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**.
+
+### Explanation of why other options are wrong:
+
+2. **Rely on the automatic enablement of the Cloud Pub/Sub API when the Service Account accesses it**:
+   - **Reason for being wrong**: APIs are not automatically enabled when a service account accesses them. Service accounts authenticate requests, but they do not enable APIs. You must manually enable the Cloud Pub/Sub API in the API Library.
+
+3. **Use Deployment Manager to deploy your application. Rely on the automatic enablement of all APIs used by the application being deployed**:
+   - **Reason for being wrong**: Deployment Manager can deploy resources and set up configurations, but it does not automatically enable APIs that are required by your application. You need to explicitly enable the Cloud Pub/Sub API regardless of how you deploy your application.
+
+4. **Grant the App Engine Default service account the role of Cloud Pub/Sub Admin. Have your application enable the API on the first connection to Cloud Pub/Sub**:
+   - **Reason for being wrong**: Granting the Cloud Pub/Sub Admin role to the service account is excessive privilege for enabling an API. Additionally, there is no mechanism for an application to dynamically enable an API upon its first connection. Enabling APIs is a manual administrative task that needs to be performed through the GCP Console or API.
+
+### Why Option 1 is correct:
+
+- **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**: This is the correct action because enabling APIs must be done manually through the GCP Console or programmatically via API calls. Once the Cloud Pub/Sub API is enabled, your App Engine application, using the appropriate service account with the necessary IAM roles (such as Pub/Sub Publisher or Subscriber), can send and consume messages from Cloud Pub/Sub without issues.
+  
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have a single binary application that you want to run on Google Cloud Platform. You decided to automatically scale the application based on underlying infrastructure CPU usage. Your organizational policies require you to use Virtual Machines directly. You need to ensure that the application scaling is operationally efficient and completed as quickly as possible. What should you do?
