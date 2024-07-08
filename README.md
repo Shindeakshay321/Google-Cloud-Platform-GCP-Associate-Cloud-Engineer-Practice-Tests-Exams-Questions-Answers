@@ -1206,7 +1206,7 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a custom role with view-only project permissions. Add the user's account to the custom role.
 - [ ] Create a custom role with view-only service permissions. Add the user's account to the custom role.
 - [x] Select the built-in IAM project Viewer role. Add the user's account to this role.
-- [ ] Select the built-in IAM service Viewer role. Add the user's account to this role.
+- [ ] Select the built-in IAM service Viewer role. Add the user's account to this role. 
 
 **[⬆ Back to Top](#table-of-contents)**
 
