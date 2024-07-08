@@ -1566,6 +1566,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Upload the data into Cloud SQL using the import function in the console.
 - [ ] Upload the data into Cloud Spanner using the import function in the console.
 
+To make unstructured data accessible on Google Cloud for processing by a Dataflow job, the most appropriate solution is:
+
+**Option 2: Upload the data to Cloud Storage using the gsutil command line tool.**
+
+### Why Option 2 is correct:
+
+- **Cloud Storage for Unstructured Data:** Cloud Storage is designed to store and manage unstructured data, including large files and various file formats. It provides high availability, scalability, and ease of access for data processing.
+
+- **Data Accessibility:** Dataflow jobs can directly read data from Cloud Storage, making it a suitable staging area for data before processing with Dataflow.
+
+- **ETL Process:** Before performing ETL (Extract, Transform, Load) transformations with Dataflow, you typically stage your data in Cloud Storage. This allows Dataflow to efficiently process and transform data from various sources.
+
+### Why the other options are incorrect:
+
+- **Option 1: Upload the data to BigQuery using the bq command line tool:**
+  - BigQuery is not typically used for storing unstructured data directly. It is a data warehouse for structured data optimized for fast SQL queries, not for unstructured file storage.
+  
+- **Option 3: Upload the data into Cloud SQL using the import function in the console:**
+  - Cloud SQL is a fully managed relational database service. It is not suitable for handling unstructured data and is optimized for structured data storage and SQL queries.
+  
+- **Option 4: Upload the data into Cloud Spanner using the import function in the console:**
+  - Cloud Spanner is a horizontally scalable, strongly consistent database service. Like Cloud SQL, it is not designed for storing unstructured data or serving as a staging area for ETL processes.
+
+Therefore, **Option 2** (Upload the data to Cloud Storage using the gsutil command line tool) is the correct choice as it aligns with best practices for handling unstructured data and preparing it for processing with Dataflow on Google Cloud.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to manage multiple Google Cloud projects in the fewest steps possible. You want to configure the Google Cloud SDK command line interface (CLI) so that you can easily manage multiple projects. What should you do?
@@ -1575,9 +1600,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Use the default configuration for one project you need to manage. 2. Activate the appropriate configuration when you work with each of your assigned Google Cloud projects.
 - [ ] 1. Use the default configuration for one project you need to manage. 2. Use gcloud init to update the configuration values when you need to work with a non-default project.
 
+To manage multiple Google Cloud projects efficiently using the Google Cloud SDK command line interface (CLI), the recommended approach is:
+
+**Option 1:** 
+1. **Create a configuration for each project you need to manage.**
+2. **Activate the appropriate configuration when you work with each of your assigned Google Cloud projects.**
+
+### Why Option 1 is correct:
+
+- **Creating a configuration for each project:** This step involves setting up separate configurations in your Google Cloud SDK for each project you want to manage. This allows you to define specific settings (like project ID, region, etc.) for each project independently.
+  
+- **Activating the appropriate configuration:** Once configurations are set up, you can easily switch between them using the `gcloud config configurations activate` command. This ensures that when you execute commands using the CLI, they apply to the correct project context.
+
+### Why the other options are incorrect:
+
+- **Option 2:** Using `gcloud init` to update configuration values when needed does not explicitly encourage the creation of separate configurations for each project. It may lead to confusion and potential errors when switching between projects.
+
+- **Option 3:** Using the default configuration for one project and activating configurations manually is less efficient and could lead to mistakes if commands are run in the wrong project context.
+
+- **Option 4:** Similar to Option 2, relying solely on `gcloud init` to update configurations for non-default projects may not provide clear separation between different project contexts.
+
+Therefore, **Option 1** is the best choice as it promotes a clear and organized approach to managing multiple Google Cloud projects with the CLI.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### Your Managed Instance Group raised an alert stating that new instance creation has failed to create new instances. You need to maintain the number of running instances specified by the template to be able to process expected application traffic. What should you do?
+### Your Managed Instance Group raised an alert stating that new instance creation has failed to create new instances. You need to maintain the number of running instances specified by the template to be able to process expected application traffic. What should you do?     ----------------Issue Big Issue
 
 - [x] Create an instance template that contains valid syntax which will be used by the instance group. Delete any persistent disks with the same name as instance names.
 - [ ] Create an instance template that contains valid syntax that will be used by the instance group. Verify that the instance name and persistent disk name values are not the same in the template.
@@ -1593,9 +1640,30 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Build a Cassandra Compute Engine instance and take a snapshot of it. 2. Use the snapshot to create instances for your developers.
 - [ ] 1. Build a Cassandra Compute Engine instance and take a snapshot of it. 2. Upload the snapshot to Cloud Storage and make it accessible to your developers. 3. Build instructions to create a Compute Engine instance from the snapshot so that developers can do it themselves.
 
+The correct answer is **Option 2**:
+
+1. Advise your developers to go to Cloud Marketplace.
+2. Ask the developers to launch a Cassandra image for their development work.
+
+**Explanation:**
+
+- **Option 1:** Building an instruction guide to install Cassandra on Google Cloud and making it accessible to developers would require each team to set up and manage their own Cassandra environment, which could lead to inconsistencies and higher support efforts.
+  
+- **Option 3:** Creating a Cassandra Compute Engine instance and taking a snapshot of it limits flexibility and scalability. Each team would still need to manage their own instance based on this snapshot, which increases administrative overhead.
+
+- **Option 4:** Taking a snapshot of a Cassandra Compute Engine instance and uploading it to Cloud Storage for developers to use still requires developers to manually create instances from the snapshot. This process lacks the simplicity and automation needed for a quick deployment.
+
+**Why Option 2 is the best choice:**
+
+- **Cloud Marketplace:** Google Cloud Marketplace provides pre-configured solutions, including Cassandra images, that developers can launch with minimal setup effort.
+- **Isolation:** Each development team can launch their own isolated Cassandra instance without affecting others, ensuring development environments are separate and independent.
+- **Ease of Deployment:** By using a pre-configured image from Cloud Marketplace, teams can quickly deploy Cassandra environments without needing detailed infrastructure setup knowledge.
+
+This approach minimizes support efforts by leveraging Google Cloud's managed services and ensures consistent environments across development teams.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### You have a Compute Engine instance hosting a production application. You want to receive an email if the instance consumes more than 90% of its CPU resources for more than 15 minutes. You want to use Google services. What should you do?
+### You have a Compute Engine instance hosting a production application. You want to receive an email if the instance consumes more than 90% of its CPU resources for more than 15 minutes. You want to use Google services. What should you do?   --------------Issue    2 or 4        All says 2
 
 - [ ] 1. Create a consumer Gmail account. 2. Write a script that monitors the CPU usage. 3. When the CPU usage exceeds the threshold, have that script send an email using the Gmail account and smtp.gmail.com on port 25 as SMTP server.
 - [x] 1. Create a Stackdriver Workspace, and associate your Google Cloud Platform (GCP) project with it. 2. Create an Alerting Policy in Stackdriver that uses the threshold as a trigger condition. 3. Configure your email address in the notification channel.
@@ -1611,6 +1679,10 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Cloud Monitoring alerting policy to send an alert to Google Cloud Support email when Cloud Spanner CPU exceeds your threshold. Google support would scale resources up or down accordingly.
 - [x] Create a Cloud Monitoring alerting policy to send an alert to webhook when Cloud Spanner CPU is over or under your threshold. Create a Cloud Function that listens to HTTP and resizes Spanner resources accordingly.
 
+Right Ans.
+Create a Cloud Monitoring alerting policy to send an alert to webhook when Cloud Spanner CPU is over or under your threshold. Create a Cloud Function that listens to HTTP and resizes Spanner resources accordingly.
+
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company publishes large files on an Apache web server that runs on a Compute Engine instance. The Apache web server is not the only application running in the project. You want to receive an email when the egress network costs for the server exceed 100 dollars for the current month as measured by Google Cloud. What should you do?
@@ -1619,6 +1691,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set up a budget alert on the billing account with an amount of 100 dollars, a threshold of 100%, and notification type of email.
 - [x] Export the billing data to BigQuery. Create a Cloud Function that uses BigQuery to sum the egress network costs of the exported billing data for the Apache web server for the current month and sends an email if it is over 100 dollars. Schedule the Cloud Function using Cloud Scheduler to run hourly.
 - [ ] Use the Cloud Logging Agent to export the Apache web server logs to Cloud Logging. Create a Cloud Function that uses BigQuery to parse the HTTP response log data in Cloud Logging for the current month and sends an email if the size of all HTTP responses, multiplied by current Google Cloud egress prices, totals over 100 dollars. Schedule the Cloud Function using Cloud Scheduler to run hourly.
+
+I apologize for the confusion. Given your specific requirement to receive an email notification when the egress network costs for the Apache web server exceed $100 for the current month, let's reassess the options with this in mind:
+
+**Option [3] Export the billing data to BigQuery. Create a Cloud Function that uses BigQuery to sum the egress network costs of the exported billing data for the Apache web server for the current month and sends an email if it is over 100 dollars. Schedule the Cloud Function using Cloud Scheduler to run hourly.**
+
+Here’s why this option fits your needs:
+
+- **Egress Network Costs**: This option directly addresses the requirement to monitor egress network costs specifically for the Apache web server.
+
+- **BigQuery and Cloud Function**: Exporting billing data to BigQuery allows you to query and analyze the data, specifically focusing on egress costs incurred by the Apache web server. By using a Cloud Function, you can automate the process of checking these costs against the $100 threshold and sending an email notification if the threshold is exceeded.
+
+- **Scheduled Execution**: Using Cloud Scheduler to run the Cloud Function hourly ensures that you are regularly monitoring the egress costs and promptly alerted if they exceed the defined threshold.
+
+**Why Other Options Are Less Suitable:**
+
+- **Option [1] and [2]**: Setting up budget alerts at the project or billing account level without specific filtering for egress network costs won't provide the granularity needed to monitor only egress costs for the Apache web server.
+
+- **Option [4]**: Monitoring HTTP response logs via Cloud Logging and calculating costs based on egress volume is indirect and may not accurately reflect the actual billed egress costs from Google Cloud, which are what you want to monitor.
+
+Therefore, **Option [3]** is the most suitable approach for monitoring egress network costs for the Apache web server and ensuring that you receive email notifications when these costs exceed $100 for the current month. It leverages Google Cloud's billing data export capabilities and automation through Cloud Functions and Cloud Scheduler to meet your specific monitoring and alerting requirements.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1629,6 +1721,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Provision the solution on Google Cloud. Leave the solution provisioned for 1 week. Navigate to the Billing Report page in the Cloud Console. Multiply the 1 week cost to determine the monthly costs.
 - [ ] Provision the solution on Google Cloud. Leave the solution provisioned for 1 week. Use Cloud Monitoring to determine the provisioned and used resource amounts. Multiply the 1 week cost to determine the monthly costs.
 
+To estimate the monthly total cost of your solution on Google Cloud, the recommended approach is:
+
+**[1] For each Google Cloud product in the solution, review the pricing details on the product's pricing page. Use the pricing calculator to total the monthly costs for each Google Cloud product.**
+
+Here's why this approach is appropriate:
+
+- **Precision in Cost Estimation**: By reviewing the pricing details for each Google Cloud product that you are using in your solution, you can accurately estimate the cost based on your specific usage patterns (such as data storage, API calls, compute hours, etc.).
+
+- **Flexibility**: The pricing calculator allows you to input your estimated usage parameters (e.g., number of instances, storage amount, data transfer) and provides an estimate of the monthly cost. This flexibility ensures that you can adjust the estimation based on different scenarios or changes in usage patterns.
+
+- **Comprehensive Coverage**: You can cover all aspects of your solution, including compute, storage, networking, and any additional services, by individually estimating their costs and then summing them up.
+
+**Why Other Options Are Less Suitable:**
+
+- **[2] Google Sheet Summary**: While creating a Google Sheet for cost estimation might be useful for documentation purposes, it doesn't provide the dynamic calculation and flexibility that the pricing calculator offers.
+
+- **[3] and [4] Provisioning and Billing Reports**: These options involve actual provisioning and monitoring costs over a short period (one week) and then extrapolating to estimate monthly costs. This approach may not accurately reflect long-term usage patterns or seasonal variations in usage.
+
+Therefore, using the pricing details and the pricing calculator (option [1]) is the best approach to estimate the monthly total cost of your solution on Google Cloud. This method ensures accuracy and flexibility in adjusting estimates based on your specific usage scenarios and configurations.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have an application that receives SSL-encrypted TCP traffic on port 443. Clients for this application are located all over the world. You want to minimize latency for the clients. Which load balancing option should you use?
@@ -1637,6 +1749,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Network Load Balancer.
 - [x] SSL Proxy Load Balancer.
 - [ ] Internal TCP/UDP Load Balancer. Add a firewall rule allowing ingress traffic from 0.0.0.0/0 on the target instances.
+
+To minimize latency for clients located all over the world while receiving SSL-encrypted TCP traffic on port 443, the most suitable load balancing option would be:
+
+**3. SSL Proxy Load Balancer.**
+
+Here’s why SSL Proxy Load Balancer is the appropriate choice:
+
+- **SSL Offloading**: SSL Proxy Load Balancer terminates SSL/TLS connections at the load balancer, reducing the workload on backend instances. This offloading process improves latency because the load balancer handles the cryptographic operations, leaving the backend instances to focus on processing application logic.
+
+- **Global Scope**: SSL Proxy Load Balancer operates at Layer 7 (Application Layer) and is designed to handle SSL/TLS traffic efficiently across global locations. It provides geographic proximity to clients, which helps minimize latency by directing traffic to the nearest available load balancing endpoint.
+
+- **Optimized for HTTPS Traffic**: While HTTPS Load Balancer also operates at Layer 7, it expects HTTP/HTTPS traffic and is tailored more for web applications rather than raw SSL/TCP traffic. SSL Proxy Load Balancer, on the other hand, is explicitly designed for SSL/TLS termination and forwarding encrypted TCP traffic.
+
+**Why Other Options Are Less Suitable:**
+
+- **HTTPS Load Balancer**: While it operates at Layer 7 and handles HTTPS traffic efficiently, it may not be optimal for non-HTTP SSL/TCP traffic as it expects HTTP/HTTPS requests.
+
+- **Network Load Balancer**: Operates at Layer 4 (Transport Layer) and directs traffic based on IP protocol data. It's suitable for raw TCP/UDP traffic but doesn't provide SSL termination or application-layer optimizations that can minimize latency for SSL-encrypted traffic.
+
+- **Internal TCP/UDP Load Balancer**: Designed for internal traffic within a Virtual Private Cloud (VPC) network, it's not suitable for handling traffic from clients located worldwide or external to the VPC network.
+
+Therefore, **SSL Proxy Load Balancer** is the best choice for your scenario to minimize latency for clients globally while efficiently handling SSL-encrypted TCP traffic on port 443.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1647,14 +1781,56 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Migrate to use a Local SSD on the instance.
 - [ ] Migrate to use a Regional SSD on the instance.
 
+Given the scenario where your application on a general-purpose Compute Engine instance is experiencing excessive disk read throttling on its Zonal SSD Persistent Disk, and the application primarily reads large files from disk, the recommended approach to provide maximum throughput while minimizing costs is:
+
+- [x] **Migrate to use a Local SSD on the instance.**
+
+Here's why this option is suitable:
+
+1. **Local SSD Performance**: Local SSDs offer significantly higher IOPS (Input/Output Operations Per Second) and throughput compared to Zonal SSD Persistent Disks. They are particularly optimized for high-performance read and write operations, making them ideal for applications that require maximum disk performance.
+
+2. **Reduced Latency**: Local SSDs have lower latency compared to Zonal SSD Persistent Disks because they are physically attached to the host machine. This reduces the time it takes to read large files from disk, thereby improving overall application performance.
+
+3. **Cost Efficiency**: While Local SSDs are more expensive per GB compared to Zonal SSD Persistent Disks, they offer higher performance capabilities that can often justify the cost, especially when the application requires high throughput and low latency.
+
+**Why Other Options Are Not Ideal:**
+
+- **Increase the size of the disk to 1 TB**: Increasing the size of the Zonal SSD Persistent Disk may provide more storage capacity but won't necessarily improve the read throughput or reduce throttling, which is the primary issue.
+
+- **Increase the allocated CPU to the instance**: While CPU resources are important for overall application performance, the issue here is specifically related to disk read throttling, not CPU-bound tasks. Increasing CPU resources wouldn't directly address the disk performance bottleneck.
+
+- **Migrate to use a Regional SSD on the instance**: Regional SSDs provide redundancy across zones within the same region but have similar characteristics to Zonal SSDs in terms of performance. They don't offer the same level of performance improvement for disk read operations as Local SSDs do.
+
+Therefore, **migrating to use a Local SSD on the instance** is the most effective solution to enhance disk read performance, address excessive read throttling, and ensure maximum throughput for your application while considering cost-efficiency.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### Your Dataproc cluster runs in a single Virtual Private Cloud (VPC) network in a single subnet with range 172.16.20.128/25. There are no private IP addresses available in the VPC network. You want to add new VMs to communicate with your cluster using the minimum number of steps. What should you do?
+### Your Dataproc cluster runs in a single Virtual Private Cloud (VPC) network in a single subnet with range 172.16.20.128/25. There are no private IP addresses available in the VPC network. You want to add new VMs to communicate with your cluster using the minimum number of steps. What should you do?    -----------------Issue
 
-- [x] Modify the existing subnet range to 172.16.20.0/24.
-- [ ] Create a new Secondary IP Range in the VPC and configure the VMs to use that range.
+- [x] Modify the existing subnet range to 172.16.20.0/24. Yes
+- [ ] Create a new Secondary IP Range in the VPC and configure the VMs to use that range. Yes
 - [ ] Create a new VPC network for the VMs. Enable VPC Peering between the VMs' VPC network and the Dataproc cluster VPC network.
 - [ ] Create a new VPC network for the VMs with a subnet of 172.32.0.0/16. Enable VPC network Peering between the Dataproc VPC network and the VMs VPC network. Configure a custom Route exchange.
+
+If there are no private IP addresses available in the current VPC network subnet (172.16.20.128/25) and you want to add new VMs to communicate with your Dataproc cluster with minimal steps, the correct approach would be:
+
+- [x] **Modify the existing subnet range to 172.16.20.0/24.**
+
+Here’s why this option is appropriate:
+
+- **Subnet Expansion**: By modifying the existing subnet range from `172.16.20.128/25` to `172.16.20.0/24`, you effectively expand the available private IP address space within the same VPC network. This allows you to allocate more IP addresses to new VMs without creating additional complexity or requiring peering with another VPC network.
+
+- **Minimal Configuration Changes**: This option involves a straightforward adjustment of the subnet range, which is manageable through the Google Cloud Console or via `gcloud` command-line tools. It avoids the need to create secondary IP ranges, new VPC networks, or set up VPC peering, thereby minimizing configuration steps and potential operational overhead.
+
+**Why Other Options Are Not Ideal:**
+
+- **Creating a new Secondary IP Range in the VPC**: While this is a valid approach in some cases, modifying the subnet range directly is often simpler and more direct when you need to expand IP address availability within the same VPC subnet.
+
+- **Creating a new VPC network and enabling VPC Peering**: This introduces additional complexity and administrative overhead, especially if it involves setting up peering between multiple VPC networks. It's a more suitable solution when distinct network isolation or management domains are necessary, which doesn't seem to be the case here.
+
+- **Creating a new VPC network for the VMs with a subnet of 172.32.0.0/16 and enabling VPC network Peering**: This option is overly complex for simply expanding IP address space within the existing VPC network.
+
+Therefore, **modifying the existing subnet range to 172.16.20.0/24** is the recommended approach to efficiently add new VMs that need to communicate with your Dataproc cluster while minimizing configuration steps and maintaining simplicity.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1665,6 +1841,24 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] In Cloud IAM of your project, ensure that the default App Engine service account has the role of BigQuery Data Viewer.
 - [ ] In Cloud IAM of your project, grant a newly created service account from the other team the role of BigQuery Job User in your project.
 
+To enable your App Engine service to read data from a BigQuery dataset in a different project where you do not have direct access, you should follow these steps:
+
+**Option 2: Ask the other team to grant your default App Engine Service account the role of BigQuery Data Viewer.**
+
+Here’s why this option is correct:
+
+- **BigQuery Data Viewer Role**: Granting the BigQuery Data Viewer role to your default App Engine service account in the other team's project allows your application to query and read data from the BigQuery dataset. This role provides read access to datasets and tables, which is sufficient for your application to retrieve data for aggregation and visualization purposes.
+
+**Why the other options are incorrect:**
+
+- **Option 1 (BigQuery Job User)**: This role is more focused on submitting jobs to execute queries or load data into BigQuery. While it includes permissions to read data, it is broader than necessary for your requirement of only needing read access.
+
+- **Option 3 (Granting roles in your project)**: Granting roles in your own project doesn’t provide access to data in the other team's project where the dataset resides.
+
+- **Option 4 (Creating a new service account)**: This option involves granting access to a newly created service account from the other team in your project, which does not address the requirement of your App Engine service needing access to the dataset in the other team's project.
+
+Therefore, **Option 2** is the correct approach as it directly addresses your need for read access to the BigQuery dataset without requiring access to the other team's project itself.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to create a copy of a custom Compute Engine Virtual Machine (VM) to facilitate an expected increase in application traffic due to a business acquisition. What should you do?
@@ -1673,6 +1867,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Compute Engine snapshot of your base VM. Create your instances from that snapshot.
 - [ ] Create a custom Compute Engine image from a snapshot. Create your images from that image.
 - [x] Create a custom Compute Engine image from a snapshot. Create your instances from that image.
+
+To create a copy of a custom Compute Engine Virtual Machine (VM) to handle increased application traffic due to a business acquisition, you should:
+
+**4. Create a custom Compute Engine image from a snapshot. Create your instances from that image.**
+
+Here’s why this option is correct:
+
+- **Custom Image Creation**: By creating a custom Compute Engine image from a snapshot of your base VM, you capture the exact configuration, software, and data stored on that VM at a specific point in time.
+  
+- **Instance Creation from Image**: Once you have the custom image, you can easily create new instances (VMs) from this image. These instances will inherit all the configurations and software settings of the original VM, including any customizations you made.
+
+**Why other options are incorrect:**
+
+- **Create a Compute Engine snapshot of your base VM. Create your images from that snapshot:**
+  - This option is incorrect because Compute Engine snapshots are used to capture the state of persistent disks attached to VMs, not to directly create VM instances. Snapshots are used for backup, data recovery, and creating images, but you do not create instances directly from snapshots.
+
+- **Create a Compute Engine snapshot of your base VM. Create your instances from that snapshot:**
+  - Similar to the previous option, creating instances directly from a snapshot is not a standard practice. Instances are typically created from images, not from snapshots of disks.
+
+- **Create a custom Compute Engine image from a snapshot. Create your images from that image:**
+  - This option doesn’t make sense because it suggests creating images from another image, which is not a typical workflow. Images are typically created from snapshots or directly from a VM disk, not from other images.
+
+### Conclusion:
+
+Creating a custom Compute Engine image from a snapshot of your base VM allows you to replicate the VM's configuration efficiently. Subsequently, creating new VM instances from this custom image ensures consistency and replicates the environment to handle increased application traffic effectively.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1683,6 +1902,35 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Configure a Health Check on the instance and set a Low Healthy Threshold value.
 - [x] Install and configure the Cloud Logging Agent and view the logs from Cloud Logging.
 
+To diagnose the problem with the application that users are reporting errors with, you should:
+
+**Install and configure the Cloud Logging Agent and view the logs from Cloud Logging.**
+
+Here’s why this option is correct:
+
+1. **Logging Configuration**: When an application writes logs to disk on a Compute Engine instance, the Cloud Logging Agent is typically used to stream these logs to Cloud Logging (formerly Stackdriver Logging).
+
+2. **Centralized Log Management**: Cloud Logging provides a centralized platform to collect, view, and analyze logs from various sources, including Compute Engine instances. By installing the Cloud Logging Agent, you ensure that logs are captured and available for troubleshooting and analysis.
+
+3. **Real-Time Monitoring**: Once the Cloud Logging Agent is configured and running on your Compute Engine instance, logs are streamed in real-time to Cloud Logging. This allows you to quickly access the most recent logs generated by your application.
+
+**Why other options are incorrect:**
+
+- **Navigate to Cloud Logging and view the application logs:**
+  - This option assumes the logs are already being streamed to Cloud Logging. If the Cloud Logging Agent is not installed and configured, the logs written to disk on the instance won't be available in Cloud Logging. You would not see the current application logs without the agent.
+
+- **Connect to the instance's serial console and read the application logs:**
+  - This method is generally used for troubleshooting low-level system issues or when direct SSH access is not available. It's not the standard approach for viewing application logs, especially in a cloud environment where centralized logging tools like Cloud Logging are available.
+
+- **Configure a Health Check on the instance and set a Low Healthy Threshold value:**
+  - Health Checks are used to monitor the health and availability of instances based on network traffic. They are not related to application-specific logging or troubleshooting application errors.
+
+### Conclusion:
+
+Installing and configuring the Cloud Logging Agent on your Compute Engine instance ensures that application logs written to disk are captured and streamed to Cloud Logging. This approach allows you to efficiently diagnose and troubleshoot application errors reported by users by providing access to centralized logs in near real-time.
+
+
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### An application generates daily reports in a Compute Engine Virtual Machine (VM). The VM is in the project corp-iot-insights. Your team operates only in the project corp-aggregate-reports and needs a copy of the daily exports in the bucket corp-aggregate-reports-storage. You want to configure access so that the daily reports from the VM are available in the bucket corp-aggregate-reports-storage and use as few steps as possible while following Google-recommended practices. What should you do?
@@ -1691,6 +1939,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Grant the VM Service Account the role Storage Object Creator on corp-aggregate-reports-storage.
 - [ ] Create a Shared VPC network between both projects. Grant the VM Service Account the role Storage Object Creator on corp-iot-insights.
 - [ ] Make corp-aggregate-reports-storage public and create a folder with a pseudo-randomized suffix name. Share the folder with the IoT team.
+
+To configure access so that daily reports generated by a Compute Engine VM in project `corp-iot-insights` are available in the bucket `corp-aggregate-reports-storage` in project `corp-aggregate-reports`, while following Google-recommended practices with minimal steps, you should:
+
+**Option 2: Grant the VM Service Account the role Storage Object Creator on `corp-aggregate-reports-storage`.**
+
+Here’s why this option is the correct choice:
+
+1. **Service Account Access**: By granting the VM's service account the `Storage Object Creator` role on the bucket (`corp-aggregate-reports-storage`), you allow the VM to write objects (daily reports) directly to the bucket. This role specifically grants permissions to create objects, which aligns with the requirement to store daily exports.
+
+2. **Least Privilege**: Google Cloud recommends granting the least privilege necessary for any service or user. The `Storage Object Creator` role provides sufficient permissions for the VM to perform the required task without unnecessarily broad permissions.
+
+**Why other options are incorrect:**
+
+- **Option 1: Move both projects under the same folder.**
+  - Moving projects under the same folder does not directly address the access requirement between projects. It's a structural organization within Google Cloud and does not grant permissions across project boundaries.
+
+- **Option 3: Create a Shared VPC network between both projects. Grant the VM Service Account the role Storage Object Creator on `corp-iot-insights`.**
+  - Shared VPC is used for network connectivity and management across projects, not for granting access to storage buckets. Granting permissions via Shared VPC would not provide the necessary access to write objects to `corp-aggregate-reports-storage`.
+
+- **Option 4: Make `corp-aggregate-reports-storage` public and create a folder with a pseudo-randomized suffix name. Share the folder with the IoT team.**
+  - Making storage buckets public is generally not recommended due to security risks unless absolutely necessary. This option also involves unnecessary steps and does not follow the principle of least privilege.
+
+### Conclusion:
+
+Granting the VM's service account the `Storage Object Creator` role on the `corp-aggregate-reports-storage` bucket in the `corp-aggregate-reports` project ensures that the VM can write its daily reports to the specified bucket. This approach is straightforward, aligns with Google-recommended practices by using IAM roles effectively, and minimizes complexity and steps involved in managing access across projects.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1701,6 +1974,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Store credentials for service accounts with appropriate access for Google services in a config file, and deploy this config file with your application.
 - [ ] Store credentials for your user account with appropriate access for Google services in a config file, and deploy this config file with your application.
 
+To migrate your application to a Compute Engine Virtual Machine (VM) and set up authentication using Google-recommended practices with minimal changes, you should:
+
+**Option 2: Create a service account with appropriate access for Google services, and configure the application to use this account.**
+
+Here's why this option is the correct choice:
+
+1. **Service Account Best Practice**: Google Cloud recommends using service accounts for authentication instead of individual user accounts for applications running on Compute Engine VMs. Service accounts are specifically designed for this purpose and provide secure access to Google Cloud services without exposing personal user credentials.
+
+2. **Minimal Changes**: This option involves minimal changes to your existing application. You would create a service account in Google Cloud IAM, assign it the necessary roles (permissions) required by your application to interact with Google Cloud services, and then configure your application running on the Compute Engine VM to use this service account.
+
+**Why other options are incorrect:**
+
+- **Option 1**: While assigning appropriate access to the service account used by the Compute Engine VM is necessary, it doesn't address the authentication mechanism directly. Service accounts should be explicitly created and used for authentication purposes.
+  
+- **Option 3**: Storing credentials in a config file is not recommended for service accounts, as it introduces security risks and complicates credential management (e.g., handling key rotation). Service accounts are preferred because they manage credentials securely within Google Cloud IAM.
+  
+- **Option 4**: Storing credentials for your user account in a config file and deploying them with your application is insecure and not recommended. User accounts should not be used for application authentication due to security concerns and the lack of appropriate permissions management.
+
+### Conclusion:
+
+To adhere to Google-recommended practices and ensure secure authentication for your application on a Compute Engine VM, create a service account in Google Cloud IAM with the necessary roles and configure your application to use this service account for authentication. This approach provides both security and ease of management for accessing Google Cloud services from your VM-hosted application.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to create a Compute Engine instance in a new project that doesn't exist yet. What should you do?
@@ -1710,9 +2005,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Using the Cloud SDK, create the new instance, and use the --project flag to specify the new project. Answer yes when prompted by Cloud SDK to enable the Compute Engine API.
 - [ ] Enable the Compute Engine API in the Cloud Console. Go to the Compute Engine section of the Console to create a new instance, and look for the Create In A New Project option in the creation form.
 
+To create a Compute Engine instance in a new project that doesn't exist yet, you should follow these steps:
+
+**Option 1: Using the Cloud SDK, create a new project, enable the Compute Engine API in that project, and then create the instance specifying your new project.**
+
+Here’s a breakdown of why this is the correct approach:
+
+1. **Create a new project**: Use the Cloud SDK (`gcloud`) command to create a new Google Cloud project. This step ensures that the project exists before attempting to create any resources in it.
+   
+2. **Enable the Compute Engine API**: Once the project is created, enable the Compute Engine API using the Cloud SDK. This API needs to be enabled before you can create Compute Engine instances.
+
+3. **Create the instance**: After enabling the API, use another Cloud SDK command to create the Compute Engine instance, specifying the newly created project using the `--project` flag.
+
+**Why other options are incorrect:**
+
+- **Option 2**: Enabling the Compute Engine API in the Cloud Console first doesn’t create the new project. You need to create the project first before enabling APIs.
+  
+- **Option 3**: While this option mentions using the `--project` flag to specify the new project, it suggests answering yes to enable the Compute Engine API during instance creation, which is not the correct sequence. API enabling should be done separately before creating instances.
+  
+- **Option 4**: There is no explicit option in the Compute Engine instance creation form to "Create In A New Project." Projects need to be created first, then resources like instances can be created within them.
+
+### Conclusion:
+
+The recommended approach is to use the Cloud SDK to first create a new project, enable the Compute Engine API in that project, and then proceed to create the Compute Engine instance specifying the newly created project using the `--project` flag. This sequence ensures that you have a project to place your resources in and that the necessary API is enabled for resource creation.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### Your company runs one batch process in an on-premises server that takes around 30 hours to complete. The task runs monthly, can be performed offline, and must be restarted if interrupted. You want to migrate this workload to the cloud while minimizing cost. What should you do?
+### Your company runs one batch process in an on-premises server that takes around 30 hours to complete. The task runs monthly, can be performed offline, and must be restarted if interrupted. You want to migrate this workload to the cloud while minimizing cost. What should you do?  ------------------Issue
 
 - [ ] Migrate the workload to a Compute Engine Preemptible VM.
 - [ ] Migrate the workload to a Google Kubernetes Engine cluster with Preemptible nodes.
@@ -1728,6 +2047,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a new Kubernetes Engine cluster. Create a deployment for the Jenkins image.
 - [ ] Create an instance template with the Jenkins executable. Create a Managed Instance Group with this template.
 
+To automate the installation of Jenkins for building and deploying your source code as quickly and easily as possible on Google Cloud Platform, you should choose:
+
+**Option 1: Deploy Jenkins through the Google Cloud Marketplace.**
+
+### Why This Option is Suitable:
+
+- **Google Cloud Marketplace:** Deploying Jenkins through the Google Cloud Marketplace offers several advantages:
+  - **Easy Deployment:** Jenkins can be deployed with just a few clicks, automating the setup process.
+  - **Pre-configured Environment:** The Jenkins installation from the Marketplace is typically pre-configured and optimized for use on Google Cloud.
+  - **Integration with Google Cloud Services:** Simplifies integration with other Google Cloud services such as Cloud Storage, Compute Engine, Kubernetes Engine, etc.
+  - **Automated Updates:** Ensures that Jenkins is kept up-to-date with the latest patches and updates.
+
+### Why Other Options are Less Suitable:
+
+- **Option 2: Create a new Compute Engine instance. Run the Jenkins executable.**
+  - **Issues:** This option requires manual installation and configuration of Jenkins on a Compute Engine instance, which is more labor-intensive and prone to configuration errors. It lacks the ease and automation provided by the Marketplace deployment.
+
+- **Option 3: Create a new Kubernetes Engine cluster. Create a deployment for the Jenkins image.**
+  - **Issues:** While Kubernetes can automate deployment and scaling, setting up and managing a Kubernetes cluster for Jenkins adds complexity. It may be overkill if you only need Jenkins for CI/CD without leveraging Kubernetes features extensively.
+
+- **Option 4: Create an instance template with the Jenkins executable. Create a Managed Instance Group with this template.**
+  - **Issues:** This approach is similar to Option 2 but involves managing instances as part of a group, which doesn't inherently simplify Jenkins installation or management compared to Marketplace deployment. It also lacks the integration benefits with Google Cloud services.
+
+### Summary:
+Deploying Jenkins through the Google Cloud Marketplace is the recommended approach because it provides an automated, pre-configured solution that minimizes setup time and effort while integrating well with other Google Cloud services you might use for your CI/CD pipeline.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have downloaded and installed the gcloud command line interface (CLI) and have authenticated with your Google Account. Most of your Compute Engine instances in your project run in the europe-west1-d zone. You want to avoid having to specify this zone with each CLI command when managing these instances. What should you do?
@@ -1737,6 +2082,34 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] In the CLI installation directory, create a file called default.conf containing zone=europe-west1-d.
 - [ ] Create a Metadata entry on the Compute Engine page with key compute/zone and value europe-west1-d.
 
+To avoid specifying the zone with each CLI command when managing your Compute Engine instances, you should:
+
+**Option 1: Set the europe-west1-d zone as the default zone using the gcloud config subcommand.**
+
+### Why This is the Correct Option:
+
+- **gcloud config Subcommand:** Using the `gcloud config` command, you can set default configurations such as the zone. This is the recommended and straightforward method to set default values for your gcloud commands.
+
+  ```sh
+  gcloud config set compute/zone europe-west1-d
+  ```
+
+  This command sets the default zone to `europe-west1-d` for your gcloud CLI, so you don't have to specify it with every command.
+
+### Why Other Options Are Incorrect:
+
+- **Option 2: In the Settings page for Compute Engine under Default location, set the zone to europe-west1-d.**
+  - **Incorrect:** Google Cloud Console settings for default location affect the web interface but do not influence the CLI configuration. This setting is for default values in the console UI, not for the gcloud CLI.
+
+- **Option 3: In the CLI installation directory, create a file called default.conf containing zone=europe-west1-d.**
+  - **Incorrect:** There is no such mechanism in gcloud CLI to read default configuration from a `default.conf` file in the installation directory. The gcloud CLI uses configuration files stored in the user's home directory under `.config/gcloud`.
+
+- **Option 4: Create a Metadata entry on the Compute Engine page with key compute/zone and value europe-west1-d.**
+  - **Incorrect:** Metadata entries for Compute Engine instances do not set default configuration values for the gcloud CLI. Metadata entries are typically used for passing information to instances, not for setting gcloud CLI defaults.
+
+### Summary:
+Using the `gcloud config set compute/zone europe-west1-d` command is the correct and recommended way to set the default zone for your gcloud CLI commands.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### The core business of your company is to rent out construction equipment at large scale. All the equipment that is being rented out has been equipped with multiple sensors that send event information every few seconds. These signals can vary from engine status, distance traveled, fuel level, and more. Customers are billed based on the consumption monitored by these sensors. You expect high throughput - up to thousands of events per hour per device - and need to retrieve consistent data based on the time of the event. Storing and retrieving individual signals should be atomic. What should you do?
@@ -1745,6 +2118,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a file in Cloud Filestore per device and append new data to that file.
 - [ ] Ingest the data into Datastore. Store data in an entity group based on the device.
 - [x] Ingest the data into Cloud Bigtable. Create a row key based on the event timestamp.
+
+For a scenario where you need to handle high-throughput, time-series data with consistent and atomic storage and retrieval, **Cloud Bigtable** is the best fit. Here’s why:
+
+**Option 4: Ingest the data into Cloud Bigtable. Create a row key based on the event timestamp.**
+
+### Why Cloud Bigtable is Suitable:
+- **High Throughput:** Cloud Bigtable is designed for high-throughput, low-latency workloads. It can handle thousands of events per hour per device efficiently.
+- **Time-Series Data:** Creating a row key based on the event timestamp allows for efficient time-based queries, making it ideal for time-series data.
+- **Atomic Operations:** Cloud Bigtable supports atomic read and write operations, ensuring data consistency.
+- **Scalability:** It scales seamlessly to accommodate large volumes of data from numerous devices.
+
+### Why Other Options Are Less Suitable:
+- **Option 1: Create a file in Cloud Storage per device and append new data to that file.**
+  - **Not Designed for High Throughput:** Cloud Storage is not optimized for high-throughput, low-latency writes and reads.
+  - **Atomicity:** Ensuring atomic append operations and consistent reads can be complex and error-prone.
+
+- **Option 2: Create a file in Cloud Filestore per device and append new data to that file.**
+  - **Not Ideal for High Throughput:** Cloud Filestore, while providing a shared file system, is not designed for handling the volume and velocity of data in this use case.
+  - **Complexity in Atomic Operations:** Similar to Cloud Storage, ensuring atomic operations can be challenging.
+
+- **Option 3: Ingest the data into Datastore. Store data in an entity group based on the device.**
+  - **Limited Throughput:** Datastore (now Firestore in Datastore mode) is optimized for high-availability and consistency but may not handle the required throughput as efficiently as Bigtable.
+  - **Time-Series Queries:** Datastore is not optimized for time-series data storage and retrieval, making it less suitable for querying based on event timestamps.
+
+### Summary:
+Using **Cloud Bigtable** with row keys based on event timestamps is the most appropriate solution for handling high-throughput, time-series data with consistent and atomic operations. This approach ensures that you can efficiently store, retrieve, and process the large volume of sensor data generated by your construction equipment.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -3219,3 +3618,50 @@ The correct answer is:
 Option 1 is the correct choice because it adheres to best practices by using a single VPC with segregated subnets for DMZ and LAN, and it correctly implements firewall rules to meet the specified requirements for both internal communication and public accessibility. This design ensures security, scalability, and ease of management for your workload on Google Cloud Platform.
 
 **[⬆ Back to Top](#table-of-contents)**
+
+
+
+
+
+BigQuery
+The **BigQuery Job User** role (`roles/bigquery.jobUser`) in Google Cloud Platform (GCP) grants permissions specifically for running jobs in BigQuery. Here’s what this role allows:
+
+1. **Running Queries**: Users with the BigQuery Job User role can submit queries to BigQuery. This includes SELECT queries to retrieve data from datasets and tables.
+
+2. **Loading Data**: They can load data into BigQuery from Cloud Storage or other sources.
+
+3. **Exporting Data**: They can export query results from BigQuery to Cloud Storage.
+
+However, the BigQuery Job User role does **not** grant direct access to view or read data stored in BigQuery tables unless the user has been explicitly granted the **BigQuery Data Viewer** (`roles/bigquery.dataViewer`) role on the specific dataset or table. 
+
+In summary:
+
+- **BigQuery Job User**: Can run queries, load data, and export query results, but cannot view or read data in BigQuery tables unless granted additional permissions.
+  
+- **BigQuery Data Viewer**: Can view (read) data within datasets and tables in BigQuery, run queries, and export data.
+
+Therefore, if a user or service account needs to both run jobs (queries, data loading) and view data in BigQuery tables, they would typically need both the BigQuery Job User and BigQuery Data Viewer roles assigned appropriately.
+
+In Google Cloud Platform (GCP), BigQuery offers several IAM (Identity and Access Management) roles that govern access to resources within BigQuery. These roles help control permissions for various operations such as querying data, managing datasets, and administering BigQuery resources. Here are some key IAM roles related to BigQuery:
+
+1. **BigQuery Data Viewer**:
+   - **Role Name**: roles/bigquery.dataViewer
+   - **Permissions**: Allows viewing (reading) data within datasets and tables in BigQuery. Users with this role can run queries and export data, but cannot modify datasets or tables.
+
+2. **BigQuery Data Editor**:
+   - **Role Name**: roles/bigquery.dataEditor
+   - **Permissions**: Includes all permissions of the Data Viewer role. Additionally, users can update and delete data within datasets and tables, and create new tables.
+
+3. **BigQuery Data Owner**:
+   - **Role Name**: roles/bigquery.dataOwner
+   - **Permissions**: Includes all permissions of the Data Editor role. Additionally, users can manage (create, update, delete) datasets and tables, and set access controls at the dataset level.
+
+4. **BigQuery Job User**:
+   - **Role Name**: roles/bigquery.jobUser
+   - **Permissions**: Allows users to run jobs (queries, load data) in BigQuery. Users with this role can submit queries, load data into BigQuery, and export query results. They cannot modify datasets or tables.
+
+5. **BigQuery Admin**:
+   - **Role Name**: roles/bigquery.admin
+   - **Permissions**: Includes all permissions in BigQuery. This role can manage all aspects of BigQuery, including creating and deleting datasets, tables, and jobs. It also includes permissions to set IAM policies and manage storage used by BigQuery.
+
+These roles can be assigned at various levels within GCP, including project level, dataset level, and specific resources within BigQuery. Assigning these roles correctly ensures that users and service accounts have appropriate access to BigQuery resources based on their responsibilities and needs.
