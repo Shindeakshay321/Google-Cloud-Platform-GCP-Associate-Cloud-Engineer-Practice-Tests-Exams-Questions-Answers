@@ -1413,15 +1413,46 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a custom role by removing delete permissions, and add users to that role only.
 - [x] Create a custom role by removing delete permissions. Add users to the group, and then add the group to the custom role.
 
+      To grant users access to query datasets in BigQuery while preventing them from accidentally deleting the datasets, and to follow Google-recommended practices, the best approach is:
+
+- **Option 4: Create a custom role by removing delete permissions. Add users to the group, and then add the group to the custom role.**
+
+Here’s why this option is suitable:
+
+- **Option 1 (roles/bigquery.user role only)**: This role grants only querying permissions but does not explicitly prevent users from deleting datasets.
+
+- **Option 2 (roles/bigquery.dataEditor role only)**: This role allows users to edit data within datasets, which includes deleting data and tables. It grants more permissions than necessary if your goal is to prevent dataset deletions.
+
+- **Option 3 (Create a custom role by removing delete permissions, and add users to that role only)**: This option is similar to Option 4 but directly assigns users to the custom role without using a group. It's straightforward but may become cumbersome to manage if you have many users.
+
+- **Option 4 (Create a custom role by removing delete permissions. Add users to the group, and then add the group to the custom role)**: This option combines the flexibility of custom roles with the ease of group management. By creating a custom role that explicitly removes delete permissions (`bigquery.datasets.delete`), you ensure users cannot delete datasets. Adding users to a group and then assigning that group to the custom role allows for easier management and scalability. It also follows best practices by using groups for role assignments, which can streamline access management across your organization.
+
+Therefore, **Option 4** is the recommended approach to grant users the necessary querying permissions in BigQuery while preventing accidental dataset deletions and maintaining manageability according to Google-recommended practices.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### You have a developer laptop with the Cloud SDK installed on Ubuntu. The Cloud SDK was installed from the Google Cloud Ubuntu package repository. You want to test your application locally on your laptop with Cloud Datastore. What should you do?
+### You have a developer laptop with the Cloud SDK installed on Ubuntu. The Cloud SDK was installed from the Google Cloud Ubuntu package repository. You want to test your application locally on your laptop with Cloud Datastore. What should you do? --------------Issue
 
 - [ ] Export Cloud Datastore data using gcloud datastore export.
 - [ ] Create a Cloud Datastore index using gcloud datastore indexes create.
-- [x] Install the google-cloud-sdk-datastore-emulator component using the apt get install command.
-- [ ] Install the cloud-datastore-emulator component using the gcloud components install command.
+- [ ] Install the google-cloud-sdk-datastore-emulator component using the apt get install command.
+- [x] Install the cloud-datastore-emulator component using the gcloud components install command.
 
+To test your application locally with Cloud Datastore on your developer laptop that runs Ubuntu and has the Cloud SDK installed from the Google Cloud Ubuntu package repository, you should follow these steps:
+
+- **[4] Install the cloud-datastore-emulator component using the gcloud components install command.**
+
+Here's why this is the correct option:
+
+- **Option 4**: Installing the `cloud-datastore-emulator` component using the `gcloud components install` command is the appropriate step to set up the Cloud Datastore emulator locally. The Cloud Datastore emulator allows you to emulate Google Cloud Datastore on your local machine, enabling you to develop and test applications without interacting with the actual Cloud Datastore service.
+
+- **Option 1**: Exporting Cloud Datastore data using `gcloud datastore export` is used for exporting data from the actual Cloud Datastore service, not for setting up the emulator.
+
+- **Option 2**: Creating a Cloud Datastore index using `gcloud datastore indexes create` is a command used to manage indexes in the Cloud Datastore service, not for setting up the emulator.
+
+- **Option 3**: Installing the `google-cloud-sdk-datastore-emulator` component using the `apt-get install` command is not the correct method because the emulator component for Cloud Datastore is installed via the Cloud SDK (`gcloud`), not through the system package manager (`apt-get`).
+
+Therefore, **Option 4** is the correct choice for installing and setting up the Cloud Datastore emulator on your developer laptop.
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company set up a complex organizational structure on Google Cloud. The structure includes hundreds of folders and projects. Only a few team members should be able to view the hierarchical structure. You need to assign minimum permissions to these team members, and you want to follow Google-recommended practices. What should you do?
@@ -1430,6 +1461,17 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Add the users to roles/iam.roleViewer role.
 - [x] Add the users to a group, and add this group to roles/browser.
 - [ ] Add the users to a group, and add this group to roles/iam.roleViewer role.
+
+To allow a few team members to view the hierarchical structure of your Google Cloud organization while following Google-recommended practices, you should:
+
+### Correct Answer:
+- **[3] Add the users to a group, and add this group to roles/browser.**
+
+### Explanation:
+- **[1] Add the users to roles/browser role**: Assigning roles directly to individual users is not a best practice because it becomes hard to manage as the number of users grows.
+- **[2] Add the users to roles/iam.roleViewer role**: The `roles/iam.roleViewer` role is not the appropriate role for viewing the hierarchical structure of folders and projects.
+- **[3] Add the users to a group, and add this group to roles/browser**: This is the recommended practice. By adding users to a group and then assigning the role to the group, you can easily manage permissions at scale. The `roles/browser` role provides the necessary permissions to view the organization’s structure.
+- **[4] Add the users to a group, and add this group to roles/iam.roleViewer role**: Again, the `roles/iam.roleViewer` role is not intended for viewing the organizational structure. The `roles/browser` role is more suitable.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1440,6 +1482,17 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Mobile &amp; Desktop Apps.
 - [ ] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Web Server Applications.
 
+To integrate your company's SSO provider that supports SAML with Cloud Identity, you need to set up single sign-on (SSO) with a third-party identity provider, with Google acting as the service provider.
+
+### Correct Answer:
+- **[2] In Cloud Identity, set up SSO with a third-party identity provider with Google as a service provider.**
+
+### Explanation:
+- **[1] In Cloud Identity, set up SSO with Google as an identity provider to access custom SAML apps**: This sets up Google as the identity provider, but in your case, you want your company's SSO provider to be the identity provider.
+- **[2] In Cloud Identity, set up SSO with a third-party identity provider with Google as a service provider**: This correctly configures Cloud Identity to use your company's SSO provider as the identity provider, with Google acting as the service provider.
+- **[3] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Mobile & Desktop Apps**: OAuth 2.0 is not used for SAML SSO integrations.
+- **[4] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Web Server Applications**: Again, OAuth 2.0 is not the appropriate protocol for this SAML SSO scenario.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your organization has a dedicated person who creates and manages all service accounts for Google Cloud projects. You need to assign this person the minimum role for projects. What should you do?
@@ -1449,6 +1502,16 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Add the user to roles/iam.serviceAccountUser role.
 - [x] Add the user to roles/iam.serviceAccountAdmin role.
 
+To manage all service accounts, including creating and managing them, the appropriate role to assign is the **Service Account Admin** role. This role provides permissions to create, update, delete, and manage service accounts.
+
+### Correct Answer:
+- **[4] Add the user to roles/iam.serviceAccountAdmin role.**
+
+### Explanation:
+- **roles/iam.roleAdmin**: This role is for managing IAM roles, not service accounts.
+- **roles/iam.securityAdmin**: This role is for managing IAM policies and security configurations, not specifically service accounts.
+- **roles/iam.serviceAccountUser**: This role allows using service accounts but not creating or managing them.
+- **roles/iam.serviceAccountAdmin**: This role has the necessary permissions to create, update, delete, and manage service accounts, which fits the requirement.
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are building an archival solution for your data warehouse and have selected Cloud Storage to archive your data. Your users need to be able to access this archived data once a quarter for some regulatory requirements. You want to select a cost-efficient option. Which storage option should you use?
@@ -1458,9 +1521,20 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Regional Storage.
 - [ ] Multi-Regional Storage.
 
+Given the requirements of accessing the archived data once a quarter (every 90 days), the most cost-efficient option for this access pattern would be **Coldline Storage**. Coldline Storage is specifically designed for data that is accessed infrequently, typically less than once a year, making it more cost-effective for quarterly access compared to other options.
+
+### Correct Answer:
+- **[1] Cold Storage.**
+
+### Explanation:
+- **Coldline Storage (Cold Storage)**: This is suitable for data accessed less than once a year. Since your data is accessed once every quarter, this fits well with the usage pattern and provides a cost-efficient solution.
+- **Nearline Storage**: More suitable for data accessed less than once a month but more frequently than Coldline. It would be less cost-efficient for quarterly access compared to Coldline Storage.
+- **Regional Storage**: This is designed for data that needs to be accessed frequently and stored in a specific region. It would be more expensive and unnecessary for infrequent, quarterly access.
+- **Multi-Regional Storage**: This is for data that needs to be accessed frequently across multiple regions. It is the most expensive option and not suitable for infrequent, quarterly access.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### A team of data scientists infrequently needs to use a Google Kubernetes Engine (GKE) cluster that you manage. They require GPUs for some long-running, nonrestartable jobs. You want to minimize cost. What should you do?
+### A team of data scientists infrequently needs to use a Google Kubernetes Engine (GKE) cluster that you manage. They require GPUs for some long-running, nonrestartable jobs. You want to minimize cost. What should you do?  ---------------Issue
 
 - [ ] Enable node auto-provisioning on the GKE cluster.
 - [ ] Create a VerticalPodAutscaler for those workloads.
@@ -1485,6 +1559,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a new project, modify your existing VPC to be a Shared VPC, share that VPC with your new project, and replicate the setup you have in the development environment in that new project in the Shared VP.
 - [ ] Ask the security team to grant you the Project Editor role in an existing production project used by another division of your company. Once they grant you that role, replicate the setup you have in the development environment in that project.
 
+The correct option is:
+
+- **[x] Create a new project, enable the Compute Engine and Cloud SQL APIs in that project, and replicate the setup you have created in the development environment.**
+
+### Explanation:
+
+Creating a new project for the production environment is the recommended approach for several reasons:
+
+1. **Isolation:** A new project ensures complete isolation between the development and production environments, which is crucial for maintaining security and avoiding potential conflicts or leaks. This aligns with the security team's requirement of no network routes between environments.
+
+2. **Granular Control:** By creating a new project, you can manage IAM roles, permissions, and billing separately for the production environment, providing more granular control and enhancing security.
+
+3. **Best Practices:** Google Cloud recommends using separate projects for different environments (development, staging, production) to streamline management, improve security, and simplify billing and resource tracking.
+
+### Why other options are not suitable:
+
+- **[ ] Create a new production subnet in the existing VPC and a new production Cloud SQL instance in your existing project, and deploy your application using those resources:**
+  - While creating a new subnet does provide some level of isolation, it does not fully separate the environments at the project level. This option would still allow potential network routes and does not meet the requirement for complete separation.
+
+- **[ ] Create a new project, modify your existing VPC to be a Shared VPC, share that VPC with your new project, and replicate the setup you have in the development environment in that new project in the Shared VPC:**
+  - Using a Shared VPC can complicate the network configuration and does not necessarily provide the complete isolation that creating a new project does. Shared VPCs are more suitable for organizations with specific requirements for shared resources across multiple projects.
+
+- **[ ] Ask the security team to grant you the Project Editor role in an existing production project used by another division of your company. Once they grant you that role, replicate the setup you have in the development environment in that project:**
+  - This option mixes environments and roles, which can lead to security and management issues. It also violates the principle of least privilege by potentially granting unnecessary access.
+
+By creating a new project and replicating the setup, you can ensure a clean, isolated production environment that adheres to best practices and security requirements.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your management has asked an external auditor to review all the resources in a specific project. The security team has enabled the Organization Policy called Domain Restricted Sharing on the organization node by specifying only your Cloud Identity domain. You want the auditor to only be able to view, but not modify, the resources in that project. What should you do?
@@ -1493,6 +1594,34 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Ask the auditor for their Google account, and give them the Security Reviewer role on the project.
 - [x] Create a temporary account for the auditor in Cloud Identity, and give that account the Viewer role on the project.
 - [ ] Create a temporary account for the auditor in Cloud Identity, and give that account the Security Reviewer role on the project.
+
+To ensure that the external auditor can view, but not modify, resources in a specific project while adhering to your organization's Domain Restricted Sharing policy, the recommended approach is:
+
+- [x] **Create a temporary account for the auditor in Cloud Identity, and give that account the Viewer role on the project.**
+
+### Explanation:
+
+- **Viewer role:** This role grants read-only access to view resources within a project. Users with the Viewer role can see all resources and configurations but cannot make any modifications or perform actions that could alter the state of the project.
+
+- **Domain Restricted Sharing policy:** This policy restricts sharing to only users within your organization's specified Cloud Identity domain. By creating a temporary account for the auditor within this domain, you ensure compliance with the policy while allowing the auditor to access the necessary resources.
+
+### Why the other options are not the best choices:
+
+- **Ask the auditor for their Google account, and give them the Viewer role on the project:**
+  - While this option may seem straightforward, it assumes the auditor already has a Google account within your domain. Creating a temporary account ensures that you have full control over the access and can revoke it as needed after the audit.
+
+- **Ask the auditor for their Google account, and give them the Security Reviewer role on the project:**
+  - The Security Reviewer role includes permissions that are more extensive than just viewing. It allows actions related to security assessments and configurations, which may not be appropriate or necessary for the auditor's role.
+
+- **Create a temporary account for the auditor in Cloud Identity, and give that account the Security Reviewer role on the project:**
+  - Similar to the previous option, this provides unnecessary permissions that exceed the scope of what the auditor requires (viewing resources only).
+
+### Additional considerations:
+
+- Ensure that the temporary account created for the auditor is only active for the duration of the audit and is disabled or removed afterward to maintain security and compliance.
+- Monitor the auditor's activities to ensure they adhere to the scope of their role (viewing only) and do not perform any unauthorized actions.
+
+By creating a temporary Cloud Identity account and assigning the Viewer role to it, you provide the auditor with the necessary access to perform their audit while maintaining strict control over permissions and adherence to organizational policies.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1503,6 +1632,37 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a cron job to create a new disk from the disk using gcloud.
 - [ ] Create a Cloud Task to create an image and export it to Cloud Storage.
 
+To ensure that the data on the boot disk of your critical Compute Engine workload is backed up regularly and following Google-recommended practices, the best approach would be:
+
+- [2] **Create a snapshot schedule for the disk using the desired interval.**
+
+### Explanation:
+
+- **Create a snapshot schedule for the disk:** Compute Engine allows you to create snapshot schedules that automatically capture incremental backups of persistent disks at specified intervals. This method is efficient because it only captures changes since the last snapshot, reducing both storage costs and the time required to create backups.
+
+### Why the other options are not the best choice:
+
+- **Create a Cloud Function to create an instance template:**
+  - This option does not directly address the backup requirements for the disk's data. Instance templates are used for creating new virtual machine instances with pre-configured settings, not for backing up data.
+
+- **Create a cron job to create a new disk from the disk using gcloud:**
+  - This approach suggests creating new disks rather than creating backups. It does not ensure that the backups are incremental or managed automatically over time.
+
+- **Create a Cloud Task to create an image and export it to Cloud Storage:**
+  - While exporting images to Cloud Storage is useful for certain scenarios, it doesn't provide automated backup capabilities for the boot disk's data. It also doesn't manage snapshots over time, including cleanup of older backups to optimize costs.
+
+### Benefits of using snapshot schedules:
+
+- **Automated backups:** Once configured, snapshot schedules automatically create backups at defined intervals, ensuring that your data is backed up regularly without manual intervention.
+
+- **Incremental backups:** Snapshots capture only incremental changes since the last snapshot, reducing storage costs and the time required to perform backups.
+
+- **Disaster recovery:** Snapshots allow you to quickly restore the boot disk in case of data loss or disaster, providing resilience to critical workloads.
+
+- **Cost efficiency:** By managing snapshot schedules, you can define retention policies to automatically delete older snapshots, optimizing storage costs.
+
+Therefore, creating a snapshot schedule for the disk ensures that your critical Compute Engine workload's data is backed up regularly, can be restored quickly in case of disaster, and adheres to Google-recommended practices for backup and disaster recovery.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to assign a Cloud Identity and Access Management (Cloud IAM) role to an external auditor. The auditor needs to have permissions to review your Google Cloud Platform (GCP) Audit Logs and also to review your Data Access logs. What should you do?
@@ -1511,6 +1671,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Assign the auditor the IAM role roles/logging.privateLogViewer. Direct the auditor to also review the logs for changes to Cloud IAM policy.
 - [ ] Assign the auditor's IAM user to a custom role that has logging.privateLogEntries.list permission. Perform the export of logs to Cloud Storage.
 - [ ] Assign the auditor's IAM user to a custom role that has logging.privateLogEntries.list permission. Direct the auditor to also review the logs for changes to Cloud IAM policy.
+
+Based on the provided options and the requirement that the auditor needs permissions to review both GCP Audit Logs and Data Access logs, the most suitable choice is:
+
+- [x] Assign the auditor the IAM role roles/logging.privateLogViewer. Direct the auditor to also review the logs for changes to Cloud IAM policy.
+
+### Explanation:
+
+- **roles/logging.privateLogViewer:** This predefined role grants the auditor permission to view private logs, including Audit Logs and Data Access logs. It allows the auditor to access and review these logs directly within the Google Cloud Console or through API calls.
+
+- **Direct the auditor to also review the logs for changes to Cloud IAM policy:** This additional guidance ensures that the auditor understands the scope of their access and can review relevant logs related to changes in IAM policies, which might be important for auditing purposes.
+
+### Why the other options are not the best choice:
+
+- **Assign the auditor the IAM role roles/logging.privateLogViewer. Perform the export of logs to Cloud Storage:**
+  - This option only focuses on exporting logs to Cloud Storage and does not specify the necessary permissions for the auditor to directly review Audit Logs and Data Access logs.
+
+- **Assign the auditor's IAM user to a custom role that has logging.privateLogEntries.list permission. Perform the export of logs to Cloud Storage:**
+  - Creating a custom role with `logging.privateLogEntries.list` permission is unnecessary when there is already a predefined role (`roles/logging.privateLogViewer`) that provides the required access.
+
+- **Assign the auditor's IAM user to a custom role that has logging.privateLogEntries.list permission. Direct the auditor to also review the logs for changes to Cloud IAM policy:**
+  - Similar to the first incorrect option, this suggests using a custom role unnecessarily and also adds the requirement to review IAM policy changes, which might not be directly related to the primary task of reviewing Audit Logs and Data Access logs.
+
+Therefore, the correct approach is to assign the predefined role `roles/logging.privateLogViewer` to the auditor and instruct them to also review logs related to changes in Cloud IAM policies to ensure comprehensive auditing and oversight.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1521,15 +1704,56 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Stackdriver Logging Export with a Sink destination to Cloud Storage. Create a lifecycle rule to delete objects after 60 days.
 - [ ] Configure a Cloud Scheduler job to read from Stackdriver and store the logs in BigQuery. Configure the table expiration to 60 days.
 
+To obtain combined logs for all projects over the past 60 days and follow Google-recommended practices, the best approach is:
+
+- [2] Create a Stackdriver Logging Export with a Sink destination to a BigQuery dataset. Configure the table expiration to 60 days.
+
+### Explanation:
+
+- **Stackdriver Logging Export:** By setting up a logging export, you can aggregate logs from multiple projects into a single location.
+- **Sink destination to BigQuery:** Exporting logs to BigQuery allows for efficient storage and querying of log data over time.
+- **Table expiration:** Configuring the table expiration to 60 days ensures that logs older than the specified period are automatically deleted, aligning with data retention best practices.
+
+### Why the other options are not the best choice:
+
+- **Option 1:** Navigating to Stackdriver Logging and selecting `resource.labels.project_id="*"` would only allow you to view logs interactively filtered by project IDs. It doesn't provide aggregation across all projects or storage beyond what's visible in the console.
+  
+- **Option 3:** Exporting logs to Cloud Storage with a lifecycle rule to delete objects after 60 days is feasible but doesn't facilitate easy querying and analysis of log data as effectively as BigQuery.
+
+- **Option 4:** Using Cloud Scheduler to periodically read from Stackdriver and store logs in BigQuery is a manual and potentially complex setup compared to using a Stackdriver Export directly to BigQuery, which is simpler and aligns more closely with Google-recommended practices for log management and analysis.
+
+Therefore, **Option 2** is the most appropriate choice for aggregating logs across multiple GCP projects, storing them in BigQuery for efficient querying and analysis, and ensuring logs are retained for up to 60 days as per your requirement.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### You need to reduce GCP service costs for a division of your company using the fewest possible steps. You need to turn off all configured services in an existing GCP project. What should you do?
+### You need to reduce GCP service costs for a division of your company using the fewest possible steps. You need to turn off all configured services in an existing GCP project. What should you do?  -----------Issue   A 
 
 - [x] 1. Verify that you are assigned the Project Owners IAM role for this project. 2. Locate the project in the GCP console, click Shut down and then enter the project I.
 - [ ] 1. Verify that you are assigned the Project Owners IAM role for this project. 2. Switch to the project in the GCP console, locate the resources and delete them.
 - [ ] 1. Verify that you are assigned the Organizational Administrator IAM role for this project. 2. Locate the project in the GCP console, enter the project ID and then click Shut down.
 - [ ] 1. Verify that you are assigned the Organizational Administrators IAM role for this project. 2. Switch to the project in the GCP console, locate the resources and delete them.
 
+For turning off all configured services in an existing GCP project to reduce costs, the correct approach is:
+
+- [x] 1. Verify that you are assigned the Project Owners IAM role for this project. 2. Locate the project in the GCP console, click Shut down and then enter the project ID.
+
+### Reasoning 1 is correct:
+
+- **Project Owners IAM role:** This role provides full access to manage all resources within the project, including the ability to shut down the project.
+- **Shut down the project:** This action suspends billing and stops all services within the project, effectively reducing costs.
+
+### Why the other options are not correct:
+
+- **Option 2:**
+  - Deleting resources individually is more labor-intensive and doesn't guarantee that all services are properly shut down or that costs are minimized efficiently.
+
+- **Option 3:**
+  - Entering the project ID and clicking "Shut down" without verifying permissions and context (Project Owners role) can lead to unintended consequences if critical services are inadvertently shut down.
+
+- **Option 4:**
+  - Similar to Option 2, deleting resources individually is not as efficient as shutting down the entire project to reduce costs comprehensively.
+
+Therefore, the recommended and correct approach is to ensure you have the Project Owners IAM role, locate the project in the GCP console, and then initiate the shutdown process for the entire project to halt all services and reduce costs effectively.
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are configuring service accounts for an application that spans multiple projects. Virtual Machines (VMs) running in the web-applications project need access to BigQuery datasets in crm-databases-proj. You want to follow Google-recommended practices to give access to the service account in the web-applications project. What should you do?
@@ -1538,6 +1762,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Give project owner role to crm-databases-proj and the web-applications project.
 - [ ] Give project owner role to crm-databases-proj and bigquery.dataViewer role to web-applications.
 - [x] Give bigquery.dataViewer role to crm-databases-proj and appropriate roles to web-applications.
+
+To follow Google-recommended practices for giving access to BigQuery datasets in `crm-databases-proj` to a service account in the `web-applications` project, you should:
+
+**Option 4: Give `bigquery.dataViewer` role to `crm-databases-proj` and appropriate roles to `web-applications`.**
+
+### Reasoning:
+
+- **bigquery.dataViewer role:** This role provides read access to BigQuery datasets. It allows the service account in the `web-applications` project to view data in datasets within `crm-databases-proj` without having unnecessary permissions.
+
+- **Appropriate roles to web-applications:** You should grant roles to the service account in `web-applications` that are necessary for its operations but strictly follow the principle of least privilege. Typically, roles like `roles/bigquery.jobUser` or `roles/bigquery.metadataViewer` might be appropriate depending on the specific tasks the service account needs to perform.
+
+### Why the other options are not correct:
+
+- **Option 1: Give project owner for `web-applications` appropriate roles to `crm-databases-proj`.**
+  - Granting project owner roles across projects is overly permissive and violates the principle of least privilege. It gives too much control and access that might not be necessary for the service account.
+
+- **Option 2: Give project owner role to `crm-databases-proj` and the `web-applications` project.**
+  - Similar to Option 1, granting project owner roles across projects is excessive and should be avoided due to security and governance concerns.
+
+- **Option 3: Give project owner role to `crm-databases-proj` and `bigquery.dataViewer` role to `web-applications`.**
+  - This option grants too much access to `web-applications` by giving it project owner role, which is unnecessary and risky. It's better to keep roles scoped appropriately to the specific needs of each project and service account.
+
+Therefore, **Option 4** is the correct choice as it aligns with Google-recommended practices by granting minimal necessary permissions (`bigquery.dataViewer`) to `crm-databases-proj` and ensuring appropriate roles are assigned to `web-applications` without over-provisioning privileges.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1548,14 +1795,39 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] View Data Access audit logs in Stackdriver. Search for the user's email as the principal.
 - [ ] View the Admin Activity log in Stackdriver. Search for the service account associated with the user.
 
+To determine if the terminated employee accessed any sensitive customer information after their termination, you should:
+
+**Option 3: View Data Access audit logs in Stackdriver. Search for the user's email as the principal.**
+
+### Reasoning:
+
+- **Data Access audit logs:** These logs provide detailed information about who accessed what data and when in Google Cloud Platform (GCP). They are crucial for auditing and compliance purposes, especially in scenarios involving access to sensitive information.
+
+- **Search by user's email as the principal:** This approach allows you to specifically track actions performed by the terminated employee, even after their official termination date. You can search for any access or operations related to sensitive customer information during the two weeks after termination.
+
+### Why the other options are not correct:
+
+- **Option 1: View System Event Logs in Stackdriver. Search for the user's email as the principal.**
+  - System Event Logs in Stackdriver primarily track changes to GCP resources, not user actions related to data access. They won't provide detailed information about data access events by users.
+
+- **Option 2: View System Event Logs in Stackdriver. Search for the service account associated with the user.**
+  - Service accounts are typically used for automated processes or services, not individual user access. Monitoring service account activities won't necessarily reveal actions taken by the terminated employee's personal account.
+
+- **Option 4: View the Admin Activity log in Stackdriver. Search for the service account associated with the user.**
+  - The Admin Activity log records actions related to administrative activities in GCP, such as IAM changes or resource modifications. It doesn't directly capture data access events by individual users, especially after their termination.
+
+Therefore, **Option 3** is the most appropriate choice as it focuses on auditing data access, allows specific search by user's email (principal), and aligns with the need to track potential unauthorized access to sensitive customer information post-termination.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### You need to create a custom IAM role for use with a GCP service. All permissions in the role must be suitable for production use. You also want to clearly share with your organization the status of the custom role. This will be the first version of the custom role. What should you do?
+### You need to create a custom IAM role for use with a GCP service. All permissions in the role must be suitable for production use. You also want to clearly share with your organization the status of the custom role. This will be the first version of the custom role. What should you do? -------------Issue
 
 - [x] Use permissions in your role that use the 'supported' support level for role permissions. Set the role stage to ALPHA while testing the role permissions.
 - [ ] Use permissions in your role that use the 'supported' support level for role permissions. Set the role stage to BETA while testing the role permissions.
 - [ ] Use permissions in your role that use the 'testing' support level for role permissions. Set the role stage to ALPHA while testing the role permissions.
 - [ ] Use permissions in your role that use the 'testing' support level for role permissions. Set the role stage to BETA while testing the role permissions.
+
+All diff ans
 
 **[⬆ Back to Top](#table-of-contents)**
 
