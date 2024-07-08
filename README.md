@@ -1755,6 +1755,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Enable API and then use default dashboards to view all projects in sequence.
 - [x] Enable API, create a workspace under project A, and then add projects B and C.
 
+To set up application performance monitoring on Google Cloud projects A, B, and C as a single pane of glass for monitoring CPU, memory, and disk, you should:
+
+- **Option 4: Enable API, create a workspace under project A, and then add projects B and C.**
+
+### Explanation:
+
+**Option 4** is the best approach because it allows you to use Google Cloud Monitoring (formerly Stackdriver) to aggregate and view metrics from multiple projects in a single place. By creating a Monitoring Workspace in project A and adding projects B and C to this workspace, you can seamlessly monitor and visualize metrics across all three projects.
+
+### Why the Other Options Are Less Suitable:
+
+- **Option 1: Enable API and then share charts from project A, B, and C.**
+  - This option involves manually sharing charts, which can be cumbersome and does not provide a unified, single-pane-of-glass view.
+
+- **Option 2: Enable API and then give the metrics.reader role to projects A, B, and C.**
+  - This option focuses on permissions but does not address the need for a centralized view. It only ensures that the projects can read metrics, not that they can be viewed together in one dashboard.
+
+- **Option 3: Enable API and then use default dashboards to view all projects in sequence.**
+  - Default dashboards are limited to individual projects. Viewing each project in sequence does not provide a consolidated view, which is less efficient and more fragmented.
+
+### Summary:
+
+**Option 4** provides the best solution by leveraging Google Cloud Monitoring workspaces to create a single, centralized dashboard. This allows for an integrated view of CPU, memory, and disk metrics across projects A, B, and C, providing a cohesive and efficient monitoring setup.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You created several resources in multiple Google Cloud projects. All projects are linked to different billing accounts. To better estimate future charges, you want to have a single visual representation of all costs incurred. You want to include new cost data as soon as possible. What should you do?
@@ -1763,6 +1786,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Visit the Cost Table page to get a CSV export and visualize it using Data Studio.
 - [ ] Fill all resources in the Pricing Calculator to get an estimate of the monthly cost.
 - [ ] Use the Reports view in the Cloud Billing Console to view the desired cost information.
+
+The best approach to achieve a single visual representation of all costs incurred across multiple Google Cloud projects, with new cost data included as soon as possible, is:
+
+- **Option 1: Configure Billing Data Export to BigQuery and visualize the data in Data Studio.**
+
+### Explanation:
+
+**Option 1** is the most effective method because it allows for a comprehensive and up-to-date visualization of all costs. By exporting billing data to BigQuery, you can aggregate cost data from multiple projects and billing accounts. Then, using Data Studio, you can create dynamic and customizable visual reports that update automatically as new data is added to BigQuery.
+
+### Why the Other Options Are Less Suitable:
+
+- **Option 2: Visit the Cost Table page to get a CSV export and visualize it using Data Studio.**
+  - While this method allows for visualization, it is manual and not real-time. You would need to regularly export the CSV and update the visualization, which is not efficient and can lead to outdated information.
+
+- **Option 3: Fill all resources in the Pricing Calculator to get an estimate of the monthly cost.**
+  - The Pricing Calculator provides estimates, not actual costs. It does not account for real-time usage data and changes, making it less accurate for current cost tracking and forecasting.
+
+- **Option 4: Use the Reports view in the Cloud Billing Console to view the desired cost information.**
+  - The Reports view in the Cloud Billing Console provides insights but is limited in its ability to customize and aggregate data across multiple projects and billing accounts in the same visual representation. It also lacks the flexibility and depth of visualization that Data Studio offers.
+
+### Summary:
+
+**Option 1** combines the strengths of BigQuery and Data Studio to provide a scalable, real-time, and customizable solution for visualizing billing data across multiple projects and billing accounts. This method ensures that you have the most up-to-date information and a comprehensive view of your costs.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1773,14 +1819,61 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a deny-all egress firewall rule on the VPC network.
 - [ ] Create a route on the VPC to route all traffic to the instance over the VPN tunnel.
 
+The correct approach is:
+
+- **Option 1: Create the instance without a public IP address.**
+
+### Explanation:
+
+**Option 1** ensures that the Compute Engine instance cannot send or receive traffic directly over the public internet, as it will not have a public IP address. This setup inherently restricts the instance to private network communication only, which can route traffic through your VPN or other internal networks as necessary.
+
+### Why the Other Options Are Less Suitable:
+
+- **Option 2: Create the instance with Private Google Access enabled.**
+  - Private Google Access allows instances without a public IP to access Google APIs and services over Google's internal network. However, it doesn't inherently prevent public internet access if the instance has a public IP.
+
+- **Option 3: Create a deny-all egress firewall rule on the VPC network.**
+  - While a deny-all egress firewall rule can prevent the instance from sending traffic to the internet, it may be overly restrictive and impact other required communications within the VPC. It also does not prevent the instance from being accessible from the internet if it has a public IP.
+
+- **Option 4: Create a route on the VPC to route all traffic to the instance over the VPN tunnel.**
+  - This option focuses on directing traffic over the VPN but doesn't address the fundamental issue of the instance having a public IP. The instance could still potentially route traffic over the internet if it has a public IP address.
+
+### Summary:
+**Option 1** directly addresses the requirement by ensuring the instance does not have a public IP address, thus preventing any public internet traffic from being routed to or from the instance. This is the simplest and most straightforward method to ensure compliance with the requirement.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-### Your team maintains the infrastructure for your organization. The current infrastructure requires changes. You need to share your proposed changes with the rest of the team. You want to follow Google's recommended best practices. What should you do?
+### Your team maintains the infrastructure for your organization. The current infrastructure requires changes. You need to share your proposed changes with the rest of the team. You want to follow Google's recommended best practices. What should you do?     -------------------Issue
 
 - [ ] Use Deployment Manager templates to describe the proposed changes and store them in a Cloud Storage bucket.
 - [x] Use Deployment Manager templates to describe the proposed changes and store them in Cloud Source Repositories.
 - [ ] Apply the changes in a development environment, run gcloud compute instances list, and then save the output in a shared Storage bucket.
 - [ ] Apply the changes in a development environment, run gcloud compute instances list, and then save the output in Cloud Source Repositories.
+
+To follow Google's recommended best practices for sharing proposed infrastructure changes with your team, you should:
+
+**Option 2: Use Deployment Manager templates to describe the proposed changes and store them in Cloud Source Repositories.**
+
+Here’s why this option is the correct choice:
+
+- **Deployment Manager Templates:** Google Cloud Deployment Manager allows you to define your infrastructure in templates using YAML or Python. These templates are declarative and version-controlled, making it easier to manage changes over time.
+  
+- **Cloud Source Repositories:** Google Cloud Source Repositories provide a Git version control system with built-in collaboration tools. Storing Deployment Manager templates in Cloud Source Repositories allows your team members to review, collaborate, and track changes effectively.
+  
+- **Best Practice:** Storing infrastructure-as-code (IaC) templates in version-controlled repositories like Cloud Source Repositories ensures that changes are documented, auditable, and can be rolled back if necessary. It also promotes consistency across environments and enables continuous integration and continuous deployment (CI/CD) pipelines.
+
+**Why the Other Options Are Wrong:**
+
+- **Option 1: Use Deployment Manager templates to describe the proposed changes and store them in a Cloud Storage bucket:**
+  - While Cloud Storage can store files, it lacks version control and collaboration features that are essential for managing infrastructure changes in a team environment. It's not designed for versioning or code review processes.
+
+- **Option 3: Apply the changes in a development environment, run `gcloud compute instances list`, and then save the output in a shared Storage bucket:**
+  - Saving the output of `gcloud compute instances list` in a Storage bucket does not provide a structured way to share proposed infrastructure changes. It also doesn’t capture the declarative nature of infrastructure changes or allow for versioning and rollback capabilities.
+
+- **Option 4: Apply the changes in a development environment, run `gcloud compute instances list`, and then save the output in Cloud Source Repositories:**
+  - Saving command output in Cloud Source Repositories is not suitable for sharing proposed infrastructure changes. It does not provide structured templates or version control for infrastructure-as-code, which are critical for managing complex environments.
+
+Therefore, **Option 2** is the best approach as it aligns with Google's recommended practices for managing infrastructure changes using Deployment Manager templates in a version-controlled repository like Cloud Source Repositories.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1791,6 +1884,35 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Create a Cloud Function that creates a snapshot of your instance's disk. 2. Create a Cloud Function that deletes snapshots that are older than 30 days. 3. Use Cloud Scheduler to trigger both Cloud Functions daily at 1:00 AM.
 - [ ] 1. Create a bash script in the instance that copies the content of the disk to Cloud Storage. 2. Create a bash script in the instance that deletes data older than 30 days in the backup Cloud Storage bucket. 3. Configure the instance's crontab to execute these scripts daily at 1:00 AM.
 
+The correct choice for your requirement is:
+
+- **Option 2:**
+  - **In the Cloud Console, go to the Compute Engine Disks page and select your instance's disk.**
+  - **In the Snapshot Schedule section, select Create Schedule and configure the following parameters: Schedule frequency: Daily. Start time: 1:00 AM - 2:00 AM. Autodelete snapshots after: 30 days.**
+
+### Explanation:
+**Option 2** is the best choice because it provides a straightforward and Google-recommended solution with the least management overhead and the fewest number of services involved. Here’s why:
+
+1. **Ease of Configuration:** The Cloud Console offers a user-friendly interface to create and manage snapshot schedules effortlessly.
+2. **Automated Management:** The snapshot schedule feature in Compute Engine automatically handles the creation and deletion of snapshots based on your specified schedule and retention period, ensuring your backups are consistent and reliable.
+3. **Minimal Overhead:** This approach leverages the built-in functionalities of Google Cloud, reducing the need for additional services or custom scripts, which simplifies the management.
+4. **Cost-Effective:** By using the built-in snapshot scheduling, you avoid the potential costs associated with additional services like Cloud Functions or Cloud Storage.
+
+### Why the Other Options Are Less Suitable:
+
+- **Option 1:**
+  - **Not a Standard Practice:** Updating instance metadata to manage snapshots is not a standard or recommended method for managing backups in Google Cloud, making it less reliable and harder to maintain.
+
+- **Option 3:**
+  - **More Services Involved:** This option requires setting up Cloud Functions and Cloud Scheduler, adding unnecessary complexity and additional services to manage.
+  - **Maintenance Overhead:** You would need to develop, deploy, and maintain the Cloud Functions code, increasing operational overhead.
+
+- **Option 4:**
+  - **Manual Script Management:** This option involves creating and managing custom scripts, increasing maintenance effort.
+  - **Less Reliable:** Using crontab for scheduling backups can be less reliable compared to the built-in cloud scheduling features, and it also involves managing Cloud Storage manually.
+
+Therefore, **Option 2** offers a simple, reliable, and Google-recommended solution with minimal management overhead and the least number of additional services required.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your existing application running in Google Kubernetes Engine (GKE) consists of multiple pods running on four GKE n1-standard-2 nodes. You need to deploy additional pods requiring n2-highmem-16 nodes without any downtime. What should you do?
@@ -1799,6 +1921,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Create a new Node Pool and specify machine type n2-highmem-16. Deploy the new pods.
 - [ ] Create a new cluster with n2-highmem-16 nodes. Redeploy the pods and delete the old cluster.
 - [ ] Create a new cluster with both n1-standard-2 and n2-highmem-16 nodes. Redeploy the pods and delete the old cluster.
+
+The correct approach is:
+
+- **Option 2: Create a new Node Pool and specify machine type n2-highmem-16. Deploy the new pods.**
+
+### Explanation:
+
+**Option 2** is the best choice because it allows you to add new nodes with the desired machine type to your existing cluster without causing downtime. Here's why:
+
+1. **Node Pools:** GKE allows you to create multiple node pools within a single cluster. Each node pool can have different machine types, allowing you to run workloads with different resource requirements within the same cluster.
+2. **No Downtime:** By adding a new node pool with the `n2-highmem-16` machine type, you can deploy the additional pods to this new node pool without affecting the existing pods running on the `n1-standard-2` nodes.
+3. **Scalability:** This approach allows you to scale your resources based on the requirements of different workloads while maintaining high availability and minimizing disruption.
+
+### Why the Other Options Are Less Suitable:
+
+- **Option 1: Use gcloud container clusters upgrade. Deploy the new services.**
+  - This option is for upgrading the control plane and node versions of your cluster. It does not address adding different machine types or handling workloads requiring different resource profiles.
+
+- **Option 3: Create a new cluster with n2-highmem-16 nodes. Redeploy the pods and delete the old cluster.**
+  - Creating a new cluster and migrating all services involves significant overhead, potential downtime, and complexity in managing the transition, which is unnecessary when you can simply add a new node pool to the existing cluster.
+
+- **Option 4: Create a new cluster with both n1-standard-2 and n2-highmem-16 nodes. Redeploy the pods and delete the old cluster.**
+  - Similar to Option 3, this option introduces unnecessary complexity and potential downtime. It is more efficient to manage different workloads within a single cluster using multiple node pools.
+
+Therefore, **Option 2** is the most efficient and effective method to deploy additional pods requiring `n2-highmem-16` nodes without causing downtime.
 
 **[⬆ Back to Top](#table-of-contents)**
 
