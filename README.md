@@ -1809,6 +1809,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Cloud Dataproc cluster that runs a Spark job to extract data from Cloud Bigtable and Cloud Storage for specific users.
 - [x] Create two separate BigQuery external tables on Cloud Storage and Cloud Bigtable. Use the BigQuery console to join these tables through user fields, and apply appropriate filters.
 
+To efficiently join data from Cloud Spanner and Cloud Bigtable for specific users, considering your setup and requirements, the best approach would be:
+
+**Option 2: Create a dataflow job that copies data from Cloud Bigtable and Cloud Spanner for specific users.**
+
+Here’s why this option is suitable:
+
+- **Dataflow for Data Integration:** Google Cloud Dataflow is designed for large-scale data integration and processing. It can handle data from multiple sources (Cloud Spanner and Cloud Bigtable) and perform transformations or joins as needed.
+  
+- **Efficiency:** Dataflow allows you to parallelize data processing tasks, ensuring efficient data retrieval and processing. You can optimize the job to fetch data only for specific users, reducing unnecessary data transfer and processing.
+  
+- **Integration of Cloud Spanner and Cloud Bigtable:** Since your analyst needs to join data from both Cloud Spanner (for current state information about users) and Cloud Bigtable (for event logs), Dataflow provides a unified framework to integrate these datasets seamlessly.
+
+**Why the Other Options Are Not Suitable:**
+
+- **Option 1: Create a dataflow job that copies data from Cloud Bigtable and Cloud Storage for specific users:**
+  - This option involves Cloud Storage, which is typically used for storing backups or large datasets but might not be directly suitable for real-time data processing or joining with Cloud Spanner data.
+
+- **Option 3: Create a Cloud Dataproc cluster that runs a Spark job to extract data from Cloud Bigtable and Cloud Storage for specific users:**
+  - Dataproc with Spark is powerful for data processing, but it adds complexity compared to Dataflow for this scenario. Dataproc clusters need management and scaling considerations, which might not be necessary for an ad hoc request.
+
+- **Option 4: Create two separate BigQuery external tables on Cloud Storage and Cloud Bigtable. Use the BigQuery console to join these tables through user fields, and apply appropriate filters:**
+  - BigQuery can handle large datasets and complex queries, but using external tables from Cloud Storage and Cloud Bigtable requires loading data into BigQuery, which might not be ideal for ad hoc, real-time query needs. It's more suited for structured data analysis after data is already loaded into BigQuery.
+
+Therefore, **Option 2** is the most efficient choice as it leverages Dataflow’s capabilities for integrating and processing data from Cloud Spanner and Cloud Bigtable directly, tailored to the specific user data join requirements.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are hosting an application from Compute Engine Virtual Machines (VMs) in us-central1-a. You want to adjust your design to support the failure of a single Compute Engine zone, eliminate downtime, and minimize cost. What should you do?
@@ -1817,6 +1842,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Managed Instance Group and specify us-central1-a as the zone. Configure the Health Check with a short Health Interval.
 - [ ] Create an HTTP(S) Load Balancer. Create one or more global forwarding rules to direct traffic to your VMs.
 - [ ] Perform regular backups of your application. Create a Cloud Monitoring Alert and be notified if your application becomes unavailable. Restore from backups when notified.
+
+To adjust your design to support the failure of a single Compute Engine zone in us-central1-a, eliminate downtime, and minimize cost, the best approach would be:
+
+**Option 1: Create Compute Engine resources in us-central1-b. Balance the load across both us-central1-a and us-central1-b.**
+
+Here's why this option is suitable:
+
+- **High Availability:** By deploying Compute Engine resources (VM instances) across multiple zones (us-central1-a and us-central1-b), you ensure that if one zone experiences a failure, your application can continue running from the other zone without downtime.
+  
+- **Load Balancing:** Balancing the load across both zones allows your application to distribute traffic effectively. You can use either a regional or global load balancer to achieve this, ensuring that traffic is routed to healthy instances across zones.
+  
+- **Cost Optimization:** This setup helps minimize costs because you can distribute your resources across zones within the same region, leveraging Google Cloud's regional pricing models.
+
+**Why the Other Options Are Not Suitable:**
+
+- **Option 2: Create a Managed Instance Group and specify us-central1-a as the zone. Configure the Health Check with a short Health Interval:**
+  - This option focuses on a single zone (us-central1-a), which does not provide fault tolerance in case of zone failure. It does not address the requirement to support failure of a single zone.
+
+- **Option 3: Create an HTTP(S) Load Balancer. Create one or more global forwarding rules to direct traffic to your VMs:**
+  - While a global load balancer can distribute traffic globally, it does not inherently solve the problem of zone failure. It is more focused on global traffic distribution rather than zone-level fault tolerance.
+
+- **Option 4: Perform regular backups of your application. Create a Cloud Monitoring Alert and be notified if your application becomes unavailable. Restore from backups when notified:**
+  - This option addresses backup and monitoring for disaster recovery, which is important but does not directly relate to minimizing downtime due to zone failure. It's a reactive measure rather than a proactive high availability solution.
+
+Therefore, **Option 1** is the correct choice as it directly aligns with the requirement to support the failure of a single Compute Engine zone (us-central1-a), ensures high availability, and minimizes costs by leveraging multiple zones within the same region.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1827,6 +1877,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Enable Audit Logs on the IAM &amp; admin page for all resources, and validate the results.
 - [x] Use the command gcloud projects get-iam-policy to view the current role assignments.
 
+To review who has been granted the Project Owner role in a Google Cloud Platform project, the correct approach is:
+
+**4. Use the command `gcloud projects get-iam-policy` to view the current role assignments.**
+
+**Reasons why other options are wrong:**
+
+1. **In the console, validate which SSH keys have been stored as project-wide keys:**
+   - Checking SSH keys stored as project-wide keys does not directly provide information about IAM roles assigned to users. SSH keys are used for authentication purposes and are not directly related to IAM role assignments.
+
+2. **Navigate to Identity-Aware Proxy and check the permissions for these resources:**
+   - Identity-Aware Proxy (IAP) is used for controlling access to your web applications and services rather than reviewing IAM role assignments across the project. Checking permissions in IAP settings won't give you a comprehensive view of all IAM role assignments in the project.
+
+3. **Enable Audit Logs on the IAM & admin page for all resources, and validate the results:**
+   - Enabling Audit Logs provides a record of actions performed in Google Cloud, but it doesn't directly show the current IAM role assignments. Audit Logs can help track changes to IAM policies but won't provide a straightforward list of who currently holds the Project Owner role.
+
+**Why Option 4 is Correct:**
+- **gcloud command (`gcloud projects get-iam-policy`):** This command allows you to retrieve the IAM policy bindings for a project, which includes detailed information about who has what role (such as Project Owner, Editor, Viewer, etc.) in the project. It provides a clear and direct way to review the current IAM role assignments, including the Project Owner role.
+
+In summary, using the `gcloud projects get-iam-policy` command is the appropriate method to review who has been granted the Project Owner role in a Google Cloud Platform project, as it directly retrieves the IAM policy bindings for detailed examination.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are running multiple VPC-native Google Kubernetes Engine clusters in the same subnet. The IPs available for the nodes are exhausted, and you want to ensure that the clusters can grow in nodes when needed. What should you do?
@@ -1835,6 +1905,22 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Add an alias IP range to the subnet used by the GKE clusters.
 - [ ] Create a new VPC, and set up VPC peering with the existing VP.
 - [x] Expand the CIDR range of the relevant subnet for the cluster.
+
+To ensure that your VPC-native Google Kubernetes Engine (GKE) clusters can grow in nodes when needed and the IPs available for the nodes are exhausted, the best approach is:
+
+- **Expand the CIDR range of the relevant subnet for the cluster.**
+
+**Reasoning:**
+- **IP Address Expansion:** By expanding the CIDR range of the subnet, you increase the pool of available IP addresses for nodes within that subnet. This directly addresses the issue of IP address exhaustion.
+- **Minimal Disruption:** While expanding the CIDR range requires careful planning to avoid disruption, it allows you to scale your clusters within the same subnet without the need for additional subnets or VPCs.
+- **Scalability:** This approach ensures that your existing clusters can grow in terms of node count without running into IP address limitations.
+
+**Why Other Options are Wrong:**
+- **Create a new subnet in the same region:** Creating a new subnet doesn't solve the problem of IP address exhaustion in the existing subnet. It also adds complexity and requires migration of existing resources.
+- **Add an alias IP range:** Adding an alias IP range is useful for adding more IPs within a subnet but might not solve the problem if the subnet's CIDR range itself is too small.
+- **Create a new VPC and set up VPC peering:** This approach involves unnecessary complexity and doesn't directly address the IP address exhaustion issue in the current subnet.
+
+Therefore, **expanding the CIDR range of the relevant subnet for the cluster** is the correct choice to ensure that your VPC-native GKE clusters can grow in nodes when needed while maintaining network efficiency and minimizing disruption.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1845,6 +1931,22 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Run a test using a Managed Instance Group. If the test is successful, use N1 Standard VMs in the Managed Instance Group when running future jobs.
 - [ ] Run a test using N1 standard VMs instead of N2. If the test is successful, use N1 Standard VMs when running future jobs.
 
+The correct option and reasoning are as follows:
+
+**Option 1: Run a test using simulated maintenance events. If the test is successful, use preemptible N1 Standard VMs when running future jobs.**
+
+**Reasoning:**
+- **Preemptible VMs:** Preemptible VMs are much cheaper compared to regular VMs because they can be preempted by Google Cloud with short notice (up to 24 hours). They are ideal for fault-tolerant workloads like batch processing where instances can be terminated and restarted without impacting the overall job.
+- **Simulated Maintenance Events:** Testing with simulated maintenance events allows you to verify how your workload handles instance terminations. Since your workload is fault-tolerant and can tolerate VM terminations, preemptible VMs are a suitable choice to reduce costs.
+- **N1 Standard VMs:** N1 Standard VMs are a generation of VM types in Google Cloud and opting for preemptible instances within this category provides cost savings without sacrificing performance, assuming your workload can handle interruptions.
+
+**Why Other Options are Wrong:**
+- **Option 2:** Testing with simulated maintenance events alone without specifying the use of preemptible VMs does not address cost concerns directly. Regular N1 Standard VMs are more expensive and wouldn't optimize costs.
+- **Option 3:** Using Managed Instance Groups (MIGs) is a good practice for managing groups of VM instances for scalability and autohealing, but it doesn't inherently reduce costs unless combined with preemptible VMs.
+- **Option 4:** Switching between N1 and N2 VM types doesn't directly address cost concerns related to the type of VM being used; preemptible instances offer cost savings irrespective of the specific VM generation.
+
+Therefore, **Option 1** is the best choice because it directly addresses cost reduction by leveraging preemptible VMs, which are suitable for your fault-tolerant batch workload and can significantly lower your compute costs.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are working with a user to set up an application in a new VPC behind a firewall. The user is concerned about data egress. You want to configure the fewest open egress ports. What should you do?
@@ -1853,6 +1955,18 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set up a high-priority (1000) rule that pairs both ingress and egress ports.
 - [ ] Set up a high-priority (1000) rule that blocks all egress and a low-priority (65534) rule that allows only the appropriate ports.
 - [ ] Set up a high-priority (1000) rule to allow the appropriate ports.
+
+Based on the options provided and the requirement to minimize open egress ports while securing data egress in a VPC, the correct approach is:
+
+**Set up a low-priority (65534) rule that blocks all egress and a high-priority rule (1000) that allows only the appropriate ports.**
+
+Here’s why this option is the correct choice:
+
+- **Low-Priority (65534) Rule Blocking All Egress:** By setting up a rule with a lower priority (higher numerical value) such as 65534, you effectively block all outbound traffic by default. This helps in ensuring that no unauthorized data leaves the VPC, which is crucial for security.
+
+- **High-Priority (1000) Rule Allowing Specific Ports:** Following the rule that blocks all egress traffic, you then set up a rule with a higher priority (lower numerical value) such as 1000 to allow outbound traffic on only the necessary ports required for your application. This approach implements the principle of least privilege, allowing only essential outbound connections and reducing the risk of data exfiltration.
+
+This configuration ensures that your VPC is secured by default with minimal open egress ports, thereby addressing the user's concern about data egress while maintaining necessary connectivity for your application.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1863,6 +1977,35 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set up Cloud VPN between your Google Cloud VPC and the internal network of the operations partner.
 - [ ] Ask the operations partner to generate SSH key pairs, and add the public keys to the VM instances.
 
+Based on the scenario where your operations partner does not use Google Accounts and you need to grant them access to Compute Engine instances, the most appropriate option would be:
+
+**Enable Cloud IAP for the Compute Engine instances, and add the operations partner as a Cloud IAP Tunnel User.**
+
+### Explanation:
+
+- **Cloud IAP (Identity-Aware Proxy):**
+  - Cloud IAP provides a way to control access to your Compute Engine instances based on identities rather than IP addresses.
+  - **Advantages:**
+    - Secure access: Cloud IAP allows you to enforce access control policies based on user identity and context.
+    - Centralized management: You can manage access centrally through IAM (Identity and Access Management) roles and policies.
+    - No need to manage SSH keys: Unlike SSH key management, Cloud IAP does not require you to distribute or manage keys manually.
+
+### Why Other Options are Not Ideal:
+
+- **Tagging Instances and Firewall Rules:**
+  - While you can use network tags and firewall rules to control SSH access, this approach requires managing IP addresses or tags, which may not align with your partner's operational setup. It also doesn't provide identity-based access control.
+
+- **Cloud VPN:**
+  - Setting up a Cloud VPN would establish a secure connection between networks, but it doesn't directly address granting access to individual Compute Engine instances based on user identity.
+
+- **SSH Key Pairs:**
+  - Asking the operations partner to generate SSH key pairs and adding them to VM instances is a viable approach but requires manual key management and may not align with your security policies if you prefer identity-based access control.
+
+### Conclusion:
+
+Enabling Cloud IAP for Compute Engine instances and adding the operations partner as a Cloud IAP Tunnel User aligns well with secure access practices and allows you to leverage identity-based access control without managing SSH keys or IP addresses explicitly. This approach provides a more scalable and secure solution for granting access to your instances.
+
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have created a code snippet that should be triggered whenever a new file is uploaded to a Cloud Storage bucket. You want to deploy this code snippet. What should you do?
@@ -1871,6 +2014,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Use Cloud Functions and configure the bucket as a trigger resource.
 - [ ] Use Google Kubernetes Engine and configure a CronJob to trigger the application using Pub/Sub.
 - [ ] Use Dataflow as a batch job, and configure the bucket as a data source.
+
+To deploy a code snippet that should be triggered whenever a new file is uploaded to a Cloud Storage bucket, the best option is:
+
+**Option 2: Use Cloud Functions and configure the bucket as a trigger resource.**
+
+### Explanation:
+
+- **Cloud Functions:** Cloud Functions are serverless functions that automatically respond to events in Google Cloud services. They are designed to handle event-driven scenarios, such as reacting to changes in Cloud Storage.
+
+- **Bucket Trigger:** Cloud Functions can be configured with Cloud Storage triggers, where the function is automatically invoked when specific events occur in the bucket, such as when a new file is uploaded.
+
+### Why Other Options are Not Ideal:
+
+- **Option 1: Use App Engine and configure Cloud Scheduler to trigger the application using Pub/Sub:**
+  - **Issue:** This approach involves unnecessary complexity and overhead. App Engine is typically used for web applications, and using Cloud Scheduler with Pub/Sub introduces additional components that are not needed for a simple file upload trigger.
+
+- **Option 3: Use Google Kubernetes Engine and configure a CronJob to trigger the application using Pub/Sub:**
+  - **Issue:** Kubernetes is more suited for containerized applications that require orchestration. Using it for a simple file upload trigger is overkill and adds complexity without significant benefit.
+
+- **Option 4: Use Dataflow as a batch job, and configure the bucket as a data source:**
+  - **Issue:** Dataflow is used for large-scale data processing tasks, typically involving data transformations and batch processing. It is not suitable for responding to real-time events such as file uploads to trigger a code snippet immediately.
+
+### Conclusion:
+
+Cloud Functions with a Cloud Storage trigger (Option 2) is the most appropriate choice because it directly addresses the requirement to trigger a code snippet in response to a file upload event in a Cloud Storage bucket. It's lightweight, serverless, and scales automatically, making it ideal for event-driven scenarios like this one.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1881,6 +2049,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set up a policy that uses Nearline storage for 30 days, then moves the Coldline for one year, and then moves to Archive storage for two years.
 - [ ] Set up a policy that uses Standard storage for 30 days, then moves to Coldline for one year, and then moves to Archive storage for two years.
 
+To minimize cost while meeting the requirements for Object Lifecycle Management, here’s the recommended approach:
+
+**Option 1: Set up a policy that uses Nearline storage for 30 days and then moves to Archive storage for three years.**
+
+### Explanation:
+
+- **Nearline Storage:** Nearline storage is cost-effective for data that is accessed less frequently but requires quick access when needed. It's suitable for objects accessed less than once a month.
+  
+- **Archive Storage:** Archive storage is the lowest-cost storage option in Cloud Storage, ideal for data that is rarely accessed and stored for long-term retention. Accessing data in Archive storage has a retrieval time of milliseconds to hours.
+
+### Why Other Options are Not Ideal:
+
+- **Option 2: Set up a policy that uses Standard storage for 30 days and then moves to Archive storage for three years:**
+  - **Issue:** Standard storage is more expensive than Nearline storage and is designed for frequently accessed data, which is not cost-effective for data that becomes infrequently accessed after 30 days.
+
+- **Option 3: Set up a policy that uses Nearline storage for 30 days, then moves to Coldline for one year, and then moves to Archive storage for two years:**
+  - **Issue:** Coldline storage is designed for data that is accessed less frequently than once a month over a year, which might not be necessary if the data is expected to be accessed even less frequently.
+
+- **Option 4: Set up a policy that uses Standard storage for 30 days, then moves to Coldline for one year, and then moves to Archive storage for two years:**
+  - **Issue:** Similar to Option 2, using Standard storage for the initial 30 days incurs unnecessary cost for data that will become infrequently accessed after that period.
+
+### Conclusion:
+
+Option 1 is the best choice because it optimizes cost by using Nearline storage for the initial 30 days when data is accessed frequently and then transitions to Archive storage, which offers the lowest cost for long-term retention. This setup aligns with the requirement to keep the objects for three years while minimizing storage costs after the initial 30-day period of frequent access.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are storing sensitive information in a Cloud Storage bucket. For legal reasons, you need to be able to record all requests that read any of the stored data. You want to make sure you comply with these requirements. What should you do?
@@ -1889,6 +2082,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Scan the bucket using the Data Loss Prevention API.
 - [ ] Allow only a single Service Account access to read the data.
 - [x] Enable Data Access audit logs for the Cloud Storage API.
+
+The correct approach to comply with the requirement of recording all requests that read sensitive information from a Cloud Storage bucket is:
+
+**4. Enable Data Access audit logs for the Cloud Storage API.**
+
+### Explanation:
+
+**Option 4: Enable Data Access audit logs for the Cloud Storage API.**
+- **Audit Logging:** Enabling Data Access audit logs for the Cloud Storage API allows you to record and monitor all actions and requests made on objects within your Cloud Storage bucket.
+- **Compliance Requirement:** This option directly addresses the need to record all read requests for sensitive information, ensuring compliance with legal requirements.
+- **Visibility and Accountability:** Audit logs provide detailed information such as who accessed the data, when the access occurred, and what actions were taken, which is crucial for security audits and compliance checks.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Enable the Identity Aware Proxy API on the project.**
+- **Purpose Misalignment:** Identity Aware Proxy (IAP) is used for controlling access to applications rather than auditing access to data stored in Cloud Storage. It does not provide the logging and auditing capabilities required to record all read requests.
+
+**Option 2: Scan the bucket using the Data Loss Prevention API.**
+- **Data Loss Prevention:** While Data Loss Prevention (DLP) API is useful for identifying and protecting sensitive data within your bucket, it does not log all access requests. It focuses on data classification and prevention rather than logging access activities.
+
+**Option 3: Allow only a single Service Account access to read the data.**
+- **Access Restriction:** Limiting access to a single Service Account can enhance security by reducing the attack surface but does not inherently log all access requests. It does not provide the comprehensive audit trail needed to meet the compliance requirement of recording all read requests.
+
+### Conclusion:
+
+Enabling Data Access audit logs for the Cloud Storage API (Option 4) is the appropriate solution as it directly addresses the requirement to record all requests that read sensitive information from your Cloud Storage bucket. It ensures transparency, accountability, and compliance with legal and regulatory requirements regarding data access auditing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1899,6 +2118,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Create a budget per project and configure budget alerts on all of these budgets.
 - [ ] Create a single billing account for all sandbox projects and enable BigQuery billing exports. Create a Data Studio dashboard to plot the spending per project.
 
+The correct approach would be:
+
+**3. Create a budget per project and configure budget alerts on all of these budgets.**
+
+### Explanation:
+
+**Option 3: Create a budget per project and configure budget alerts on all of these budgets.**
+- **Granular Control:** Creating a budget per project allows you to set specific spending limits tailored to each developer's sandbox environment.
+- **Alert Configuration:** By configuring budget alerts on each individual project's budget, you can receive notifications when the spending reaches or exceeds the defined threshold ($500 per month in this case).
+- **Visibility and Control:** This approach provides clear visibility into spending for each developer's sandbox project and enables proactive management by alerting you to potential overspending early.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Create a single budget for all projects and configure budget alerts on this budget.**
+- **Lack of Granularity:** A single budget for all projects would aggregate spending across all sandbox environments, making it difficult to identify which specific project is exceeding the budget threshold.
+- **Limited Control:** This option does not provide the fine-grained control needed to monitor individual developer's spending patterns effectively.
+
+**Option 2: Create a separate billing account per sandbox project and enable BigQuery billing exports. Create a Data Studio dashboard to plot the spending per billing account.**
+- **Overly Complex:** Creating separate billing accounts per project is unnecessary for monitoring spending thresholds. It also complicates billing management and does not directly provide budget alerts for proactive monitoring.
+- **BigQuery Usage:** Enabling BigQuery billing exports and using Data Studio for reporting adds unnecessary complexity for a straightforward budget monitoring requirement.
+
+**Option 4: Create a single billing account for all sandbox projects and enable BigQuery billing exports. Create a Data Studio dashboard to plot the spending per project.**
+- **Similar Issues:** Like Option 2, using a single billing account for all projects does not allow for individual budgeting and alerting per project. It also introduces complexity with BigQuery exports and Data Studio reporting which are not essential for basic budget monitoring.
+
+### Conclusion:
+Creating a budget per project and configuring budget alerts on each individual project's budget (Option 3) is the recommended approach. It provides the necessary granularity, control, and simplicity to effectively monitor and manage spending across multiple sandbox environments in Google Cloud.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are deploying a production application on Compute Engine. You want to prevent anyone from accidentally destroying the instance by clicking the wrong button. What should you do?
@@ -1908,6 +2154,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Disable Automatic restart on the instance.
 - [ ] Enable Preemptibility on the instance.
 
+The best approach is:
+
+**2. Enable delete protection on the instance.**
+
+### Explanation:
+
+**Option 2: Enable delete protection on the instance.**
+- **Prevents Accidental Deletion:** Enabling delete protection directly prevents the instance from being accidentally deleted. This feature is specifically designed to protect instances from accidental deletion by adding an additional step and confirmation when attempting to delete the instance.
+- **Suitable for Production Environments:** This is the most straightforward and effective method to ensure that critical production instances are not removed unintentionally.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Disable the flag Delete boot disk when instance is deleted.**
+- **Not a Direct Solution:** While this ensures that the boot disk persists after the instance is deleted, it does not prevent the instance itself from being deleted. The instance can still be accidentally terminated, causing downtime.
+
+**Option 3: Disable Automatic restart on the instance.**
+- **Irrelevant to Deletion Protection:** Disabling automatic restart affects the behavior of the instance in the event of a crash or maintenance event, not its deletion. It has no impact on preventing accidental deletions.
+
+**Option 4: Enable Preemptibility on the instance.**
+- **Increased Risk of Deletion:** Enabling preemptibility makes instances more prone to being automatically terminated by Google Cloud after a short period (typically 24 hours). This option is intended for cost-saving on non-critical workloads and is the opposite of what is needed to protect a critical production instance from accidental deletion.
+
+### Conclusion:
+Enabling delete protection on the instance (Option 2) is the most appropriate measure to safeguard a production application from accidental deletion. This approach directly addresses the requirement to prevent unintentional instance termination, ensuring the instance remains operational until a deliberate action is taken to remove the delete protection.
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company uses a large number of Google Cloud services centralized in a single project. All teams have specific projects for testing and development. The DevOps team needs access to all of the production services in order to perform their job. You want to prevent Google Cloud product changes from broadening their permissions in the future. You want to follow Google-recommended practices. What should you do?
@@ -1916,6 +2185,34 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Grant all members of the DevOps team the role of Project Editor on the production project.
 - [x] Create a custom role that combines the required permissions. Grant the DevOps team the custom role on the production project.
 - [ ] Create a custom role that combines the required permissions. Grant the DevOps team the custom role on the organization level.
+
+The best approach is:
+
+**3. Create a custom role that combines the required permissions. Grant the DevOps team the custom role on the production project.**
+
+### Explanation:
+
+**Option 3: Create a custom role that combines the required permissions. Grant the DevOps team the custom role on the production project.**
+- **Principle of Least Privilege:** By creating a custom role, you ensure that the DevOps team has exactly the permissions they need to perform their tasks, and nothing more. This minimizes security risks.
+- **Scoped Access:** Granting the custom role specifically on the production project ensures that permissions are limited to the relevant scope, preventing unnecessary access to other projects or environments.
+- **Avoiding Future Broadening of Permissions:** Custom roles are defined by you and will not change unless you update them, so future changes to Google Cloud products or predefined roles won't inadvertently grant additional permissions.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Grant all members of the DevOps team the role of Project Editor on the organization level.**
+- **Excessive Permissions:** This grants broad access to all projects within the organization, not just the production project. It violates the principle of least privilege.
+- **Risk of Misuse:** Any changes or actions taken by the DevOps team could impact all projects, increasing the risk of accidental or malicious changes.
+
+**Option 2: Grant all members of the DevOps team the role of Project Editor on the production project.**
+- **Excessive Permissions:** The Project Editor role includes broad permissions that might not all be necessary for the DevOps team, increasing the potential for misuse or accidental changes.
+- **Future Broadening of Permissions:** If Google Cloud changes the permissions associated with the Project Editor role, the DevOps team could gain additional permissions that are not intended.
+
+**Option 4: Create a custom role that combines the required permissions. Grant the DevOps team the custom role on the organization level.**
+- **Excessive Scope:** Granting the custom role at the organization level provides permissions beyond the production project, which is not necessary and increases security risks.
+- **Increased Risk:** Similar to option 1, this could lead to unintended changes or access across the entire organization.
+
+### Conclusion:
+Creating a custom role and granting it specifically on the production project (Option 3) provides a tailored, secure, and controlled approach, adhering to Google-recommended practices and the principle of least privilege.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1927,6 +2224,36 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Build a Cloud function that triggers a timer of 45 days to delete objects that have expired.
 - [ ] Develop a script that loops through all Cloud Storage buckets and deletes any buckets that are older than 45 days.
 
+The best strategies to meet the requirements are:
+
+**1. Build a lifecycle policy to delete Cloud Storage objects after 45 days.**
+**2. Use signed URLs to allow suppliers limited time access to store their objects.**
+
+### Explanation:
+
+**Option 1: Build a lifecycle policy to delete Cloud Storage objects after 45 days.**
+- **Automated Data Expiration:** Cloud Storage lifecycle policies allow you to automatically delete objects after a specified period. This meets the requirement of deleting data that is over 45 days old without requiring manual intervention or additional maintenance.
+- **Minimal Maintenance:** Lifecycle policies are easy to set up and manage, providing a low-maintenance solution for automatic data expiration.
+
+**Option 2: Use signed URLs to allow suppliers limited time access to store their objects.**
+- **Restricted Access:** Signed URLs can be generated to give time-limited access to specific Cloud Storage objects. This ensures that suppliers can only upload data within a specific time frame (e.g., 30 minutes).
+- **Granular Access Control:** Signed URLs allow you to control access at a fine-grained level, ensuring that each supplier can only access their own data.
+- **Minimal Maintenance:** Signed URLs are straightforward to implement and do not require a complex setup or ongoing maintenance.
+
+**Why Other Options are Wrong:**
+
+**Option 3: Set up an SFTP server for your application, and create a separate user for each supplier.**
+- **Complex and High Maintenance:** Setting up and managing an SFTP server and individual user accounts for thousands of suppliers is complex and high-maintenance. This approach does not easily support the requirement for time-limited access or automated data deletion.
+
+**Option 4: Build a Cloud function that triggers a timer of 45 days to delete objects that have expired.**
+- **Additional Development and Maintenance:** While this approach could meet the data expiration requirement, it involves additional development and ongoing maintenance. Cloud Storage lifecycle policies provide a simpler and more efficient solution for this requirement.
+
+**Option 5: Develop a script that loops through all Cloud Storage buckets and deletes any buckets that are older than 45 days.**
+- **Inefficient and Error-Prone:** This approach is not efficient for handling a large number of objects and is prone to errors. It also requires regular execution and maintenance of the script, making it a less desirable solution compared to lifecycle policies.
+
+### Conclusion:
+
+**Option 1 (lifecycle policies)** and **Option 2 (signed URLs)** are the most suitable strategies. They provide automated, secure, and low-maintenance solutions to meet the requirements of restricting access, providing time-limited write access, and deleting aged data.
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company wants to standardize the creation and management of multiple Google Cloud resources using Infrastructure as Code. You want to minimize the amount of repetitive code needed to manage the environment. What should you do?
@@ -1935,6 +2262,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use curl in a terminal to send a REST request to the relevant Google API for each individual resource.
 - [ ] Use the Cloud Console interface to provision and manage all related resources.
 - [ ] Create a bash script that contains all requirement steps as gcloud commands.
+
+The correct answer is:
+
+**1. Develop templates for the environment using Cloud Deployment Manager.**
+
+### Explanation:
+
+**Option 1: Develop templates for the environment using Cloud Deployment Manager.**
+- **Infrastructure as Code (IaC):** Cloud Deployment Manager allows you to define and manage your Google Cloud resources in a declarative manner using templates. This approach is well-suited for Infrastructure as Code (IaC) as it enables you to specify the desired state of your resources, which Deployment Manager then uses to create and manage those resources automatically.
+- **Reusability and Standardization:** Templates in Cloud Deployment Manager can be reused and shared across different projects and environments, minimizing repetitive code and ensuring a consistent setup.
+- **Complex Resource Management:** It supports managing complex resource configurations and dependencies, making it easier to handle multiple interconnected resources.
+
+**Why Other Options are Wrong:**
+
+**Option 2: Use curl in a terminal to send a REST request to the relevant Google API for each individual resource.**
+- **Manual and Error-Prone:** Using `curl` to send REST requests for each resource is a highly manual process that requires detailed knowledge of the API and is prone to human error. It lacks the benefits of a declarative approach and does not support reusability or standardization.
+
+**Option 3: Use the Cloud Console interface to provision and manage all related resources.**
+- **Not Scalable:** While the Cloud Console interface is user-friendly, it is not practical for managing multiple resources, especially in a standardized and repeatable manner. It is a manual process and does not support Infrastructure as Code practices.
+
+**Option 4: Create a bash script that contains all required steps as gcloud commands.**
+- **Imperative Approach:** While bash scripts can automate resource creation using `gcloud` commands, they follow an imperative approach rather than a declarative one. This makes them harder to maintain and less efficient for managing complex infrastructure.
+- **Lack of Advanced Features:** Bash scripts do not natively support features like dependency management, error handling, and rollback, which are crucial for managing infrastructure at scale.
+
+### Conclusion:
+
+Option 1 is the best choice because Cloud Deployment Manager allows you to manage your infrastructure using templates, providing a declarative, reusable, and standardized approach to Infrastructure as Code. This minimizes repetitive code and simplifies the management of complex resource configurations.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1945,6 +2299,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Review the Identity-Aware Proxy settings for each resource.
 - [ ] Create a Data Loss Prevention job.
 
+The correct answer is:
+
+**2. Review the IAM permissions for any role that allows for data access.**
+
+### Explanation:
+
+**Option 2: Review the IAM permissions for any role that allows for data access.**
+- **Access Control:** Reviewing IAM permissions is the most direct way to determine who has access to view data in your Google Cloud project. IAM (Identity and Access Management) allows you to assign roles to users, groups, or service accounts, and each role has specific permissions associated with it. By reviewing these roles and permissions, you can see exactly who has access to your data.
+- **Comprehensive:** This method provides a clear overview of all the permissions granted within your project and helps identify potential security risks or over-privileged accounts.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Enable Audit Logs for all APIs that are related to data storage.**
+- **Monitoring, Not Access Control:** While enabling audit logs is a good practice for monitoring access and activity, it does not directly show you who has access. Instead, it logs actions taken on resources, which is useful for forensic analysis but not for understanding current access permissions.
+
+**Option 3: Review the Identity-Aware Proxy settings for each resource.**
+- **Limited Scope:** Identity-Aware Proxy (IAP) settings are specific to applications protected by IAP and do not cover all data storage resources. This method would not provide a comprehensive view of all access permissions for data stored across different services in your Google Cloud project.
+
+**Option 4: Create a Data Loss Prevention job.**
+- **Data Sensitivity, Not Access:** A Data Loss Prevention (DLP) job is used to scan for sensitive information within your data, such as personally identifiable information (PII). It does not provide information about who has access to view the data.
+
+### Conclusion:
+
+Option 2 is the best choice because reviewing IAM permissions gives you a direct and comprehensive understanding of who has access to view data in your Google Cloud project. This method allows you to audit and manage access control effectively, ensuring that only authorized users can view sensitive data.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your company has embraced a hybrid cloud strategy where some of the applications are deployed on Google Cloud. A Virtual Private Network (VPN) tunnel connects your Virtual Private Cloud (VPC) in Google Cloud with your company's on-premises network. Multiple applications in Google Cloud need to connect to an on-premises database server, and you want to avoid having to change the IP configuration in all of your applications when the IP of the database changes. What should you do?
@@ -1953,6 +2332,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Create a private zone on Cloud DNS, and configure the applications with the DNS name.
 - [ ] Configure the IP of the database as custom metadata for each instance, and query the metadata server.
 - [ ] Query the Compute Engine internal DNS from the applications to retrieve the IP of the database.
+
+The correct answer is:
+
+**2. Create a private zone on Cloud DNS, and configure the applications with the DNS name.**
+
+### Explanation:
+
+**Option 2: Create a private zone on Cloud DNS, and configure the applications with the DNS name.**
+- **DNS Flexibility:** By creating a private DNS zone in Cloud DNS, you can create a DNS record for the on-premises database. Applications can be configured to connect to the database using its DNS name. If the IP address of the database changes, you can simply update the DNS record, and all applications will resolve the new IP address without requiring any changes in their configurations.
+- **Centralized Management:** This approach centralizes the management of the database's IP address and eliminates the need to update each application's configuration individually.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Configure Cloud NAT for all subnets of your VPC to be used when egressing from the VM instances.**
+- **Purpose of Cloud NAT:** Cloud NAT is used to provide outgoing (egress) internet access for instances without assigning them external IP addresses. It does not help with managing internal connectivity between Google Cloud VPC and on-premises resources or with dynamic IP resolution.
+
+**Option 3: Configure the IP of the database as custom metadata for each instance, and query the metadata server.**
+- **Inconvenient Updates:** This method would require updating the custom metadata for each instance whenever the database IP changes, which can be cumbersome and error-prone. It lacks the flexibility and ease of use provided by a DNS-based solution.
+
+**Option 4: Query the Compute Engine internal DNS from the applications to retrieve the IP of the database.**
+- **Not Applicable for On-Premises:** The Compute Engine internal DNS is designed to resolve internal Google Cloud resource names to their respective IP addresses. It cannot be used to resolve the IP addresses of on-premises resources.
+
+### Conclusion:
+
+Option 2 is the most appropriate solution as it provides a scalable and maintainable way to manage the IP address of the on-premises database server. By using Cloud DNS with a private zone, you can ensure that applications in Google Cloud always connect to the correct IP address via the DNS name, even if the database's IP address changes. This method simplifies management and avoids the need for frequent reconfiguration of the applications.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1963,6 +2367,34 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Deploy the container on App Engine flexible environment with autoscaling, and set the value min_instances to zero in the app.yaml.
 - [ ] Deploy the container on App Engine flexible environment with manual scaling, and set the value instances to zero in the app.yaml.
 
+Cloud Run is a managed compute platform that lets you run containers directly on top of Google's scalable infrastructure.
+Cloud Run adds and removes instances automatically to handle all incoming requests. If there are no incoming requests to your service, even the last remaining instance will be removed. This behavior is commonly referred to as scale to zero.
+
+The correct answer is:
+
+**2. Deploy the container on Cloud Run (fully managed), and set the minimum number of instances to zero.**
+
+### Explanation:
+
+**Option 2: Deploy the container on Cloud Run (fully managed), and set the minimum number of instances to zero.**
+- **Fully Managed Service:** Cloud Run (fully managed) is designed to run containerized applications and automatically scale down to zero instances when there is no traffic. This means you will not incur costs outside of business hours when the application is not in use.
+- **Cost Efficiency:** By setting the minimum number of instances to zero, you ensure that no costs are incurred when the application is not being accessed, which aligns with your requirement to avoid costs outside of business hours.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Deploy the container on Cloud Run for Anthos, and set the minimum number of instances to zero.**
+- **Complexity:** Cloud Run for Anthos runs on GKE (Google Kubernetes Engine), which might incur additional costs for the underlying GKE cluster, even if the application instances are scaled to zero. This does not fully prevent costs outside of business hours.
+
+**Option 3: Deploy the container on App Engine flexible environment with autoscaling, and set the value min_instances to zero in the app.yaml.**
+- **Minimum Instances:** In the App Engine flexible environment, you cannot set `min_instances` to zero. The minimum value is 1, which means at least one instance will always be running and incurring costs, even outside of business hours.
+
+**Option 4: Deploy the container on App Engine flexible environment with manual scaling, and set the value instances to zero in the app.yaml.**
+- **Invalid Configuration:** You cannot set the number of instances to zero in the manual scaling configuration of App Engine flexible environment. Manual scaling requires a fixed number of instances, which means there will always be running instances incurring costs.
+
+### Conclusion:
+
+Option 2 is the best choice because Cloud Run (fully managed) allows for the containerized application to automatically scale to zero instances when not in use, ensuring no costs are incurred outside of business hours. This meets your requirement of avoiding costs during non-business hours while providing a managed environment for your application.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have experimented with Google Cloud using your own credit card and expensed the costs to your company. Your company wants to streamline the billing process and charge the costs of your projects to their monthly invoice. What should you do?
@@ -1972,6 +2404,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a ticket with Google Billing Support to ask them to send the invoice to your company.
 - [x] Change the billing account of your projects to the billing account of your company.
 
+The correct answer is:
+
+**4. Change the billing account of your projects to the billing account of your company.**
+
+### Explanation:
+
+**Option 4: Change the billing account of your projects to the billing account of your company.**
+- **Direct Solution:** This option directly addresses the requirement to streamline the billing process by charging the costs of your projects to your company’s billing account. By changing the billing account associated with your projects, you ensure that all future expenses are billed to your company’s account and included in their monthly invoice.
+- **Simplicity and Efficiency:** This method is straightforward and efficient. It ensures that all costs are consolidated under the company's billing account, simplifying the billing and reconciliation process for the financial team.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Grant the financial team the IAM role of Billing Account User on the billing account linked to your credit card.**
+- **Incorrect Scope:** This does not change the billing source of the projects. It only gives the financial team access to the existing billing account linked to your credit card, which doesn’t help in consolidating the expenses under the company’s account.
+
+**Option 2: Set up BigQuery billing export and grant your financial department IAM access to query the data.**
+- **Monitoring Only:** This option allows the financial team to monitor and analyze billing data but does not change where the costs are billed. It doesn’t address the need to charge the costs to the company’s billing account.
+
+**Option 3: Create a ticket with Google Billing Support to ask them to send the invoice to your company.**
+- **Not Automated:** This option might result in a temporary solution but does not provide an automated or long-term fix. Changing the billing account ensures all future charges are directed appropriately without needing ongoing manual intervention.
+
+### Conclusion:
+
+Option 4 is the most appropriate and efficient solution to ensure that all project costs are charged to the company’s billing account, thereby streamlining the billing process and aligning with the company’s financial policies.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are running a data warehouse on BigQuery. A partner company is offering a recommendation engine based on the data in your data warehouse. The partner company is also running their application on Google Cloud. They manage the resources in their own project, but they need access to the BigQuery dataset in your project. You want to provide the partner company with access to the dataset. What should you do?
@@ -1980,6 +2437,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Service Account in your own project, and ask the partner to grant this Service Account access to BigQuery in their project.
 - [ ] Ask the partner to create a Service Account in their project, and have them give the Service Account access to BigQuery in their project.
 - [x] Ask the partner to create a Service Account in their project, and grant their Service Account access to the BigQuery dataset in your project.
+
+The correct answer is:
+
+**4. Ask the partner to create a Service Account in their project, and grant their Service Account access to the BigQuery dataset in your project.**
+
+### Explanation:
+
+**Option 4: Ask the partner to create a Service Account in their project, and grant their Service Account access to the BigQuery dataset in your project.**
+- **Delegation and Security:** This approach ensures that the partner company has control over the credentials and usage of the Service Account. By granting their Service Account access to your BigQuery dataset, you maintain a clear boundary between your projects while allowing the necessary access.
+- **IAM Best Practices:** This method follows best practices for Identity and Access Management (IAM) by granting the least privilege necessary for the partner to perform their tasks.
+- **Ease of Management:** It simplifies management and auditing since the partner company manages their own Service Account.
+
+**Why Other Options are Wrong:**
+
+**Option 1: Create a Service Account in your own project, and grant this Service Account access to BigQuery in your project.**
+- **Control and Management:** This would mean you are responsible for managing the credentials and any potential misuse by the partner, which complicates security and accountability.
+
+**Option 2: Create a Service Account in your own project, and ask the partner to grant this Service Account access to BigQuery in their project.**
+- **Incorrect Scope:** This option doesn't address the requirement of granting access to your BigQuery dataset. Instead, it suggests granting your Service Account access to their project, which isn't the requirement.
+
+**Option 3: Ask the partner to create a Service Account in their project, and have them give the Service Account access to BigQuery in their project.**
+- **Incorrect Target:** This option suggests that the partner should give access to their own BigQuery dataset, but the requirement is to give access to the dataset in your project.
+
+### Conclusion:
+
+Option 4 is the correct approach because it allows the partner to manage their own Service Account while you grant the necessary access to your BigQuery dataset. This ensures a clear division of responsibilities, adheres to security best practices, and simplifies management and auditing.
 
 **[⬆ Back to Top](#table-of-contents)**
 
