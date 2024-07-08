@@ -1235,6 +1235,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a CSV sheet with all users' email addresses. Use the gcloud command line tool to convert them into Google Cloud Platform accounts.
 - [ ] In the G Suite console, add the users to a special group called cloud-console-users@yourdomain.com. Rely on the default behavior of the Cloud Platform to grant users access if they are members of this group.
 
+To grant G Suite users access to your Google Cloud Platform (GCP) project, you should follow these steps:
+
+- [2] **Grant them the required IAM roles using their G Suite email address.**
+
+Here’s why this option is correct:
+
+- **IAM Roles and G Suite Users:** In GCP, you can grant IAM (Identity and Access Management) roles directly to G Suite users by using their G Suite email addresses. This allows you to specify exactly which permissions and access levels these users should have within your GCP project.
+
+- **Integration with G Suite:** G Suite accounts are automatically linked to Google Cloud Platform, so you can manage access to GCP resources using the same identity and credentials that users use for G Suite services.
+
+The other options are not appropriate or do not align with best practices for granting G Suite users access to GCP:
+
+- **Option 1:** Enabling Cloud Identity in the GCP Console for your domain is not necessary to grant access to G Suite users. Cloud Identity is more relevant for managing identities and access across Google Cloud services, but G Suite accounts already provide integration for access.
+
+- **Option 3:** Converting G Suite accounts into Google Cloud Platform accounts via a CSV sheet and gcloud command line tool is not the standard or recommended approach for managing access to GCP resources for G Suite users.
+
+- **Option 4:** Adding users to a special group in the G Suite console (`cloud-console-users@yourdomain.com`) and relying on default behaviors for access is not the preferred method for managing precise access control in GCP. IAM roles provide more granular control over permissions.
+
+Therefore, **Option 2** is the correct approach to grant G Suite users access to your Cloud Platform project by assigning them the required IAM roles using their G Suite email addresses. This method leverages G Suite's integration with Google Cloud Platform to manage access efficiently and securely.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have a Google Cloud Platform account with access to both production and development projects. You need to create an automated process to list all compute instances in development and production projects on a daily basis. What should you do?
@@ -1262,6 +1282,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Filter the Activity log to view the Data Access category. Filter the Resource type to Service Account.
 - [ ] Filter the Activity log to view the Data Access category. Filter the Resource type to Google Project.
 
+To verify that a Google Cloud Platform service account was created at a particular time, you should follow these steps:
+
+- **[1] Filter the Activity log to view the Configuration category. Filter the Resource type to Service Account.**
+
+Here’s why this option is correct:
+
+- **Configuration Category:** The Configuration category in the Google Cloud Console Activity logs includes events related to creating, updating, and deleting resources like service accounts.
+  
+- **Resource Type to Service Account:** By filtering the Activity log to show events related specifically to the Service Account resource type, you can narrow down the logs to those directly related to the creation of service accounts.
+
+- **Verification:** This approach allows you to see when the service account was created, providing details such as the timestamp of the creation event and any associated metadata.
+
+The other options are less appropriate for verifying the creation time of a service account:
+
+- **Option 2:** Filtering the Activity log for Google Project in the Configuration category doesn't specifically target service account creation events.
+
+- **Option 3:** The Data Access category typically includes events related to accessing data rather than creating service accounts.
+
+- **Option 4:** Filtering for Google Project in the Data Access category is unrelated to service account creation events.
+
+Therefore, **Option 1** is the correct and recommended approach to verify the creation time of a Google Cloud Platform service account.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You deployed an LDAP server on Compute Engine that is reachable via TLS through port 636 using UDP. You want to make sure it is reachable by clients over that port. What should you do?
@@ -1270,6 +1312,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a route called allow-udp-636 and set the next hop to be the VM instance running the LDAP server.
 - [x] Add a network tag of your choice to the instance. Create a firewall rule to allow ingress on UDP port 636 for that network tag.
 - [ ] Add a network tag of your choice to the instance running the LDAP server. Create a firewall rule to allow egress on UDP port 636 for that network tag.
+
+To ensure that your LDAP server deployed on Compute Engine is reachable by clients over port 636 using UDP, you should follow these steps:
+
+- **[3] Add a network tag of your choice to the instance. Create a firewall rule to allow ingress on UDP port 636 for that network tag.**
+
+Here’s why this option is correct:
+
+- **Network Tag:** Adding a network tag to the instance allows you to target specific instances for firewall rules.
+  
+- **Firewall Rule for Ingress:** By creating a firewall rule that allows ingress traffic on UDP port 636 for the network tag assigned to your LDAP server instance, you permit incoming traffic from clients trying to connect to the LDAP server.
+
+- **UDP Port 636:** LDAP typically uses TCP port 636 for LDAPS (LDAP over SSL/TLS), but if you specifically need UDP for any reason (such as specific client requirements or configurations), this rule ensures UDP traffic on port 636 is allowed.
+
+The other options are less appropriate or incorrect for enabling UDP traffic on port 636:
+
+- **Option 1:** Adding a network tag alone without creating a corresponding firewall rule will not allow traffic on UDP port 636. Tags are used to identify instances but do not directly control traffic flow.
+
+- **Option 2:** Creating a route is used for directing traffic within the network, not for allowing specific ports or protocols like UDP 636.
+
+- **Option 4:** Allowing egress (outgoing) traffic on UDP port 636 does not address the requirement for inbound traffic from clients to reach the LDAP server over UDP.
+
+Therefore, **Option 3** is the correct approach to ensure that your LDAP server on Compute Engine is reachable by clients over UDP port 636.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1307,6 +1371,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create bastion hosts both in your on-premises environment and on Google Cloud. Configure both as proxy servers using their public IP addresses.
 - [x] Set up Cloud VPN between the infrastructure on-premises and Google Cloud.
 
+To enable your workloads on Google Cloud to communicate directly with workloads on-premises using a private IP range, while allowing for bursting from on-premises infrastructure to Google Cloud, the most appropriate solution is:
+
+- [4] Set up Cloud VPN between the infrastructure on-premises and Google Cloud.
+
+Here’s why this option is correct:
+
+- **Cloud VPN**: Google Cloud VPN allows you to securely connect your on-premises network to your Google Cloud Virtual Private Cloud (VPC) network using IPsec VPN tunnels. This setup enables private IP communication between on-premises machines and Google Cloud workloads.
+
+- **Private IP Range**: With Cloud VPN, you can configure IP ranges that are part of your on-premises network to be reachable from Google Cloud workloads. This ensures that your applications can communicate securely using private IP addresses, maintaining network isolation and security.
+
+The other options are less suitable for achieving private IP communication between on-premises and Google Cloud:
+
+- **Option 1 (Shared VPC)**: Shared VPC allows resources from multiple projects to connect to a common VPC network, but it does not directly address the need for private IP communication with on-premises infrastructure.
+
+- **Option 2 (VPC Network Peering)**: VPC Network Peering allows VPC networks to be interconnected, but it does not establish a secure, private communication channel between on-premises and Google Cloud networks.
+
+- **Option 3 (Bastion hosts with public IP addresses)**: Using bastion hosts as proxy servers with public IP addresses introduces security risks and does not provide direct private IP communication between on-premises and Google Cloud networks.
+
+Therefore, **Option 4 (Cloud VPN)** is the recommended solution for establishing secure and private IP communication between your on-premises infrastructure and Google Cloud, allowing for bursting workloads to the cloud while maintaining network isolation and compliance with your company's infrastructure requirements.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to select and configure a solution for storing and archiving data on Google Cloud Platform. You need to support compliance objectives for data from one geographic location. This data is archived after 30 days and needs to be accessed annually. What should you do?
@@ -1325,6 +1409,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Write a script that loops through all the projects in your organization and runs a query on INFORMATION_SCHEMA.COLUMNS view to find the employee_ssn column.
 - [ ] Write a Cloud Dataflow job that loops through all the projects in your organization and runs a query on INFORMATION_SCHEMA.COLUMNS view to find employee_ssn column.
 
+To efficiently find tables across all datasets in your company's BigQuery environment that contain an `employee_ssn` column while minimizing effort, the most appropriate approach is:
+
+- [1] Go to Data Catalog and search for `employee_ssn` in the search box.
+
+Here’s why this option is the best choice:
+
+- **Data Catalog**: Google Cloud's Data Catalog is designed to provide a unified and searchable metadata catalog for all your data assets across Google Cloud services, including BigQuery datasets and tables.
+  
+- **Searching for `employee_ssn`**: Data Catalog allows you to search for specific columns like `employee_ssn` across all datasets within your organization's Google Cloud environment. This search capability is efficient and leverages metadata indexing to quickly locate relevant information without needing to manually query each dataset.
+
+The other options involve scripting or using Cloud Dataflow, which can be more complex and time-consuming:
+
+- **Option 2 (Shell script with `bq` command)**: While feasible, scripting with `bq` would require looping through all projects and datasets, querying each table's schema to find the `employee_ssn` column. This approach could be labor-intensive and may not scale well for large numbers of datasets.
+
+- **Option 3 (Script using INFORMATION_SCHEMA.COLUMNS)**: This involves scripting to query the `INFORMATION_SCHEMA.COLUMNS` view across all projects. While this is more automated than using `bq` manually, it still requires scripting effort and potentially large amounts of API calls depending on the number of projects and datasets.
+
+- **Option 4 (Cloud Dataflow job)**: Writing a Cloud Dataflow job for this task would be over-engineering unless there are specific requirements for data processing or transformation beyond simple metadata search.
+
+Therefore, **Option 1** is the most efficient and straightforward approach to achieve the task of identifying tables with an `employee_ssn` column across all datasets in your BigQuery environment using Google Cloud's Data Catalog.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You create a Deployment with 2 replicas in a Google Kubernetes Engine cluster that has a single preemptible node pool. After a few minutes, you use kubectl to examine the status of your Pod and observe that one of them is still in Pending status. What is the most likely cause?
@@ -1336,6 +1440,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] The node pool is configured with a service account that does not have permission to pull the container image used by the pending Pod.
 - [x] The pending Pod was originally scheduled on a node that has been preempted between the creation of the Deployment and your verification of the Pods' status. It is currently being rescheduled on a new node.
 
+Based on the information provided and the observation that one of your Pods in a Deployment with 2 replicas is still in Pending status on a Google Kubernetes Engine cluster with a single preemptible node pool, the most likely cause is:
+
+- [4] The pending Pod was originally scheduled on a node that has been preempted between the creation of the Deployment and your verification of the Pods' status. It is currently being rescheduled on a new node.
+
+Here’s why this is the most likely cause:
+
+- **Preemptible Node**: In Google Kubernetes Engine (GKE), preemptible VMs (nodes) can be terminated by Google Cloud with short notice (up to 24 hours). When a preemptible node is terminated (preempted), any Pods running on that node are also terminated.
+
+- **Pod Rescheduling**: When a preemptible node is preempted, Kubernetes detects this and attempts to reschedule the Pods that were running on that node onto other available nodes in the cluster. This rescheduling process can lead to some Pods, particularly if the cluster is under resource pressure or the node pool has limited capacity, remaining in Pending status until suitable resources are found.
+
+- **Deployment ReplicaSet**: In your case, with a Deployment having 2 replicas, Kubernetes ensures that at least 2 Pods are running based on the desired state defined in the Deployment’s ReplicaSet. If one Pod is Pending, it suggests that Kubernetes is in the process of rescheduling that Pod onto another node after the original node (where it was scheduled) was preempted.
+
+The other options are less likely to be the cause:
+
+- **Option 1 (Resource requests too large)**: While this can sometimes cause Pending status if nodes cannot satisfy resource requests, preemptible nodes are typically the cause in this scenario.
+
+- **Option 2 (Too many Pods running)**: GKE manages node scaling based on resource requirements, and Kubernetes should handle scheduling based on available resources unless the node pool is severely overutilized.
+
+- **Option 3 (Service account permission issue)**: This would typically result in a different error related to pulling the container image rather than leaving the Pod in Pending status.
+
+Therefore, **Option 4** is the most likely cause for the pending Pod in your scenario, where it was originally scheduled on a preemptible node that has been preempted, and Kubernetes is in the process of rescheduling it onto a new node.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to find out when users were added to Cloud Spanner Identity Access Management (IAM) roles on your Google Cloud Platform (GCP) project. What should you do in the GCP Console?
@@ -1344,6 +1470,23 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Open the IAM &amp; admin console to review IAM policies for Cloud Spanner roles.
 - [ ] Go to the Stackdriver Monitoring console and review information for Cloud Spanner.
 - [x] Go to the Stackdriver Logging console, review admin activity logs, and filter them for Cloud Spanner IAM roles.
+
+To find out when users were added to Cloud Spanner Identity Access Management (IAM) roles on your Google Cloud Platform (GCP) project, you should:
+
+- [4] Go to the Stackdriver Logging console, review admin activity logs, and filter them for Cloud Spanner IAM roles.
+
+Here’s why this option is correct:
+
+- **Stackdriver Logging**: Stackdriver Logging captures admin activity logs, which include events related to changes in IAM roles and permissions within your GCP project.
+  
+- **Reviewing Admin Activity Logs**: Within Stackdriver Logging, you can filter logs specifically for changes related to Cloud Spanner IAM roles. This allows you to see when users were added or removed from IAM roles associated with Cloud Spanner.
+
+- **Other Options Explained**:
+  - **Option 1 (Cloud Spanner Console)**: This console is primarily for managing Cloud Spanner databases and instances, not for reviewing IAM role changes.
+  - **Option 2 (IAM & admin console)**: While the IAM & admin console allows you to manage IAM policies, it does not provide a direct view of when changes were made historically.
+  - **Option 3 (Stackdriver Monitoring)**: Stackdriver Monitoring is focused on monitoring and alerting for system performance, not for reviewing historical IAM changes.
+
+Therefore, **Option 4** is the correct choice for reviewing when users were added to Cloud Spanner IAM roles by accessing admin activity logs through Stackdriver Logging.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1363,6 +1506,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use the Container Analysis API to detect vulnerabilities in the containers used by your customers' Pods.
 - [x] Create a GKE node pool with a sandbox type configured to gvisor. Add the parameter runtimeClassName: gvisor to the specification of your customers' Pods.
 - [ ] Use the cos_containerd image for your GKE nodes. Add a nodeSelector with the value cloud.google.com/gke-os-distribution: cos_containerd to the specification of your customers' Pods.
+
+To maximize isolation between your customers' Pods running in a single Google Kubernetes Engine (GKE) cluster, the most suitable option from those provided is:
+
+- [3] Create a GKE node pool with a sandbox type configured to gvisor. Add the parameter runtimeClassName: gvisor to the specification of your customers' Pods.
+
+Here’s why this option is appropriate:
+
+- **gVisor Sandbox**: Google gVisor provides an additional layer of isolation and security by running each container in a lightweight sandboxed environment. This helps prevent one customer's workload from accessing another customer's data or resources directly.
+
+- **Node Pool Configuration**: By creating a dedicated GKE node pool configured to use gVisor as the sandbox type (`gvisor`), you isolate the Pods of your customers within this specific node pool. Each customer's Pod can then be configured to use the `gvisor` runtimeClassName, ensuring that their containers run in gVisor sandboxes.
+
+The other options are less focused on maximizing isolation between customers' Pods:
+
+- **Option 1 (Binary Authorization)**: While Binary Authorization helps in enforcing policies for container images, it does not directly maximize isolation between Pods running in the same cluster.
+
+- **Option 2 (Container Analysis API)**: This API is used for vulnerability scanning of container images and does not impact runtime isolation between Pods.
+
+- **Option 4 (cos_containerd image and nodeSelector)**: Using a specific containerd-based image for nodes and nodeSelectors does not provide the same level of isolation as gVisor’s sandboxing mechanism.
+
+Therefore, **Option 3** is the most effective choice to ensure maximum isolation between your customers' Pods within a GKE cluster, leveraging gVisor's sandboxing capabilities at the node pool level and specifying `runtimeClassName: gvisor` in the Pod specifications.
 
 **[⬆ Back to Top](#table-of-contents)**
 
