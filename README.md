@@ -209,7 +209,7 @@ The correct answer is:
 
 In summary, the `--preview` option gives the fastest and most effective way to confirm resource dependencies and deployment outcomes without making any real changes to the project, making it the best choice for this scenario.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has a 3-tier solution running on Compute Engine. The configuration of the current infrastructure is shown below. Each tier has a service account that is associated with all instances within it. You need to enable communication on TCP port 8080 between tiers as follows: Instances in tier #1 must communicate with tier #2. Instances in tier #2 must communicate with tier #3. What should you do?
 
@@ -220,7 +220,7 @@ In summary, the `--preview` option gives the fastest and most effective way to c
 - [ ] 1. Create an ingress firewall rule with the following settings: Targets: all instances with tier #2 service account. Source filter: all instances with tier #1 service account. Protocols: allow all. 2. Create an ingress firewall rule with the following settings: Targets: all instances with tier #3 service account. Source filter: all instances with tier #2 service account. Protocols: allow all.
 - [ ] 1. Create an egress firewall rule with the following settings: Targets: all instances. Source filter: IP ranges (with the range set to 10.0.2.0/24). Protocols: allow TCP: 8080. 2. Create an egress firewall rule with the following settings: Targets: all instances. Source filter: IP ranges (with the range set to 10.0.1.0/24). Protocols: allow TCP: 8080.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are analyzing Google Cloud Platform service costs from three separate projects. You want to use this information to create service cost estimates by service type, daily and monthly, for the next six months using standard query syntax. What should you do?
 
@@ -249,7 +249,7 @@ The correct answer is:
 
 By using BigQuery, you can perform sophisticated analysis with high performance and scalability, making it the best choice for this task.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to send and consume Cloud Pub/Sub messages from your App Engine application. The Cloud Pub/Sub API is currently disabled. You will use a service account to authenticate your application to the API. You want to make sure your application can use Cloud Pub/Sub. What should you do?
 
@@ -278,7 +278,7 @@ The correct answer is:
 - **Enable the Cloud Pub/Sub API in the API Library on the GCP Console**: This is the correct action because enabling APIs must be done manually through the GCP Console or programmatically via API calls. Once the Cloud Pub/Sub API is enabled, your App Engine application, using the appropriate service account with the necessary IAM roles (such as Pub/Sub Publisher or Subscriber), can send and consume messages from Cloud Pub/Sub without issues.
 
   
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a website hosted on App Engine standard environment. You want 1% of your users to see a new test version of the website. You want to minimize complexity.
 
@@ -306,7 +306,7 @@ The correct answer is:
 
 - **Deploy the new version in the same application and use the `--split` option to give a weight of 99 to the current version and a weight of 1 to the new version**: This option leverages App Engine's native traffic splitting feature (`--split` option during deployment). By specifying a 99:1 split, you ensure that only 1% of incoming traffic is routed to the new version, allowing you to test it without affecting the majority of users. This approach minimizes complexity by keeping both versions within the same App Engine application and using standard platform features for traffic management.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization is a financial company that needs to store audit log files for 3 years. Your organization has hundreds of Google Cloud projects. You need to implement a cost-effective approach for log file retention.
 
@@ -334,7 +334,7 @@ The correct answer is:
 
 - **Create an export to the sink that saves logs from Cloud Audit to a Coldline Storage bucket**: Coldline Storage (now called Archive Storage) is designed for long-term, infrequently accessed data storage at a lower cost compared to active storage options like BigQuery or standard Cloud Storage. Storing audit logs in Coldline Storage ensures cost-effectiveness while meeting the requirement of retaining logs for 3 years. This option is straightforward to implement and manages the storage costs efficiently over the retention period.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You built an application on Google Cloud that uses Cloud Spanner. Your support team needs to monitor the environment but should not have access to table data. You need a streamlined solution to grant the correct permissions to your support team, and you want to follow Google-recommended practices. What should you do?
 
@@ -362,7 +362,7 @@ The correct answer is:
 
 - **Add the support team group to the roles/spanner.databaseReader role**: The `roles/spanner.databaseReader` role is designed to provide read-only access to Cloud Spanner databases. Users with this role can view database schemas, read metadata, and monitor the health and performance of Cloud Spanner databases without accessing table data. This aligns perfectly with the requirement to monitor the environment while maintaining data confidentiality. It follows Google-recommended practices by granting the least privilege necessary for the support team to perform their monitoring tasks effectively without exposing sensitive data.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to run a single caching HTTP reverse proxy on GCP for a latency-sensitive website. This specific reverse proxy consumes almost no CPU. You want to have a 30-GB in-memory cache, and need an additional 2 GB of memory for the rest of the processes. You want to minimize cost. How should you run this reverse proxy?  -----------------Issue
 
@@ -390,7 +390,7 @@ The correct answer is:
 
 - **Create a Cloud Memorystore for Redis instance with 32-GB capacity**: Cloud Memorystore for Redis is a fully managed Redis service on Google Cloud Platform. It provides a scalable and reliable in-memory caching solution with low latency access to data. By choosing a 32-GB instance, you can allocate 30 GB for the in-memory cache and have 2 GB for other processes, exactly meeting your requirements. This option minimizes management overhead, ensures optimal performance for caching, and is cost-effective compared to managing your own caching solution on Compute Engine or Kubernetes.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a single binary application that you want to run on Google Cloud Platform. You decided to automatically scale the application based on underlying infrastructure CPU usage. Your organizational policies require you to use Virtual Machines directly. You need to ensure that the application scaling is operationally efficient and completed as quickly as possible. What should you do?
 
@@ -418,7 +418,7 @@ The correct answer is:
 
 - **Create an instance template, and use the template in a Managed Instance Group with autoscaling configured**: This option leverages Managed Instance Groups (MIGs) which allow you to create a group of identical VM instances from a common instance template. Autoscaling configured on the MIGs ensures that the number of VM instances automatically scales based on CPU usage, which aligns with the requirement to scale based on underlying infrastructure CPU usage. It's operationally efficient because GCP manages the scaling process based on predefined policies, ensuring the application can quickly respond to changes in workload demand while adhering to organizational policies of using VMs directly.
   
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to set up permissions for a set of Compute Engine instances to enable them to write data into a particular Cloud Storage bucket. You want to follow Google-recommended practices. What should you do?
 
@@ -446,7 +446,7 @@ The correct answer is:
 
 - **Create a service account and add it to the IAM role 'storage.objectAdmin' for that bucket**: The `storage.objectAdmin` role provides full control over objects in the specified Cloud Storage bucket. This includes permissions to read, write, and manage objects within the bucket. By assigning the service account to this role, you ensure that the Compute Engine instances have all necessary permissions to write data into the bucket, adhering to Google-recommended practices by granting the least privilege necessary for the task.
   
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an object in a Cloud Storage bucket that you want to share with an external company. The object contains sensitive data. You want access to the content to be removed after four hours. The external company does not have a Google account to which you can grant specific user-based access privileges. You want to use the most secure method that requires the fewest steps. What should you do?
 
@@ -474,7 +474,7 @@ The correct answer is:
 
 - **Create a signed URL with a four-hour expiration and share the URL with the company**: A signed URL is a secure method to grant time-limited access to individual objects in Cloud Storage without requiring the recipient to have a Google account. By creating a signed URL with a four-hour expiration, you ensure that the external company can access the object securely and only within the specified time frame. This method adheres to best practices for securely sharing sensitive data while minimizing administrative steps and ensuring access control.
   
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create an autoscaling Managed Instance Group for an HTTPS web application. You want to make sure that unhealthy VMs are recreated. What should you do?
 
@@ -502,7 +502,7 @@ The correct answer is:
 
 - **Create a health check on port 443 and use that when creating the Managed Instance Group**: Google Cloud allows you to create HTTP or HTTPS health checks that periodically verify that instances are responding to requests correctly. When you associate such a health check with a Managed Instance Group, instances failing health checks are automatically detected as unhealthy. The Managed Instance Group then terminates unhealthy instances and creates new ones to maintain the desired number of healthy instances, ensuring the availability and reliability of the HTTPS web application. This approach is the recommended way to handle VM replacement for unhealthy instances in autoscaling Managed Instance Groups.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are deploying an application to a Compute Engine VM in a Managed Instance Group. The application must be running at all times, but only a single instance of the VM should run per GCP project. How should you configure the instance group?
 
@@ -518,7 +518,7 @@ The correct answer is:
 
 **Operational Continuity:** By utilizing autoscaling in this way, you benefit from automated instance replacement without manual intervention. This helps in maintaining the application's availability and ensures that the instance group always runs the specified number of instances.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have production and test workloads that you want to deploy on Compute Engine. Production VMs need to be in a different subnet than the test VMs. All the VMs must be able to reach each other over internal IP without creating additional routes. You need to set up VPC and the 2 subnets. Which configuration meets these requirements?
 
@@ -554,7 +554,7 @@ The correct answer is:
 
 Option 1 is the correct choice because it aligns with best practices for VPC design by using a single VPC with multiple subnets, each with unique CIDR ranges and potentially located in different regions. This setup facilitates internal communication between VMs while maintaining network isolation and addressing requirements for both production and test environments.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an instance group that you want to load balance. You want the load balancer to terminate the client SSL session. The instance group is used to serve a public web application over HTTPS. You want to follow Google-recommended practices. What should you do?   -----------------Issue
 
@@ -588,7 +588,7 @@ The correct answer is:
 
 Configuring an external SSL proxy load balancer ensures that SSL/TLS sessions are terminated at the load balancer, adhering to Google-recommended practices for managing SSL/TLS termination in a scalable and secure manner for public web applications served over HTTPS.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a web application deployed as a Managed Instance Group. You have a new version of the application to gradually deploy. Your web application is currently receiving live web traffic. You want to ensure that the available capacity does not decrease during the deployment. What should you do?
 
@@ -624,7 +624,7 @@ The correct answer is:
 
 Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavailable` set to 0 is the recommended approach to ensure a smooth deployment of a new application version in a Managed Instance Group while maintaining constant available capacity. This method adheres to best practices for minimizing downtime and ensuring service continuity during updates.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to grant access for three users so that they can view and edit table data on a Cloud Spanner instance. What should you do?
 
@@ -633,7 +633,7 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Run gcloud iam roles describe roles/spanner.viewer –project my-project. Add the users to the role.
 - [ ] Run gcloud iam roles describe roles/spanner.viewer –project my-project. Add the users to a new group. Add the group to the role.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create a new billing account and then link it with an existing Google Cloud Platform project. What should you do?
 
@@ -642,7 +642,7 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Verify that you are Billing Administrator for the billing account. Create a new project and link the new project to the existing billing account.
 - [ ] Verify that you are Billing Administrator for the billing account. Update the existing project to link it to the existing billing account.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have sensitive data stored in three Cloud Storage buckets and have enabled data access logging. You want to verify activities for a particular user for these buckets, using the fewest possible steps. You need to verify the addition of metadata labels and which files have been viewed from those buckets. What should you do?
 
@@ -651,7 +651,7 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] View the bucket in the Storage section of the GCP Console.
 - [ ] Create a trace in Stackdriver to view the information.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to run an important query in BigQuery but expect it to return a lot of records. You want to find out how much it will cost to run the query. You are using on-demand pricing. What should you do?
 
@@ -660,7 +660,7 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use the command line to run a dry run query to estimate the number of bytes returned. Then convert that bytes estimate to dollars using the Pricing Calculator.
 - [ ] Run a select count (*) to get an idea of how many records your query will look through. Then convert that number of rows to dollars using the Pricing Calculator.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to monitor resources that are distributed over different projects in Google Cloud Platform. You want to consolidate reporting under the same Stackdriver Monitoring dashboard. What should you do?
 
@@ -686,7 +686,7 @@ To consolidate reporting under the same Stackdriver (now Google Cloud Monitoring
 - **[4] Configure a single Stackdriver account for one of the projects. In Stackdriver, create a Group and add the other project names as criteria for that Group.**
   - While creating a group in Stackdriver might help organize resources, it doesn't inherently link multiple projects to a single Stackdriver account for consolidated reporting. Groups are more about organizing resources within a project rather than across multiple projects.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need a dynamic way of provisioning VMs on Compute Engine. The exact specifications will be in a dedicated configuration file. You want to follow Google's recommended practices. Which method should you use?
 
@@ -695,7 +695,7 @@ To consolidate reporting under the same Stackdriver (now Google Cloud Monitoring
 - [ ] Managed Instance Group.
 - [ ] Unmanaged Instance Group.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You created an instance of SQL Server 2017 on Compute Engine to test features in the new version. You want to connect to this instance using the fewest number of steps. What should you do?
 
@@ -704,7 +704,7 @@ To consolidate reporting under the same Stackdriver (now Google Cloud Monitoring
 - [ ] Set a Windows password in the GCP Console. Verify that a firewall rule for port 22 exists. Click the RDP button in the GCP Console and supply the credentials to log in.
 - [ ] Set a Windows username and password in the GCP Console. Verify that a firewall rule for port 3389 exists. Click the RDP button in the GCP Console, and supply the credentials to log in.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are the organization and billing administrator for your company. The engineering team has the Project Creator role on the organization. You do not want the engineering team to be able to link projects to the billing account. Only the finance team should be able to link a project to a billing account, but they should not be able to make any other changes to projects. What should you do?
 
@@ -713,7 +713,7 @@ To consolidate reporting under the same Stackdriver (now Google Cloud Monitoring
 - [ ] Assign the finance team the Billing Account User role on the billing account and the Project Billing Manager role on the organization.
 - [ ] Assign the engineering team the Billing Account User role on the billing account and the Project Billing Manager role on the organization.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are creating a Google Kubernetes Engine (GKE) cluster with a cluster autoscaler feature enabled. You need to make sure that each node of the cluster will run a monitoring pod that sends container metrics to a third-party monitoring solution. What should you do?
 
@@ -739,7 +739,7 @@ To ensure that each node of the GKE cluster runs a monitoring pod that sends con
 - **[4] Reference the monitoring pod in a cluster initializer at the GKE cluster creation time.**
   - While you can initialize certain settings at the cluster creation time, this option doesn't provide a way to ensure that a monitoring pod runs on each node. DaemonSets are specifically designed for this purpose and are the standard Kubernetes solution for running a pod on every node.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You create a new Google Kubernetes Engine (GKE) cluster and want to make sure that it always runs a supported and stable version of Kubernetes. What should you do?
 
@@ -748,7 +748,7 @@ To ensure that each node of the GKE cluster runs a monitoring pod that sends con
 - [ ] Select the latest available cluster version for your GKE cluster.
 - [ ] Select 'Container-Optimized OS (cos)' as a node image for your GKE cluster.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company uses Cloud Storage to store application backup files for disaster recovery purposes. You want to follow Google's recommended practices. Which storage option should you use?
 
@@ -757,7 +757,7 @@ To ensure that each node of the GKE cluster runs a monitoring pod that sends con
 - [ ] Nearline Storage.
 - [x] Coldline Storage.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to set up a policy so that videos stored in a specific Cloud Storage Regional bucket are moved to Coldline after 90 days, and then deleted after one year from their creation. How should you set up the policy?
 
@@ -766,7 +766,7 @@ To ensure that each node of the GKE cluster runs a monitoring pod that sends con
 - [ ] Use gsutil rewrite and set the Delete action to 275 days (365-90).
 - [ ] Use gsutil rewrite and set the Delete action to 365 days.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has an existing GCP organization with hundreds of projects and a billing account. Your company recently acquired another company that also has hundreds of projects and its own billing account. You would like to consolidate all GCP costs of both GCP organizations onto a single invoice. You would like to consolidate all costs as of tomorrow. What should you do?
 
@@ -783,7 +783,7 @@ This approach allows you to quickly and efficiently consolidate billing under on
 
 Options like migrating projects to a new organization or linking billing data to a shared BigQuery dataset are more involved and wouldn't provide an immediate consolidation of invoices by tomorrow.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to configure 10 Compute Engine instances for availability when maintenance occurs. Your requirements state that these instances should attempt to automatically restart if they crash. Also, the instances should be highly available including during system maintenance. What should you do?
 
@@ -820,7 +820,7 @@ Now, let's analyze why the other options are incorrect:
 
 Therefore, option [1] is the correct choice as it directly addresses the requirements for instance availability during maintenance and automatic restart in Google Cloud Compute Engine instances.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a development project with appropriate IAM roles defined. You are creating a production project and want to have the same IAM roles on the new project, using the fewest possible steps. What should you do?
 
@@ -846,7 +846,7 @@ Here’s why the other options are incorrect:
 
 Therefore, using `gcloud iam roles copy` with the destination project specified is the most direct and efficient method to replicate IAM roles from one project to another. It ensures that all permissions and configurations associated with the roles are copied accurately to the new project.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are using multiple configurations for gcloud. You want to review the configured Kubernetes Engine cluster of an inactive configuration using the fewest possible steps. What should you do?
 
@@ -884,7 +884,7 @@ By using `kubectl config use-context` to switch to the desired context and then 
 ### Conclusion:
 Using `kubectl config use-context` to switch contexts and `kubectl config view` to display the current configuration settings is the most efficient and direct method to review the Kubernetes Engine cluster of an inactive configuration.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to configure IAM access audit logging in BigQuery for external auditors. You want to follow Google-recommended practices. What should you do?
 
@@ -919,7 +919,7 @@ To configure IAM access audit logging in BigQuery for external auditors while fo
 ### Conclusion:
 Option 1 follows Google-recommended practices by using predefined IAM roles to grant the necessary permissions and managing these permissions through a group, making it the most efficient and secure approach.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create a custom VPC with a single subnet. The subnet's range must be as large as possible. Which range should you use?
 
@@ -928,7 +928,7 @@ Option 1 follows Google-recommended practices by using predefined IAM roles to g
 - [ ] 172.16.0.0/12.
 - [ ] 192.168.0.0/16.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You recently deployed a new version of an application to App Engine and then discovered a bug in the release. You need to immediately revert to the prior version of the application. What should you do?
 
@@ -962,7 +962,7 @@ To revert to the prior version of your application in App Engine, you should rou
 ### Conclusion:
 Option 3 is the best answer because it leverages App Engine's built-in traffic management capabilities to revert to a previous version quickly and efficiently. This ensures minimal downtime and disruption for users while addressing the bug in the new release.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to configure Autohealing for network load balancing for a group of Compute Engine instances that run in multiple zones, using the fewest possible steps. You need to configure re-creation of VMs if they are unresponsive after 3 attempts of 10 seconds each. What should you do?
 
@@ -997,7 +997,7 @@ To configure Autohealing for network load balancing with the fewest steps, you s
 ### Conclusion:
 Option 3 is the best answer because it directly addresses the need to configure autohealing for the instances in a managed instance group with a specific HTTP health check. This approach ensures that instances are recreated if they become unresponsive according to the defined health check parameters.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Linux VM that must connect to Cloud SQL. You created a service account with the appropriate access rights. You want to make sure that the VM uses this service account instead of the default Compute Engine service account. What should you do?
 
@@ -1031,7 +1031,7 @@ To ensure that your Linux VM uses a specific service account instead of the defa
 ### Conclusion:
 Option 1 is the correct approach because it securely assigns the specified service account to the VM during the creation process, leveraging built-in Google Cloud Platform features without exposing sensitive credentials.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have one project called proj-sa where you manage all your service accounts. You want to be able to use a service account from this project to take snapshots of VMs running in another project called proj-vm. What should you do?
 
@@ -1065,7 +1065,7 @@ To allow a service account from one project (proj-sa) to take snapshots of VMs r
 ### Conclusion:
 Option 3 is the correct approach because it properly uses IAM roles to grant the required permissions to the service account, ensuring it can take snapshots of VMs in the proj-vm project securely and efficiently.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have one GCP account running in your default region and zone and another account running in a non-default region and zone. You want to start a new Compute Engine instance in these two Google Cloud Platform accounts using the command line interface. What should you do?
 
@@ -1100,7 +1100,7 @@ To manage multiple Google Cloud Platform (GCP) accounts and set different config
 ### Conclusion:
 Option 1 correctly outlines the steps to create and switch between configurations for different GCP accounts using the `gcloud` command-line tool. This method allows you to manage multiple accounts efficiently and execute commands in the appropriate account context.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Every employee of your company has a Google account. Your operational team needs to manage a large number of instances on Compute Engine. Each member of this team needs only administrative access to the servers. Your security team wants to ensure that the deployment of credentials is operationally efficient and must be able to determine who accessed a given instance. What should you do?
 
@@ -1136,7 +1136,7 @@ Option 1 correctly outlines the steps to create and switch between configuration
 ### Conclusion:
 Option 3 provides a balanced solution that ensures operational efficiency, individual accountability, and robust security. By leveraging Google accounts and the `compute.osAdminLogin` role, you can manage access effectively and maintain detailed audit logs.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to deploy an application, which is packaged in a container image, in a new project. The application exposes an HTTP endpoint and receives very few requests per day. You want to minimize costs. What should you do?
 
@@ -1169,7 +1169,7 @@ To minimize costs while deploying an application that receives very few requests
 
 Deploying your container on **Cloud Run (option 1)** is the most cost-effective and straightforward approach for an application that receives very few requests per day. It leverages serverless computing benefits, such as automatic scaling and pay-per-use pricing, while minimizing operational overhead and ensuring efficient resource utilization.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your development team needs a new Jenkins server for their project. You need to deploy the server using the fewest steps possible. What should you do?
 
@@ -1178,7 +1178,7 @@ Deploying your container on **Cloud Run (option 1)** is the most cost-effective 
 - [ ] Create a Kubernetes cluster on Compute Engine and create a deployment with the Jenkins Docker image.
 - [x] Use GCP Marketplace to launch the Jenkins solution.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building an application that stores relational data from users. Users across the globe will use this application. Your CTO is concerned about the scaling requirements because the size of the user base is unknown. You need to implement a database solution that can scale with your user growth with minimum configuration changes. Which storage solution should you use?
 
@@ -1211,7 +1211,7 @@ Here's why Cloud Spanner is appropriate:
 
 Given the requirement for global scalability, relational data consistency, and minimal configuration changes as the user base grows, **Cloud Spanner** is the best choice among the options provided. It provides a scalable and globally distributed relational database solution with strong consistency and transaction support, making it well-suited for modern applications with global user bases.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are using Deployment Manager to create a Google Kubernetes Engine cluster. Using the same Deployment Manager deployment, you also want to create a DaemonSet in the kube-system namespace of the cluster. You want a solution that uses the fewest possible services.
 
@@ -1220,7 +1220,7 @@ Given the requirement for global scalability, relational data consistency, and m
 - [ ] With Deployment Manager, create a Compute Engine instance with a startup script that uses kubectl to create the DaemonSet.
 - [ ] In the cluster's definition in Deployment Manager, add a metadata that has kube-system as key and the DaemonSet manifest as value.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Virtual Machine that is currently configured with 2 vCPUs and 4 GB of memory. It is running out of memory. You want to upgrade the Virtual Machine to have 8 GB of memory. What should you do?
 
@@ -1229,7 +1229,7 @@ Given the requirement for global scalability, relational data consistency, and m
 - [ ] Stop the VM, change the machine type to n1-standard-8, and start the VM.
 - [x] Stop the VM, increase the memory to 8 GB, and start the VM.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You created a Google Cloud Platform project with an App Engine application inside the project. You initially configured the application to be served from the us-central region. Now you want the application to be served from the asia-northeast1 region. What should you do?
 
@@ -1255,7 +1255,7 @@ Here's why the other options are not suitable:
 
 Therefore, the recommended approach is to create a new GCP project specifically for the App Engine application that needs to be served from the asia-northeast1 region. This keeps your deployments clean, separate, and aligned with Google Cloud's best practices for regional deployment management.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Several employees at your company have been creating projects with Cloud Platform and paying for it with their personal credit cards, which the company reimburses. The company wants to centralize all these projects under a single, new billing account. What should you do?
 
@@ -1264,7 +1264,7 @@ Therefore, the recommended approach is to create a new GCP project specifically 
 - [ ] In the Google Platform Console, go to the Resource Manage and move all projects to the root Organization.
 - [x] In the Google Cloud Platform Console, create a new billing account and set up a payment method.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Dockerfile that you need to deploy on Kubernetes Engine. What should you do?
 
@@ -1300,7 +1300,7 @@ Now, let's briefly explain why the other options are incorrect:
 
 Therefore, option [3] is the correct and recommended approach for deploying a Dockerfile on Kubernetes Engine.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a project for your App Engine application that serves a development environment. The required testing has succeeded and you want to create a new project to serve as your production environment. What should you do?
 
@@ -1332,7 +1332,7 @@ Now, let's briefly explain why the other options are not the best choices:
 
 Therefore, option [1] is the correct choice as it aligns with best practices for creating a new production environment project and deploying your application to that project using `gcloud` commands.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building an application that will run in your data center. The application will use Google Cloud Platform (GCP) services like AutoML. You created a service account that has appropriate access to AutoML. You need to enable authentication to the APIs from your on-premises environment. What should you do?
 
@@ -1353,7 +1353,7 @@ Here's why this approach is correct:
 
 Therefore, the correct step in this scenario is to use `gcloud` to generate a key file for your service account and then configure your on-premises application to use this key file for authentication when accessing AutoML or other GCP services.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You host a static website on Cloud Storage. Recently, you began to include links to PDF files on this site. Currently, when users click on the links to these PDF files, their browsers prompt them to save the file onto their local system. Instead, you want the clicked PDF files to be displayed within the browser window directly, without prompting the user to save the file locally. What should you do?
 
@@ -1382,7 +1382,7 @@ Here’s why this is the correct approach:
 
 Therefore, by setting the `Content-Type` metadata to `application/pdf` on your PDF file objects in Cloud Storage, you ensure that users can view the PDF files directly in their browser windows when clicking on links from your static website.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application that looks for its licensing server on the IP 10.0.3.21. You need to deploy the licensing server on Compute Engine. You do not want to change the configuration of the application and want the application to be able to reach the licensing server. What should you do?
 
@@ -1413,7 +1413,7 @@ Here’s why this option is correct:
 
 Therefore, **reserving 10.0.3.21 as a static internal IP address** is the correct approach to ensure that your application can reliably reach the licensing server without requiring any changes to the application's existing configuration.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are deploying an application to App Engine. You want the number of instances to scale based on request rate. You need at least 3 unoccupied instances at all times. Which scaling type should you use?
 
@@ -1443,7 +1443,7 @@ The reasons why the other options are less suitable:
 
 Therefore, **Automatic Scaling with min_idle_instances set to 3** is the best choice to meet your requirements of scaling based on request rate and maintaining at least 3 unoccupied instances at all times.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are the project owner of a GCP project and want to delegate control to colleagues to manage buckets and files in Cloud Storage. You want to follow Google-recommended practices. Which IAM roles should you grant your colleagues?
 
@@ -1473,7 +1473,7 @@ The reasons why the other options are less suitable:
 
 Therefore, granting the **Storage Admin** role to your colleagues will provide them with the necessary permissions to manage both Cloud Storage buckets and the files within them, aligning with Google-recommended practices.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to update a deployment in Deployment Manager without any resource downtime in the deployment. Which command should you use?
 
@@ -1505,7 +1505,7 @@ Therefore, the correct command to use for updating a deployment without causing 
 
 **[2] gcloud deployment-manager deployments update --config <deployment-config-path>.**
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are running an application on multiple Virtual Machines within a Managed Instance Group and have autoscaling enabled. The autoscaling policy is configured so that additional instances are added to the group if the CPU utilization of instances goes above 80%. VMs are added until the instance group reaches its maximum limit of five VMs or until CPU utilization of instances lowers to 80%. The initial delay for HTTP health checks against the instances is set to 30 seconds. The Virtual Machine instances take around three minutes to become available for users. You observe that when the instance group autoscales, it adds more instances then necessary to support the levels of end-user traffic. You want to properly maintain instance group sizes when autoscaling. What should you do?
 
@@ -1514,7 +1514,7 @@ Therefore, the correct command to use for updating a deployment without causing 
 - [ ] Use a TCP health check instead of an HTTP health check.
 - [x] Increase the initial delay of the HTTP health check to 200 seconds.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have 32 GB of data in a single file that you need to upload to a Nearline Storage bucket. The WAN connection you are using is rated at 1 Gbps, and you are the only one on the connection. You want to use as much of the rated 1 Gbps as possible to transfer the file rapidly. How should you upload the file?
 
@@ -1544,7 +1544,7 @@ The reasons why the other options are less suitable:
 
 Therefore, enabling parallel composite uploads with gsutil is the best method to utilize your 1 Gbps connection effectively and transfer your 32 GB file quickly.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You deployed an App Engine application using gcloud app deploy, but it did not deploy to the intended project. You want to find out why this happened and where the application deployed. What should you do?
 
@@ -1553,7 +1553,7 @@ Therefore, enabling parallel composite uploads with gsutil is the best method to
 - [ ] Go to Deployment Manager and review settings for deployment of applications.
 - [x] Go to Cloud Shell and run gcloud config list to review the Google Cloud configuration used for deployment.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to verify the IAM users and roles assigned within a GCP project named my-project. What should you do?
 
@@ -1562,7 +1562,7 @@ Therefore, enabling parallel composite uploads with gsutil is the best method to
 - [x] Navigate to the project and then to the IAM section in the GCP Console. Review the members and roles.
 - [ ] Navigate to the project and then to the Roles section in the GCP Console. Review the roles and status.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to select and configure compute resources for a set of batch processing jobs. These jobs take around 2 hours to complete and are run nightly. You want to minimize service costs. What should you do?
 
@@ -1571,7 +1571,7 @@ Therefore, enabling parallel composite uploads with gsutil is the best method to
 - [x] Select Compute Engine. Use preemptible VM instances of the appropriate standard machine type.
 - [ ] Select Compute Engine. Use VM instance types that support micro bursting.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to select and configure a cost-effective solution for relational data on Google Cloud Platform. You are working with a small set of operational data in one geographic location. You need to support point-in-time recovery. What should you do?
 
@@ -1602,7 +1602,7 @@ The reasons why the other options are less suitable:
 
 Therefore, **option [1]** is the most cost-effective and suitable solution for your requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are hosting an application on bare-metal servers in your own data center. The application needs access to Cloud Storage. However, security policies prevent the servers hosting the application from having public IP addresses or access to the internet. You want to follow Google-recommended practices to provide the application with access to Cloud Storage. What should you do?
 
@@ -1634,7 +1634,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [4]** provides a secure, compliant, and efficient way to access Cloud Storage from your on-premises servers without public IP addresses.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has a Google Cloud Platform project that uses BigQuery for data warehousing. Your data science team changes frequently and has few members. You need to allow members of this team to perform queries. You want to follow Google-recommended practices. What should you do?
 
@@ -1666,7 +1666,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [3]** is the most efficient and recommended approach to allow data scientists to perform queries in BigQuery while minimizing administrative overhead and ensuring proper permission management.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are given a project with a single Virtual Private Cloud (VPC) and a single subnetwork in the us-central1 region. There is a Compute Engine instance hosting an application in this subnetwork. You need to deploy a new instance in the same project in the europe-west1 region. This new instance needs access to the application. You want to follow Google-recommended practices. What should you do?
 
@@ -1697,7 +1697,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [1]** is the simplest and most efficient approach that follows Google-recommended practices for deploying a new instance in a different region while allowing it to access an application on an existing instance.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building a pipeline to process time-series data. Which Google Cloud Platform services should you put in boxes 1,2,3, and 4?
 
@@ -1708,7 +1708,7 @@ Therefore, **option [1]** is the simplest and most efficient approach that follo
 - [ ] Cloud Pub/Sub, Cloud Storage, BigQuery, Cloud Bigtable.
 - [x] Cloud Pub/Sub, Cloud Dataflow, Cloud Bigtable, BigQuery.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### For analysis purposes, you need to send all the logs from all of your Compute Engine instances to a BigQuery dataset called platform-logs. You have already installed the Cloud Logging agent on all the instances. You want to minimize cost. What should you do?
 
@@ -1717,7 +1717,7 @@ Therefore, **option [1]** is the simplest and most efficient approach that follo
 - [x] 1. In Cloud Logging, create a filter to view only Compute Engine logs. 2. Click Create Export. 3. Choose BigQuery as Sink Service, and the platform-logs dataset as Sink Destination.
 - [ ] 1. Create a Cloud Function that has the BigQuery User role on the platform-logs dataset. 2. Configure this Cloud Function to create a BigQuery Job that executes this query: INSERT INTO dataset.platform-logs (timestamp, log) SELECT timestamp, log FROM compute.logs WHERE timestamp > DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY) 3. Use Cloud Scheduler to trigger this Cloud Function once a day.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to deploy an application on Cloud Run that processes messages from a Cloud Pub/Sub topic. You want to follow Google-recommended practices. What should you do?
 
@@ -1748,7 +1748,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [3]** is the recommended practice for deploying a Cloud Run application that processes messages from a Cloud Pub/Sub topic efficiently and securely.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your projects incurred more costs than you expected last month. Your research reveals that a development GKE container emitted a huge number of logs, which resulted in higher costs. You want to disable the logs quickly using the minimum number of steps. What should you do?
 
@@ -1779,7 +1779,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [1]** is the correct and efficient choice to quickly address the issue of excessive logging costs from a specific GKE container.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You've deployed a microservice called myapp1 to a Google Kubernetes Engine cluster using the YAML file specified below. You need to refactor this configuration so that the database password is not stored in plain text. You want to follow Google-recommended practices. What should you do?
 
@@ -1790,7 +1790,7 @@ Therefore, **option [1]** is the correct and efficient choice to quickly address
 - [ ] Store the database password inside a ConfigMap object. Modify the YAML file to populate the DB_PASSWORD environment variable from the ConfigMap.
 - [ ] Store the database password in a file inside a Kubernetes persistent volume, and use a persistent volume claim to mount the volume to the container.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application running in Google Kubernetes Engine (GKE) with cluster autoscaling enabled. The application exposes a TCP endpoint. There are several replicas of this application. You have a Compute Engine instance in the same region, but in another Virtual Private Cloud (VPC), called gce-network, that has no overlapping IP ranges with the first VPC. This instance needs to connect to the application on GKE. You want to minimize effort. What should you do?
 
@@ -1825,7 +1825,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [1]** is the most straightforward and efficient approach to enable connectivity from a Compute Engine instance in a separate VPC to an application running in GKE with cluster autoscaling enabled.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are using Container Registry to centrally store your company's container images in a separate project. In another project, you want to create a Google Kubernetes Engine (GKE) cluster. You want to ensure that Kubernetes can download images from Container Registry. What should you do?
 
@@ -1856,7 +1856,7 @@ The reasons why the other options are incorrect:
 
 Therefore, to ensure that Kubernetes can download images from Container Registry in another project, you should implement **option [1]** by granting the Storage Object Viewer IAM role to the appropriate service account in the project where Container Registry is located.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You deployed a new application inside your Google Kubernetes Engine cluster using the YAML file specified below. You check the status of the deployed pods and notice that one of them is still in PENDING status. You want to find out why the pod is stuck in pending status. What should you do?
 
@@ -1869,7 +1869,7 @@ Therefore, to ensure that Kubernetes can download images from Container Registry
 - [x] Review details of myapp-deployment-58ddbbb995-lp86m Pod and check for warning messages.
 - [ ] View logs of the container in myapp-deployment-58ddbbb995-lp86m pod and check for warning messages.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are setting up a Windows VM on Compute Engine and want to make sure you can log in to the VM via RDP. What should you do?
 
@@ -1899,7 +1899,7 @@ The reasons why the other options are incorrect:
 
 Therefore, to log in to your Windows VM via RDP after creation, you should use option **[2]** and run the `gcloud compute reset-windows-password` command to obtain the necessary credentials.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to configure an SSH connection to a single Compute Engine instance for users in the dev1 group. This instance is the only resource in this particular Google Cloud Platform project that the dev1 users should be able to connect to. What should you do?
 
@@ -1931,7 +1931,7 @@ The reasons why the other options are incorrect:
 
 Therefore, **option [1]** is the correct and recommended approach to configure SSH access for users in the dev1 group to the specified Compute Engine instance.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to produce a list of the enabled Google Cloud Platform APIs for a GCP project using the gcloud command line in the Cloud Shell. The project name is my-project. What should you do?
 
@@ -1970,7 +1970,7 @@ Therefore, the correct command sequence is:
    gcloud services list --project <project ID>
    ```
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building a new version of an application hosted in an App Engine environment. You want to test the new version with 1% of users before you completely switch your application over to the new version. What should you do?
 
@@ -1998,7 +1998,7 @@ The reasons why the other options are incorrect:
 **[3] Deploy a new version as a separate app in App Engine. Then configure App Engine using GCP Console to split traffic between the two apps.**
 - Deploying the new version as a separate app is not necessary. You can deploy it as a new version within the same app and use App Engine’s traffic splitting features directly.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to provide a cost estimate for a Kubernetes cluster using the GCP pricing calculator for Kubernetes. Your workload requires high IOPs, and you will also be using disk snapshots. You start by entering the number of nodes, average hours, and average days. What should you do next?
 
@@ -2026,7 +2026,7 @@ The reasons why the other options are incorrect:
 **[4] Select Add GPUs. Add estimated cost for cluster management.**
 - Similar to option [3], this option is irrelevant unless your workload requires GPUs. Additionally, it does not account for the need for persistent disk storage and snapshot storage.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are using Google Kubernetes Engine with autoscaling enabled to host a new application. You want to expose this new application to the public, using HTTPS on a public IP address. What should you do?
 
@@ -2054,7 +2054,7 @@ The reasons why the other options are incorrect:
 **[4] Create a HAProxy pod in the cluster to load-balance the traffic to all the pods of the application. Forward the public traffic to HAProxy with an iptable rule. Configure the DNS name of your application using the public IP of the node HAProxy is running on.**
 - This approach is complex and involves managing HAProxy and iptable rules manually. It does not leverage the built-in capabilities of Kubernetes Ingress and Cloud Load Balancers, which are designed for this purpose and provide easier management and scalability.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to enable traffic between multiple groups of Compute Engine instances that are currently running two different GCP projects. Each group of Compute Engine instances is running in its own VPC. What should you do?
 
@@ -2082,7 +2082,7 @@ The reasons why the other options are incorrect:
 **[4] Verify that you are the Project Administrator of both projects. Create a new VPC and add all instances.**
 - Similar to option [1], this would require migrating instances, which is not necessary. Shared VPC offers a more efficient and less disruptive solution.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to add a new auditor to a Google Cloud Platform project. The auditor should be allowed to read, but not modify, all project items. How should you configure the auditor's permissions?
 
@@ -2091,7 +2091,7 @@ The reasons why the other options are incorrect:
 - [x] Select the built-in IAM project Viewer role. Add the user's account to this role.
 - [ ] Select the built-in IAM service Viewer role. Add the user's account to this role. 
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are operating a Google Kubernetes Engine (GKE) cluster for your company where different teams can run non-production workloads. Your Machine Learning (ML) team needs access to Nvidia Tesla P100 GPUs to train their models. You want to minimize effort and cost. What should you do?
 
@@ -2100,7 +2100,7 @@ The reasons why the other options are incorrect:
 - [ ] Create your own Kubernetes cluster on top of Compute Engine with nodes that have GPUs. Dedicate this cluster to your ML team.
 - [x] Add a new, GPU-enabled, node pool to the GKE cluster. Ask your ML team to add the cloud.google.com/gke -accelerator: nvidia-tesla-p100 nodeSelector to their pod specification.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your VMs are running in a subnet that has a subnet mask of 255.255.255.240. The current subnet has no more free IP addresses and you require an additional 10 IP addresses for new VMs. The existing and new VMs should all be able to reach each other without additional routes. What should you do?
 
@@ -2109,7 +2109,7 @@ The reasons why the other options are incorrect:
 - [ ] Create a new project. Use Shared VPC to share the current network with the new project.
 - [ ] Create a new subnet with the same starting IP but a wider range to overwrite the current subnet.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization uses G Suite for communication and collaboration. All users in your organization have a G Suite account. You want to grant some G Suite users access to your Cloud Platform project. What should you do?
 
@@ -2138,7 +2138,7 @@ The other options are not appropriate or do not align with best practices for gr
 
 Therefore, **Option 2** is the correct approach to grant G Suite users access to your Cloud Platform project by assigning them the required IAM roles using their G Suite email addresses. This method leverages G Suite's integration with Google Cloud Platform to manage access efficiently and securely.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Google Cloud Platform account with access to both production and development projects. You need to create an automated process to list all compute instances in development and production projects on a daily basis. What should you do?
 
@@ -2167,7 +2167,7 @@ The reasons why the other options are incorrect:
 **[ ] Go to GCP Console and export this information to Cloud SQL on a daily basis.**
 - This option involves manual steps and does not automate the process. It also does not address the need to list compute instances from multiple projects.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a large 5-TB AVRO file stored in a Cloud Storage bucket. Your analysts are proficient only in SQL and need access to the data stored in this file. You want to find a cost-effective way to complete their request as soon as possible. What should you do?
 
@@ -2176,7 +2176,7 @@ The reasons why the other options are incorrect:
 - [x] Create external tables in BigQuery that point to Cloud Storage buckets and run a SQL query on these external tables to complete your request.
 - [ ] Create a Hadoop cluster and copy the AVRO file to NDFS by compressing it. Load the file in a hive table and provide access to your analysts so that they can run SQL queries.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to verify that a Google Cloud Platform service account was created at a particular time. What should you do?
 
@@ -2207,7 +2207,7 @@ The other options are less appropriate for verifying the creation time of a serv
 
 Therefore, **Option 1** is the correct and recommended approach to verify the creation time of a Google Cloud Platform service account.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You deployed an LDAP server on Compute Engine that is reachable via TLS through port 636 using UDP. You want to make sure it is reachable by clients over that port. What should you do?
 
@@ -2238,7 +2238,7 @@ The other options are less appropriate or incorrect for enabling UDP traffic on 
 
 Therefore, **Option 3** is the correct approach to ensure that your LDAP server on Compute Engine is reachable by clients over UDP port 636.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to set a budget alert for use of Compute Engine services on one of the three Google Cloud Platform projects that you manage. All three projects are linked to a single billing account. What should you do?
 
@@ -2266,7 +2266,7 @@ The reasons why the other options are incorrect:
 **[4] Verify that you are the project administrator. Select the associated billing account and create a budget and a custom alert.**
 - Similar to option [3], being a project administrator is not sufficient for managing billing. Additionally, "custom alert" is unnecessary in this context. The correct role is the project billing administrator.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are migrating a production-critical on-premises application that requires 96 vCPUs to perform its task. You want to make sure the application runs in a similar environment on GCP. What should you do?
 
@@ -2294,7 +2294,7 @@ The reasons why the other options are incorrect:
 **[4] Start the VM using Compute Engine default settings, and adjust as you go based on Rightsizing Recommendations.**
 - Starting with default settings means the VM will not have the required 96 vCPUs initially. Rightsizing Recommendations are more suitable for optimizing resource usage after monitoring the application’s performance. This approach is not suitable for a production-critical application that requires specific resources from the start.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to configure a solution for archiving data in a Cloud Storage bucket. The solution must be cost-effective. Data with multiple versions should be archived after 30 days. Previous versions are accessed once a month for reporting. This archive data is also occasionally updated at month-end. What should you do?
 
@@ -2303,7 +2303,7 @@ The reasons why the other options are incorrect:
 - [ ] Add a bucket lifecycle rule that archives data from regional storage after 30 days to Coldline Storage.
 - [ ] Add a bucket lifecycle rule that archives data from regional storage after 30 days to Nearline Storage.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company's infrastructure is on-premises, but all machines are running at maximum capacity. You want to burst to Google Cloud. The workloads on Google Cloud must be able to directly communicate to the workloads on-premises using a private IP range. What should you do?
 
@@ -2332,7 +2332,7 @@ The other options are less suitable for achieving private IP communication betwe
 
 Therefore, **Option 4 (Cloud VPN)** is the recommended solution for establishing secure and private IP communication between your on-premises infrastructure and Google Cloud, allowing for bursting workloads to the cloud while maintaining network isolation and compliance with your company's infrastructure requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to select and configure a solution for storing and archiving data on Google Cloud Platform. You need to support compliance objectives for data from one geographic location. This data is archived after 30 days and needs to be accessed annually. What should you do?
 
@@ -2341,7 +2341,7 @@ Therefore, **Option 4 (Cloud VPN)** is the recommended solution for establishing
 - [ ] Select Regional Storage. Add a bucket lifecycle rule that archives data after 30 days to Nearline Storage.
 - [x] Select Regional Storage. Add a bucket lifecycle rule that archives data after 30 days to Coldline Storage.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company uses BigQuery for data warehousing. Over time, many different business units in your company have created 1000+ datasets across hundreds of projects. Your CIO wants you to examine all datasets to find tables that contain an employee_ssn column. You want to minimize effort in performing this task. What should you do?
 
@@ -2370,7 +2370,7 @@ The other options involve scripting or using Cloud Dataflow, which can be more c
 
 Therefore, **Option 1** is the most efficient and straightforward approach to achieve the task of identifying tables with an `employee_ssn` column across all datasets in your BigQuery environment using Google Cloud's Data Catalog.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You create a Deployment with 2 replicas in a Google Kubernetes Engine cluster that has a single preemptible node pool. After a few minutes, you use kubectl to examine the status of your Pod and observe that one of them is still in Pending status. What is the most likely cause?
 
@@ -2403,7 +2403,7 @@ The other options are less likely to be the cause:
 
 Therefore, **Option 4** is the most likely cause for the pending Pod in your scenario, where it was originally scheduled on a preemptible node that has been preempted, and Kubernetes is in the process of rescheduling it onto a new node.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You want to find out when users were added to Cloud Spanner Identity Access Management (IAM) roles on your Google Cloud Platform (GCP) project. What should you do in the GCP Console?
 
@@ -2429,7 +2429,7 @@ Here’s why this option is correct:
 
 Therefore, **Option 4** is the correct choice for reviewing when users were added to Cloud Spanner IAM roles by accessing admin activity logs through Stackdriver Logging.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company implemented BigQuery as an enterprise data warehouse. Users from multiple business units run queries on this data warehouse. However, you notice that query costs for BigQuery are very high, and you need to control costs. Which two methods should you use? (Choose two.)
 
@@ -2439,7 +2439,7 @@ Therefore, **Option 4** is the correct choice for reviewing when users were adde
 - [ ] Split your BigQuery data warehouse into multiple data warehouses for each business unit.
 - [x] Change your BigQuery query model from on-demand to flat rate. Apply the appropriate number of slots to each Project.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building a product on top of Google Kubernetes Engine (GKE). You have a single GKE cluster. For each of your customers, a Pod is running in that cluster, and your customers can run arbitrary code inside their Pod. You want to maximize the isolation between your customers' Pods. What should you do?
 
@@ -2468,7 +2468,7 @@ The other options are less focused on maximizing isolation between customers' Po
 
 Therefore, **Option 3** is the most effective choice to ensure maximum isolation between your customers' Pods within a GKE cluster, leveraging gVisor's sandboxing capabilities at the node pool level and specifying `runtimeClassName: gvisor` in the Pod specifications.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your customer has implemented a solution that uses Cloud Spanner and notices some read latency-related performance issues on one table. This table is accessed only by their users using a primary key. The table schema is shown below. You want to resolve the issue. What should you do?
 
@@ -2481,7 +2481,7 @@ Therefore, **Option 3** is the most effective choice to ensure maximum isolation
 
 ![DDL](images/ddl.png)
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your finance team wants to view the billing report for your projects. You want to make sure that the finance team does not get additional permissions to the project. What should you do?
 
@@ -2490,7 +2490,7 @@ Therefore, **Option 3** is the most effective choice to ensure maximum isolation
 - [x] Add the group for the finance team to roles/billing viewer role.
 - [ ] Add the group for the finance team to roles/billing project/Manager role.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization has strict requirements to control access to Google Cloud projects. You need to enable your Site Reliability Engineers (SREs) to approve requests from the Google Cloud support team when an SRE opens a support case. You want to follow Google-recommended practices. What should you do?
 
@@ -2499,7 +2499,7 @@ Therefore, **Option 3** is the most effective choice to ensure maximum isolation
 - [ ] Add your SREs to a group and then add this group to roles/iam.roleAdmin.role.
 - [x] Add your SREs to a group and then add this group to roles/accessapproval.approver role.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to host an application on a Compute Engine instance in a project shared with other teams. You want to prevent the other teams from accidentally causing downtime on that application. Which feature should you use?
 
@@ -2508,7 +2508,7 @@ Therefore, **Option 3** is the most effective choice to ensure maximum isolation
 - [ ] Use a sole-tenant node.
 - [x] Enable deletion protection on the instance.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization needs to grant users access to query datasets in BigQuery but prevent them from accidentally deleting the datasets. You want a solution that follows Google-recommended practices. What should you do?
 
@@ -2533,7 +2533,7 @@ Here’s why this option is suitable:
 
 Therefore, **Option 4** is the recommended approach to grant users the necessary querying permissions in BigQuery while preventing accidental dataset deletions and maintaining manageability according to Google-recommended practices.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a developer laptop with the Cloud SDK installed on Ubuntu. The Cloud SDK was installed from the Google Cloud Ubuntu package repository. You want to test your application locally on your laptop with Cloud Datastore. What should you do? --------------Issue
 
@@ -2557,7 +2557,7 @@ Here's why this is the correct option:
 - **Option 3**: Installing the `google-cloud-sdk-datastore-emulator` component using the `apt-get install` command is not the correct method because the emulator component for Cloud Datastore is installed via the Cloud SDK (`gcloud`), not through the system package manager (`apt-get`).
 
 Therefore, **Option 4** is the correct choice for installing and setting up the Cloud Datastore emulator on your developer laptop.
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company set up a complex organizational structure on Google Cloud. The structure includes hundreds of folders and projects. Only a few team members should be able to view the hierarchical structure. You need to assign minimum permissions to these team members, and you want to follow Google-recommended practices. What should you do?
 
@@ -2577,7 +2577,7 @@ To allow a few team members to view the hierarchical structure of your Google Cl
 - **[3] Add the users to a group, and add this group to roles/browser**: This is the recommended practice. By adding users to a group and then assigning the role to the group, you can easily manage permissions at scale. The `roles/browser` role provides the necessary permissions to view the organization’s structure.
 - **[4] Add the users to a group, and add this group to roles/iam.roleViewer role**: Again, the `roles/iam.roleViewer` role is not intended for viewing the organizational structure. The `roles/browser` role is more suitable.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has a single sign-on (SSO) identity provider that supports Security Assertion Markup Language (SAML) integration with service providers. Your company has users in Cloud Identity. You would like users to authenticate using your company's SSO provider. What should you do?
 
@@ -2597,7 +2597,7 @@ To integrate your company's SSO provider that supports SAML with Cloud Identity,
 - **[3] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Mobile & Desktop Apps**: OAuth 2.0 is not used for SAML SSO integrations.
 - **[4] Obtain OAuth 2.0 credentials, configure the user consent screen, and set up OAuth 2.0 for Web Server Applications**: Again, OAuth 2.0 is not the appropriate protocol for this SAML SSO scenario.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization has a dedicated person who creates and manages all service accounts for Google Cloud projects. You need to assign this person the minimum role for projects. What should you do?
 
@@ -2616,7 +2616,7 @@ To manage all service accounts, including creating and managing them, the approp
 - **roles/iam.securityAdmin**: This role is for managing IAM policies and security configurations, not specifically service accounts.
 - **roles/iam.serviceAccountUser**: This role allows using service accounts but not creating or managing them.
 - **roles/iam.serviceAccountAdmin**: This role has the necessary permissions to create, update, delete, and manage service accounts, which fits the requirement.
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building an archival solution for your data warehouse and have selected Cloud Storage to archive your data. Your users need to be able to access this archived data once a quarter for some regulatory requirements. You want to select a cost-efficient option. Which storage option should you use?
 
@@ -2636,7 +2636,7 @@ Given the requirements of accessing the archived data once a quarter (every 90 d
 - **Regional Storage**: This is designed for data that needs to be accessed frequently and stored in a specific region. It would be more expensive and unnecessary for infrequent, quarterly access.
 - **Multi-Regional Storage**: This is for data that needs to be accessed frequently across multiple regions. It is the most expensive option and not suitable for infrequent, quarterly access.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### A team of data scientists infrequently needs to use a Google Kubernetes Engine (GKE) cluster that you manage. They require GPUs for some long-running, nonrestartable jobs. You want to minimize cost. What should you do?  ---------------Issue
 
@@ -2645,7 +2645,7 @@ Given the requirements of accessing the archived data once a quarter (every 90 d
 - [ ] Create a node pool with preemptible VMs and GPUs attached to those VMs.
 - [x] Create a node pool of instances with GPUs, and enable autoscaling on this node pool with a minimum size of 1.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your organization has user identities in Active Directory. Your organization wants to use Active Directory as their source of truth for identities. Your organization wants to have full control over the Google accounts used by employees for all Google services, including your Google Cloud Platform (GCP) organization. What should you do?
 
@@ -2654,7 +2654,7 @@ Given the requirements of accessing the archived data once a quarter (every 90 d
 - [ ] Export users from Active Directory as a CSV and import them to Cloud Identity via the Admin Console.
 - [ ] Ask each employee to create a Google account using self signup. Require that each employee use their company email address and password.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have successfully created a development environment in a project for an application. This application uses Compute Engine and Cloud SQL. Now you need to create a production environment for this application. The security team has forbidden the existence of network routes between these 2 environments and has asked you to follow Google-recommended practices. What should you do?
 
@@ -2690,7 +2690,7 @@ Creating a new project for the production environment is the recommended approac
 
 By creating a new project and replicating the setup, you can ensure a clean, isolated production environment that adheres to best practices and security requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your management has asked an external auditor to review all the resources in a specific project. The security team has enabled the Organization Policy called Domain Restricted Sharing on the organization node by specifying only your Cloud Identity domain. You want the auditor to only be able to view, but not modify, the resources in that project. What should you do?
 
@@ -2727,7 +2727,7 @@ To ensure that the external auditor can view, but not modify, resources in a spe
 
 By creating a temporary Cloud Identity account and assigning the Viewer role to it, you provide the auditor with the necessary access to perform their audit while maintaining strict control over permissions and adherence to organizational policies.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a workload running on Compute Engine that is critical to your business. You want to ensure that the data on the boot disk of this workload is backed up regularly. You need to be able to restore a backup as quickly as possible in case of disaster. You also want older backups to be cleaned automatically to save on cost. You want to follow Google-recommended practices. What should you do?
 
@@ -2767,7 +2767,7 @@ To ensure that the data on the boot disk of your critical Compute Engine workloa
 
 Therefore, creating a snapshot schedule for the disk ensures that your critical Compute Engine workload's data is backed up regularly, can be restored quickly in case of disaster, and adheres to Google-recommended practices for backup and disaster recovery.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to assign a Cloud Identity and Access Management (Cloud IAM) role to an external auditor. The auditor needs to have permissions to review your Google Cloud Platform (GCP) Audit Logs and also to review your Data Access logs. What should you do?
 
@@ -2799,7 +2799,7 @@ Based on the provided options and the requirement that the auditor needs permiss
 
 Therefore, the correct approach is to assign the predefined role `roles/logging.privateLogViewer` to the auditor and instruct them to also review logs related to changes in Cloud IAM policies to ensure comprehensive auditing and oversight.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are managing several Google Cloud Platform (GCP) projects and need access to all logs for the past 60 days. You want to be able to explore and quickly analyze the log contents. You want to follow Google-recommended practices to obtain the combined logs for all projects. What should you do?
 
@@ -2828,7 +2828,7 @@ To obtain combined logs for all projects over the past 60 days and follow Google
 
 Therefore, **Option 2** is the most appropriate choice for aggregating logs across multiple GCP projects, storing them in BigQuery for efficient querying and analysis, and ensuring logs are retained for up to 60 days as per your requirement.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to reduce GCP service costs for a division of your company using the fewest possible steps. You need to turn off all configured services in an existing GCP project. What should you do?  -----------Issue   A 
 
@@ -2858,7 +2858,7 @@ For turning off all configured services in an existing GCP project to reduce cos
   - Similar to Option 2, deleting resources individually is not as efficient as shutting down the entire project to reduce costs comprehensively.
 
 Therefore, the recommended and correct approach is to ensure you have the Project Owners IAM role, locate the project in the GCP console, and then initiate the shutdown process for the entire project to halt all services and reduce costs effectively.
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are configuring service accounts for an application that spans multiple projects. Virtual Machines (VMs) running in the web-applications project need access to BigQuery datasets in crm-databases-proj. You want to follow Google-recommended practices to give access to the service account in the web-applications project. What should you do?
 
@@ -2890,7 +2890,7 @@ To follow Google-recommended practices for giving access to BigQuery datasets in
 
 Therefore, **Option 4** is the correct choice as it aligns with Google-recommended practices by granting minimal necessary permissions (`bigquery.dataViewer`) to `crm-databases-proj` and ensuring appropriate roles are assigned to `web-applications` without over-provisioning privileges.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### An employee was terminated, but their access to Google Cloud Platform (GCP) was not removed until 2 weeks later. You need to find out this employee accessed any sensitive customer information after their termination. What should you do?
 
@@ -2922,7 +2922,7 @@ To determine if the terminated employee accessed any sensitive customer informat
 
 Therefore, **Option 3** is the most appropriate choice as it focuses on auditing data access, allows specific search by user's email (principal), and aligns with the need to track potential unauthorized access to sensitive customer information post-termination.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create a custom IAM role for use with a GCP service. All permissions in the role must be suitable for production use. You also want to clearly share with your organization the status of the custom role. This will be the first version of the custom role. What should you do? -------------Issue
 
@@ -2933,7 +2933,7 @@ Therefore, **Option 3** is the most appropriate choice as it focuses on auditing
 
 All diff ans
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has a large quantity of unstructured data in different file formats. You want to perform ETL transformations on the data. You need to make the data accessible on Google Cloud so it can be processed by a Dataflow job. What should you do?
 
@@ -2967,7 +2967,7 @@ To make unstructured data accessible on Google Cloud for processing by a Dataflo
 
 Therefore, **Option 2** (Upload the data to Cloud Storage using the gsutil command line tool) is the correct choice as it aligns with best practices for handling unstructured data and preparing it for processing with Dataflow on Google Cloud.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to manage multiple Google Cloud projects in the fewest steps possible. You want to configure the Google Cloud SDK command line interface (CLI) so that you can easily manage multiple projects. What should you do?
 
@@ -2998,7 +2998,7 @@ To manage multiple Google Cloud projects efficiently using the Google Cloud SDK 
 
 Therefore, **Option 1** is the best choice as it promotes a clear and organized approach to managing multiple Google Cloud projects with the CLI.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your Managed Instance Group raised an alert stating that new instance creation has failed to create new instances. You need to maintain the number of running instances specified by the template to be able to process expected application traffic. What should you do?     ----------------Issue Big Issue
 
@@ -3007,7 +3007,7 @@ Therefore, **Option 1** is the best choice as it promotes a clear and organized 
 - [ ] Verify that the instance template being used by the instance group contains valid syntax. Delete any persistent disks with the same name as instance names. Set the disks.autoDelete property to true in the instance template.
 - [ ] Delete the current instance template and replace it with a new instance template. Verify that the instance name and persistent disk name values are not the same in the template. Set the disks.autoDelete property to true in the instance template.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company is moving from an on-premises environment to Google Cloud. You have multiple development teams that use Cassandra environments as backend databases. They all need a development environment that is isolated from other Cassandra instances. You want to move to Google Cloud quickly and with minimal support effort. What should you do?
 
@@ -3037,7 +3037,7 @@ The correct answer is **Option 2**:
 
 This approach minimizes support efforts by leveraging Google Cloud's managed services and ensures consistent environments across development teams.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Compute Engine instance hosting a production application. You want to receive an email if the instance consumes more than 90% of its CPU resources for more than 15 minutes. You want to use Google services. What should you do?   --------------Issue    2 or 4        All says 2
 
@@ -3046,7 +3046,7 @@ This approach minimizes support efforts by leveraging Google Cloud's managed ser
 - [ ] 1. Create a Stackdriver Workspace, and associate your GCP project with it. 2. Write a script that monitors the CPU usage and sends it as a custom metric to Stackdriver. 3. Create an uptime check for the instance in Stackdriver.
 - [ ] 1. In Stackdriver Logging, create a logs-based metric to extract the CPU usage by using this regular expression: CPU Usage: ([0-9] {1,3})% 2. In Stackdriver Monitoring, create an Alerting Policy based on this metric. 3. Configure your email address in the notification channel.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application that uses Cloud Spanner as a backend database. The application has a very predictable traffic pattern. You want to automatically scale up or down the number of Spanner nodes depending on traffic. What should you do?
 
@@ -3059,7 +3059,7 @@ Right Ans.
 Create a Cloud Monitoring alerting policy to send an alert to webhook when Cloud Spanner CPU is over or under your threshold. Create a Cloud Function that listens to HTTP and resizes Spanner resources accordingly.
 
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company publishes large files on an Apache web server that runs on a Compute Engine instance. The Apache web server is not the only application running in the project. You want to receive an email when the egress network costs for the server exceed 100 dollars for the current month as measured by Google Cloud. What should you do?
 
@@ -3088,7 +3088,7 @@ Here’s why this option fits your needs:
 
 Therefore, **Option [3]** is the most suitable approach for monitoring egress network costs for the Apache web server and ensuring that you receive email notifications when these costs exceed $100 for the current month. It leverages Google Cloud's billing data export capabilities and automation through Cloud Functions and Cloud Scheduler to meet your specific monitoring and alerting requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have designed a solution on Google Cloud that uses multiple Google Cloud products. Your company has asked you to estimate the costs of the solution. You need to provide estimates for the monthly total cost. What should you do?
 
@@ -3117,7 +3117,7 @@ Here's why this approach is appropriate:
 
 Therefore, using the pricing details and the pricing calculator (option [1]) is the best approach to estimate the monthly total cost of your solution on Google Cloud. This method ensures accuracy and flexibility in adjusting estimates based on your specific usage scenarios and configurations.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application that receives SSL-encrypted TCP traffic on port 443. Clients for this application are located all over the world. You want to minimize latency for the clients. Which load balancing option should you use?
 
@@ -3148,7 +3148,7 @@ Here’s why SSL Proxy Load Balancer is the appropriate choice:
 
 Therefore, **SSL Proxy Load Balancer** is the best choice for your scenario to minimize latency for clients globally while efficiently handling SSL-encrypted TCP traffic on port 443.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application on a general-purpose Compute Engine instance that is experiencing excessive disk read throttling on its Zonal SSD Persistent Disk. The application primarily reads large files from disk. The disk size is currently 350 GB. You want to provide the maximum amount of throughput while minimizing costs. What should you do?
 
@@ -3179,7 +3179,7 @@ Here's why this option is suitable:
 
 Therefore, **migrating to use a Local SSD on the instance** is the most effective solution to enhance disk read performance, address excessive read throttling, and ensure maximum throughput for your application while considering cost-efficiency.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your Dataproc cluster runs in a single Virtual Private Cloud (VPC) network in a single subnet with range 172.16.20.128/25. There are no private IP addresses available in the VPC network. You want to add new VMs to communicate with your cluster using the minimum number of steps. What should you do?    -----------------Issue
 
@@ -3208,7 +3208,7 @@ Here’s why this option is appropriate:
 
 Therefore, **modifying the existing subnet range to 172.16.20.0/24** is the recommended approach to efficiently add new VMs that need to communicate with your Dataproc cluster while minimizing configuration steps and maintaining simplicity.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You manage an App Engine Service that aggregates and visualizes data from BigQuery. The application is deployed with the default App Engine Service account. The data that needs to be visualized resides in a different project managed by another team. You do not have access to this project, but you want your application to be able to read data from the BigQuery dataset. What should you do?
 
@@ -3235,7 +3235,7 @@ Here’s why this option is correct:
 
 Therefore, **Option 2** is the correct approach as it directly addresses your need for read access to the BigQuery dataset without requiring access to the other team's project itself.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create a copy of a custom Compute Engine Virtual Machine (VM) to facilitate an expected increase in application traffic due to a business acquisition. What should you do?
 
@@ -3269,7 +3269,7 @@ Here’s why this option is correct:
 
 Creating a custom Compute Engine image from a snapshot of your base VM allows you to replicate the VM's configuration efficiently. Subsequently, creating new VM instances from this custom image ensures consistency and replicates the environment to handle increased application traffic effectively.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have deployed an application on a single Compute Engine instance. The application writes logs to disk. Users start reporting errors with the application. You want to diagnose the problem. What should you do?
 
@@ -3307,7 +3307,7 @@ Installing and configuring the Cloud Logging Agent on your Compute Engine instan
 
 
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### An application generates daily reports in a Compute Engine Virtual Machine (VM). The VM is in the project corp-iot-insights. Your team operates only in the project corp-aggregate-reports and needs a copy of the daily exports in the bucket corp-aggregate-reports-storage. You want to configure access so that the daily reports from the VM are available in the bucket corp-aggregate-reports-storage and use as few steps as possible while following Google-recommended practices. What should you do?
 
@@ -3341,7 +3341,7 @@ Here’s why this option is the correct choice:
 
 Granting the VM's service account the `Storage Object Creator` role on the `corp-aggregate-reports-storage` bucket in the `corp-aggregate-reports` project ensures that the VM can write its daily reports to the specified bucket. This approach is straightforward, aligns with Google-recommended practices by using IAM roles effectively, and minimizes complexity and steps involved in managing access across projects.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You built an application on your development laptop that uses Google Cloud services. Your application uses Application Default Credentials for authentication and works fine on your development laptop. You want to migrate this application to a Compute Engine Virtual Machine (VM) and set up authentication using Google-recommended practices and minimal changes. What should you do?
 
@@ -3372,7 +3372,7 @@ Here's why this option is the correct choice:
 
 To adhere to Google-recommended practices and ensure secure authentication for your application on a Compute Engine VM, create a service account in Google Cloud IAM with the necessary roles and configure your application to use this service account for authentication. This approach provides both security and ease of management for accessing Google Cloud services from your VM-hosted application.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You need to create a Compute Engine instance in a new project that doesn't exist yet. What should you do?
 
@@ -3405,7 +3405,7 @@ Here’s a breakdown of why this is the correct approach:
 
 The recommended approach is to use the Cloud SDK to first create a new project, enable the Compute Engine API in that project, and then proceed to create the Compute Engine instance specifying the newly created project using the `--project` flag. This sequence ensures that you have a project to place your resources in and that the necessary API is enabled for resource creation.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company runs one batch process in an on-premises server that takes around 30 hours to complete. The task runs monthly, can be performed offline, and must be restarted if interrupted. You want to migrate this workload to the cloud while minimizing cost. What should you do?  ------------------Issue
 
@@ -3414,7 +3414,7 @@ The recommended approach is to use the Cloud SDK to first create a new project, 
 - [x] Migrate the workload to a Compute Engine VM. Start and stop the instance as needed.
 - [ ] Create an Instance Template with Preemptible VMs On. Create a Managed Instance Group from the template and adjust Target CPU Utilization. Migrate the workload.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are developing a new application and are looking for a Jenkins installation to build and deploy your source code. You want to automate the installation as quickly and easily as possible. What should you do?
 
@@ -3449,7 +3449,7 @@ To automate the installation of Jenkins for building and deploying your source c
 ### Summary:
 Deploying Jenkins through the Google Cloud Marketplace is the recommended approach because it provides an automated, pre-configured solution that minimizes setup time and effort while integrating well with other Google Cloud services you might use for your CI/CD pipeline.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have downloaded and installed the gcloud command line interface (CLI) and have authenticated with your Google Account. Most of your Compute Engine instances in your project run in the europe-west1-d zone. You want to avoid having to specify this zone with each CLI command when managing these instances. What should you do?
 
@@ -3486,7 +3486,7 @@ To avoid specifying the zone with each CLI command when managing your Compute En
 ### Summary:
 Using the `gcloud config set compute/zone europe-west1-d` command is the correct and recommended way to set the default zone for your gcloud CLI commands.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### The core business of your company is to rent out construction equipment at large scale. All the equipment that is being rented out has been equipped with multiple sensors that send event information every few seconds. These signals can vary from engine status, distance traveled, fuel level, and more. Customers are billed based on the consumption monitored by these sensors. You expect high throughput - up to thousands of events per hour per device - and need to retrieve consistent data based on the time of the event. Storing and retrieving individual signals should be atomic. What should you do?
 
@@ -3521,7 +3521,7 @@ For a scenario where you need to handle high-throughput, time-series data with c
 ### Summary:
 Using **Cloud Bigtable** with row keys based on event timestamps is the most appropriate solution for handling high-throughput, time-series data with consistent and atomic operations. This approach ensures that you can efficiently store, retrieve, and process the large volume of sensor data generated by your construction equipment.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are asked to set up application performance monitoring on Google Cloud projects A, B, and C as a single pane of glass. You want to monitor CPU, memory, and disk. What should you do?
 
@@ -3553,7 +3553,7 @@ To set up application performance monitoring on Google Cloud projects A, B, and 
 
 **Option 4** provides the best solution by leveraging Google Cloud Monitoring workspaces to create a single, centralized dashboard. This allows for an integrated view of CPU, memory, and disk metrics across projects A, B, and C, providing a cohesive and efficient monitoring setup.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You created several resources in multiple Google Cloud projects. All projects are linked to different billing accounts. To better estimate future charges, you want to have a single visual representation of all costs incurred. You want to include new cost data as soon as possible. What should you do?
 
@@ -3585,7 +3585,7 @@ The best approach to achieve a single visual representation of all costs incurre
 
 **Option 1** combines the strengths of BigQuery and Data Studio to provide a scalable, real-time, and customizable solution for visualizing billing data across multiple projects and billing accounts. This method ensures that you have the most up-to-date information and a comprehensive view of your costs.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has workloads running on Compute Engine and on-premises. The Google Cloud Virtual Private Cloud (VPC) is connected to your WAN over a Virtual Private Network (VPN). You need to deploy a new Compute Engine instance and ensure that no public Internet traffic can be routed to it. What should you do?
 
@@ -3616,7 +3616,7 @@ The correct approach is:
 ### Summary:
 **Option 1** directly addresses the requirement by ensuring the instance does not have a public IP address, thus preventing any public internet traffic from being routed to or from the instance. This is the simplest and most straightforward method to ensure compliance with the requirement.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your team maintains the infrastructure for your organization. The current infrastructure requires changes. You need to share your proposed changes with the rest of the team. You want to follow Google's recommended best practices. What should you do?     -------------------Issue
 
@@ -3650,7 +3650,7 @@ Here’s why this option is the correct choice:
 
 Therefore, **Option 2** is the best approach as it aligns with Google's recommended practices for managing infrastructure changes using Deployment Manager templates in a version-controlled repository like Cloud Source Repositories.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a Compute Engine instance hosting an application used between 9 AM and 6 PM on weekdays. You want to back up this instance daily for disaster recovery purposes. You want to keep the backups for 30 days. You want the Google-recommended solution with the least management overhead and the least number of services. What should you do?
 
@@ -3688,7 +3688,7 @@ The correct choice for your requirement is:
 
 Therefore, **Option 2** offers a simple, reliable, and Google-recommended solution with minimal management overhead and the least number of additional services required.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your existing application running in Google Kubernetes Engine (GKE) consists of multiple pods running on four GKE n1-standard-2 nodes. You need to deploy additional pods requiring n2-highmem-16 nodes without any downtime. What should you do?
 
@@ -3722,7 +3722,7 @@ The correct approach is:
 
 Therefore, **Option 2** is the most efficient and effective method to deploy additional pods requiring `n2-highmem-16` nodes without causing downtime.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have an application that uses Cloud Spanner as a database backend to keep current state information about users. Cloud Bigtable logs all events triggered by users. You export Cloud Spanner data to Cloud Storage during daily backups. One of your analysts asks you to join data from Cloud Spanner and Cloud Bigtable for specific users. You want to complete this ad hoc request as efficiently as possible. What should you do?
 
@@ -3756,7 +3756,7 @@ Here’s why this option is suitable:
 
 Therefore, **Option 2** is the most efficient choice as it leverages Dataflow’s capabilities for integrating and processing data from Cloud Spanner and Cloud Bigtable directly, tailored to the specific user data join requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are hosting an application from Compute Engine Virtual Machines (VMs) in us-central1-a. You want to adjust your design to support the failure of a single Compute Engine zone, eliminate downtime, and minimize cost. What should you do?
 
@@ -3790,7 +3790,7 @@ Here's why this option is suitable:
 
 Therefore, **Option 1** is the correct choice as it directly aligns with the requirement to support the failure of a single Compute Engine zone (us-central1-a), ensures high availability, and minimizes costs by leveraging multiple zones within the same region.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### A colleague handed over a Google Cloud Platform project for you to maintain. As part of a security checkup, you want to review who has been granted the Project Owner role. What should you do?
 
@@ -3819,7 +3819,7 @@ To review who has been granted the Project Owner role in a Google Cloud Platform
 
 In summary, using the `gcloud projects get-iam-policy` command is the appropriate method to review who has been granted the Project Owner role in a Google Cloud Platform project, as it directly retrieves the IAM policy bindings for detailed examination.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are running multiple VPC-native Google Kubernetes Engine clusters in the same subnet. The IPs available for the nodes are exhausted, and you want to ensure that the clusters can grow in nodes when needed. What should you do?
 
@@ -3844,7 +3844,7 @@ To ensure that your VPC-native Google Kubernetes Engine (GKE) clusters can grow 
 
 Therefore, **expanding the CIDR range of the relevant subnet for the cluster** is the correct choice to ensure that your VPC-native GKE clusters can grow in nodes when needed while maintaining network efficiency and minimizing disruption.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have a batch workload that runs every night and uses a large number of Virtual Machines (VMs). It is fault-tolerant and can tolerate some of the VMs being terminated. The current cost of VMs is too high. What should you do?
 
@@ -3869,7 +3869,7 @@ The correct option and reasoning are as follows:
 
 Therefore, **Option 1** is the best choice because it directly addresses cost reduction by leveraging preemptible VMs, which are suitable for your fault-tolerant batch workload and can significantly lower your compute costs.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are working with a user to set up an application in a new VPC behind a firewall. The user is concerned about data egress. You want to configure the fewest open egress ports. What should you do?
 
@@ -3890,7 +3890,7 @@ Here’s why this option is the correct choice:
 
 This configuration ensures that your VPC is secured by default with minimal open egress ports, thereby addressing the user's concern about data egress while maintaining necessary connectivity for your application.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company runs its Linux workloads on Compute Engine instances. Your company will be working with a new operations partner that does not use Google Accounts. You need to grant access to the instances to your operations partner so they can maintain the installed tooling. What should you do?
 
@@ -3928,7 +3928,7 @@ Based on the scenario where your operations partner does not use Google Accounts
 Enabling Cloud IAP for Compute Engine instances and adding the operations partner as a Cloud IAP Tunnel User aligns well with secure access practices and allows you to leverage identity-based access control without managing SSH keys or IP addresses explicitly. This approach provides a more scalable and secure solution for granting access to your instances.
 
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have created a code snippet that should be triggered whenever a new file is uploaded to a Cloud Storage bucket. You want to deploy this code snippet. What should you do?
 
@@ -3962,7 +3962,7 @@ To deploy a code snippet that should be triggered whenever a new file is uploade
 
 Cloud Functions with a Cloud Storage trigger (Option 2) is the most appropriate choice because it directly addresses the requirement to trigger a code snippet in response to a file upload event in a Cloud Storage bucket. It's lightweight, serverless, and scales automatically, making it ideal for event-driven scenarios like this one.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have been asked to set up Object Lifecycle Management for objects stored in storage buckets. The objects are written once and accessed frequently for 30 days. After 30 days, the objects are not read again unless there is a special need. The objects should be kept for three years, and you need to minimize cost. What should you do?
 
@@ -3996,7 +3996,7 @@ To minimize cost while meeting the requirements for Object Lifecycle Management,
 
 Option 1 is the best choice because it optimizes cost by using Nearline storage for the initial 30 days when data is accessed frequently and then transitions to Archive storage, which offers the lowest cost for long-term retention. This setup aligns with the requirement to keep the objects for three years while minimizing storage costs after the initial 30-day period of frequent access.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are storing sensitive information in a Cloud Storage bucket. For legal reasons, you need to be able to record all requests that read any of the stored data. You want to make sure you comply with these requirements. What should you do?
 
@@ -4031,7 +4031,7 @@ The correct approach to comply with the requirement of recording all requests th
 
 Enabling Data Access audit logs for the Cloud Storage API (Option 4) is the appropriate solution as it directly addresses the requirement to record all requests that read sensitive information from your Cloud Storage bucket. It ensures transparency, accountability, and compliance with legal and regulatory requirements regarding data access auditing.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are the team lead of a group of 10 developers. You provided each developer with an individual Google Cloud Project that they can use as their personal sandbox to experiment with different Google Cloud solutions. You want to be notified if any of the developers are spending above $500 per month on their sandbox environment. What should you do?
 
@@ -4067,7 +4067,7 @@ The correct approach would be:
 ### Conclusion:
 Creating a budget per project and configuring budget alerts on each individual project's budget (Option 3) is the recommended approach. It provides the necessary granularity, control, and simplicity to effectively monitor and manage spending across multiple sandbox environments in Google Cloud.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are deploying a production application on Compute Engine. You want to prevent anyone from accidentally destroying the instance by clicking the wrong button. What should you do?
 
@@ -4099,7 +4099,7 @@ The best approach is:
 
 ### Conclusion:
 Enabling delete protection on the instance (Option 2) is the most appropriate measure to safeguard a production application from accidental deletion. This approach directly addresses the requirement to prevent unintentional instance termination, ensuring the instance remains operational until a deliberate action is taken to remove the delete protection.
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company uses a large number of Google Cloud services centralized in a single project. All teams have specific projects for testing and development. The DevOps team needs access to all of the production services in order to perform their job. You want to prevent Google Cloud product changes from broadening their permissions in the future. You want to follow Google-recommended practices. What should you do?
 
@@ -4136,7 +4136,7 @@ The best approach is:
 ### Conclusion:
 Creating a custom role and granting it specifically on the production project (Option 3) provides a tailored, secure, and controlled approach, adhering to Google-recommended practices and the principle of least privilege.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are building an application that processes data files uploaded from thousands of suppliers. Your primary goals for the application are data security and the expiration of aged data. You need to design the application to: Restrict access so that suppliers can access only their own data. Give suppliers write access to data only for 30 minutes. Delete data that is over 45 days old. You have a very short development cycle, and you need to make sure that the application requires minimal maintenance. Which two strategies should you use? (Choose two.)
 
@@ -4176,7 +4176,7 @@ The best strategies to meet the requirements are:
 ### Conclusion:
 
 **Option 1 (lifecycle policies)** and **Option 2 (signed URLs)** are the most suitable strategies. They provide automated, secure, and low-maintenance solutions to meet the requirements of restricting access, providing time-limited write access, and deleting aged data.
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company wants to standardize the creation and management of multiple Google Cloud resources using Infrastructure as Code. You want to minimize the amount of repetitive code needed to manage the environment. What should you do?
 
@@ -4212,7 +4212,7 @@ The correct answer is:
 
 Option 1 is the best choice because Cloud Deployment Manager allows you to manage your infrastructure using templates, providing a declarative, reusable, and standardized approach to Infrastructure as Code. This minimizes repetitive code and simplifies the management of complex resource configurations.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are performing a monthly security check of your Google Cloud environment and want to know who has access to view data stored in your Google Cloud Project. What should you?
 
@@ -4246,7 +4246,7 @@ The correct answer is:
 
 Option 2 is the best choice because reviewing IAM permissions gives you a direct and comprehensive understanding of who has access to view data in your Google Cloud project. This method allows you to audit and manage access control effectively, ensuring that only authorized users can view sensitive data.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company has embraced a hybrid cloud strategy where some of the applications are deployed on Google Cloud. A Virtual Private Network (VPN) tunnel connects your Virtual Private Cloud (VPC) in Google Cloud with your company's on-premises network. Multiple applications in Google Cloud need to connect to an on-premises database server, and you want to avoid having to change the IP configuration in all of your applications when the IP of the database changes. What should you do?
 
@@ -4280,7 +4280,7 @@ The correct answer is:
 
 Option 2 is the most appropriate solution as it provides a scalable and maintainable way to manage the IP address of the on-premises database server. By using Cloud DNS with a private zone, you can ensure that applications in Google Cloud always connect to the correct IP address via the DNS name, even if the database's IP address changes. This method simplifies management and avoids the need for frequent reconfiguration of the applications.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have developed a containerized web application that will serve internal colleagues during business hours. You want to ensure that no costs are incurred outside of the hours the application is used. You have just created a new Google Cloud project and want to deploy the application. What should you do?
 
@@ -4317,7 +4317,7 @@ The correct answer is:
 
 Option 2 is the best choice because Cloud Run (fully managed) allows for the containerized application to automatically scale to zero instances when not in use, ensuring no costs are incurred outside of business hours. This meets your requirement of avoiding costs during non-business hours while providing a managed environment for your application.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have experimented with Google Cloud using your own credit card and expensed the costs to your company. Your company wants to streamline the billing process and charge the costs of your projects to their monthly invoice. What should you do?
 
@@ -4351,7 +4351,7 @@ The correct answer is:
 
 Option 4 is the most appropriate and efficient solution to ensure that all project costs are charged to the company’s billing account, thereby streamlining the billing process and aligning with the company’s financial policies.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are running a data warehouse on BigQuery. A partner company is offering a recommendation engine based on the data in your data warehouse. The partner company is also running their application on Google Cloud. They manage the resources in their own project, but they need access to the BigQuery dataset in your project. You want to provide the partner company with access to the dataset. What should you do?
 
@@ -4386,7 +4386,7 @@ The correct answer is:
 
 Option 4 is the correct approach because it allows the partner to manage their own Service Account while you grant the necessary access to your BigQuery dataset. This ensures a clear division of responsibilities, adheres to security best practices, and simplifies management and auditing.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your web application has been running successfully on Cloud Run for Anthos. You want to evaluate an updated version of the application with a specific percentage of your production users (canary deployment). What should you do?
 
@@ -4422,7 +4422,7 @@ The correct answer is:
 
 Option 2 is the correct approach because it leverages Cloud Run's built-in capabilities to create and manage revisions of your application, allowing you to perform canary deployments by controlling traffic splitting between versions. This method is straightforward, aligns with best practices for deploying applications on Cloud Run, and provides the flexibility to evaluate updates with a subset of production users before full deployment.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company developed a mobile game that is deployed on Google Cloud. Gamers are connecting to the game with their personal phones over the Internet. The game sends UDP packets to update the servers about the gamers' actions while they are playing in multiplayer mode. Your game backend can scale over multiple Virtual Machines (VMs), and you want to expose the VMs over a single IP address. What should you do?
 
@@ -4465,7 +4465,7 @@ The most suitable option for your scenario is:
 
 Configuring an External Network load balancer (Option D) ensures that your game backend can efficiently handle UDP traffic from gamers' phones over the Internet, while providing scalability and a single IP address endpoint. This solution aligns with the requirements of exposing your VMs over a single IP address for your multiplayer game deployed on Google Cloud.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are working for a hospital that stores its medical images in an on-premises data room. The hospital wants to use Cloud Storage for archival storage of these images. The hospital wants an automated process to upload any new medical images to Cloud Storage. You need to design and implement a solution. What should you do?
 
@@ -4514,7 +4514,7 @@ Given the scenario, the most suitable solution is:
 
 This will ensure that your medical images are regularly uploaded to Cloud Storage, automating the archival process as required.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your auditor wants to view your organization's use of data in Google Cloud. The auditor is most interested in auditing who accessed data in Cloud Storage buckets. You need to help the auditor access the data they need. What should you do?
 
@@ -4539,7 +4539,7 @@ To help the auditor view your organization's use of data in Google Cloud, partic
 
 Therefore, **Option 1** is the most appropriate choice as it directly enables and utilizes Data Access Logs for Cloud Storage to facilitate auditing of data access events, aligning closely with the auditor's needs.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You received a JSON file that contained a private key of a Service Account in order to get access to several resources in a Google Cloud project. You downloaded and installed the Cloud SDK and want to use this private key for authentication and authorization when performing gcloud commands. What should you do?
 
@@ -4582,7 +4582,7 @@ The correct option for using the private key of a Service Account with the Cloud
 
 Option 2 (`gcloud auth activate-service-account`) is the correct choice for using a Service Account's private key with the Cloud SDK (`gcloud`) for authentication and authorization purposes. It directly configures `gcloud` to use the specified Service Account credentials, allowing seamless interaction with Google Cloud resources via CLI commands.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are working with a Cloud SQL MySQL database at your company. You need to retain a month-end copy of the database for three years for audit purposes. What should you do?   ---------------Issue  
 
@@ -4660,7 +4660,7 @@ The most suitable option for retaining a month-end copy of a Cloud SQL MySQL dat
 
 Option 2 is the recommended approach as it leverages Cloud SQL's automatic daily backups, which can be configured to retain the first-of-the-month backups for up to a year. Storing these backups in an Archive class Cloud Storage bucket ensures cost-effective, long-term retention for audit purposes over three years, aligning with best practices for data retention and compliance requirements.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are monitoring an application and receive user feedback that a specific error is spiking. You notice that the error is caused by a Service Account having insufficient permissions. You are able to solve the problem but want to be notified if the problem recurs. What should you do?
 
@@ -4699,7 +4699,7 @@ The correct option for your scenario is:
 
 Creating a custom log-based metric in Google Cloud Monitoring for the specific error related to the Service Account and setting up an Alerting Policy based on this metric is the most effective approach. It allows you to monitor the occurrence of the error in real-time and receive automated notifications if the issue reoccurs, enabling timely response and resolution to maintain application reliability and availability.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are developing a financial trading application that will be used globally. Data is stored and queried using a relational structure, and clients from all over the world should get the exact identical state of the data. The application will be deployed in multiple regions to provide the lowest latency to end users. You need to select a storage option for the application data while minimizing latency. What should you do?
 
@@ -4733,7 +4733,7 @@ The correct option for your scenario is:
 
 For a financial trading application that requires globally consistent data access with minimal latency across multiple regions, Cloud Spanner is the optimal choice. It combines the benefits of a relational data model with global distribution, strong consistency, and low-latency reads and writes, making it well-suited for mission-critical applications like financial trading platforms.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are about to deploy a new Enterprise Resource Planning (ERP) system on Google Cloud. The application holds the full database in-memory for fast data access, and you need to configure the most appropriate resources on Google Cloud for this application. What should you do?   -----------------Issue
 
@@ -4777,7 +4777,7 @@ Microsoft SQL Server and similar databases
 
 For an ERP system that requires fast data access with an in-memory database, provisioning Compute Engine instances with local SSDs attached is the most appropriate choice. It ensures that your application can leverage high-performance storage for rapid data retrieval and processing, meeting the requirements for efficient operation of an ERP system.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You have developed an application that consists of multiple microservices, with each microservice packaged in its own Docker container image. You want to deploy the entire application on Google Kubernetes Engine so that each microservice can be scaled individually. What should you do?
 
@@ -4815,7 +4815,7 @@ The correct approach is:
 
 Deploying a `Deployment` per microservice on Google Kubernetes Engine (GKE) is the recommended approach for deploying and managing a microservices-based application. It leverages Kubernetes' capabilities for container orchestration, scaling, and management, allowing you to deploy and scale each microservice independently based on your application's requirements. This approach provides flexibility, scalability, and robustness for running microservices in a production environment.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You will have several applications running on different Compute Engine instances in the same project. You want to specify at a more granular level the service account each instance uses when calling Google Cloud APIs. What should you do?
 
@@ -4851,7 +4851,7 @@ The correct approach is:
 
 Specifying a service account for each Compute Engine instance during instance creation is the recommended approach for ensuring that each application running on different instances has the appropriate permissions to interact with Google Cloud APIs. This approach provides security, governance, and operational benefits by enabling fine-grained control over access to Google Cloud resources at the instance level.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are creating an application that will run on Google Kubernetes Engine. You have identified MongoDB as the most suitable database system for your application and want to deploy a managed MongoDB environment that provides a support SLA. What should you do?
 
@@ -4886,7 +4886,7 @@ The correct answer is:
 
 Deploying MongoDB Atlas from the Google Cloud Marketplace is the recommended approach for deploying a managed MongoDB environment on Google Kubernetes Engine (GKE). It provides the benefits of a fully managed service with support SLAs, ensuring reliability, scalability, and ease of management for your application's database needs.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### You are managing a project for the Business Intelligence (BI) department in your company. A data pipeline ingests data into BigQuery via streaming. You want the users in the BI department to be able to run the custom SQL queries against the latest data in BigQuery. What should you do?
 
@@ -4953,7 +4953,7 @@ In Google BigQuery, IAM roles are used to manage permissions that control access
 
 These roles can be assigned at the project level or directly to specific datasets or tables within BigQuery, allowing fine-grained control over who can access and manipulate data. It's essential to assign roles based on the principle of least privilege to ensure that users have only the permissions necessary to perform their tasks.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 ### Your company is moving its entire workload to Compute Engine. Some servers should be accessible through the Internet, and other servers should only be accessible over the internal network. All servers need to be able to talk to each other over specific ports and protocols. The current on-premises network relies on a demilitarized zone (DMZ) for the public servers and a Local Area Network (LAN) for the private servers. You need to design the networking infrastructure on Google Cloud to match these requirements. What should you do?
 
@@ -4993,7 +4993,7 @@ The correct answer is:
 
 Option 1 is the correct choice because it adheres to best practices by using a single VPC with segregated subnets for DMZ and LAN, and it correctly implements firewall rules to meet the specified requirements for both internal communication and public accessibility. This design ensures security, scalability, and ease of management for your workload on Google Cloud Platform.
 
-**[⬆ Back to Top](#table-of-contents)**
+-----------------------------------------------------------------------x-----x----x-----x---------------------------------------------------------------------------
 
 
 
