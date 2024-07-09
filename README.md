@@ -831,6 +831,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Activate two configurations using gcloud configurations activate [NAME]. Run gcloud config list to start the Compute Engine instances.
 - [ ] Activate two configurations using gcloud configurations activate [NAME]. Run gcloud configurations list to start the Compute Engine instances.
 
+To manage multiple Google Cloud Platform (GCP) accounts and set different configurations for each, the appropriate steps involve creating and activating configurations. Here's the correct approach:
+
+### Correct Answer:
+**Create two configurations using `gcloud config configurations create [NAME]`. Run `gcloud config configurations activate [NAME]` to switch between accounts when running the commands to start the Compute Engine instances.**
+
+### Explanation:
+
+#### Why Option 1 is Correct:
+- **Creating Configurations:** Using `gcloud config configurations create [NAME]`, you can create separate configurations for each account.
+- **Activating Configurations:** The command `gcloud config configurations activate [NAME]` allows you to switch between these configurations, making it easy to manage and run commands in different accounts without having to reconfigure each time.
+- **Running Commands:** After activating the desired configuration, you can run the necessary commands to start Compute Engine instances in the respective accounts.
+
+### Why the Other Options Are Incorrect:
+
+2. **Create two configurations using gcloud config configurations create [NAME]. Run gcloud configurations list to start the Compute Engine instances.**
+   - **Incorrect Usage:** `gcloud configurations list` is used to list all available configurations, not to start instances. It doesn't switch between configurations or start Compute Engine instances.
+
+3. **Activate two configurations using gcloud configurations activate [NAME]. Run gcloud config list to start the Compute Engine instances.**
+   - **Incorrect Command:** `gcloud config list` lists the properties in the currently active configuration. It does not start Compute Engine instances or switch between configurations.
+
+4. **Activate two configurations using gcloud configurations activate [NAME]. Run gcloud configurations list to start the Compute Engine instances.**
+   - **Incorrect Combination:** `gcloud configurations list` lists all available configurations but does not start Compute Engine instances. It also does not switch between configurations.
+
+### Conclusion:
+Option 1 correctly outlines the steps to create and switch between configurations for different GCP accounts using the `gcloud` command-line tool. This method allows you to manage multiple accounts efficiently and execute commands in the appropriate account context.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Every employee of your company has a Google account. Your operational team needs to manage a large number of instances on Compute Engine. Each member of this team needs only administrative access to the servers. Your security team wants to ensure that the deployment of credentials is operationally efficient and must be able to determine who accessed a given instance. What should you do?
@@ -840,6 +866,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Ask each member of the team to generate a new SSH key pair and to add the public key to their Google account. Grant the 'compute.osAdminLogin' role to the Google group corresponding to this team.
 - [ ] Generate a new SSH key pair. Give the private key to each member of your team. Configure the public key as a project-wide public SSH key in your Cloud Platform project and allow project-wide public SSH keys on each instance.
 
+### Correct Answer:
+**Ask each member of the team to generate a new SSH key pair and to add the public key to their Google account. Grant the 'compute.osAdminLogin' role to the Google group corresponding to this team.**
+
+### Explanation:
+
+#### Why Option 3 is Correct:
+- **Administrative Access:** By granting the `compute.osAdminLogin` role to a Google group, all team members in that group will have administrative access to the instances.
+- **Operational Efficiency:** Each team member managing their own SSH key pair and adding it to their Google account streamlines the process and reduces the overhead of manual key distribution.
+- **Auditing and Accountability:** Using individual Google accounts ensures that each access is tied to a specific user, enabling detailed auditing and accountability through Google Cloud's audit logs.
+
+### Why the Other Options Are Incorrect:
+
+1. **Generate a new SSH key pair. Give the private key to each member of your team. Configure the public key in the metadata of each instance.**
+   - **Operational Efficiency:** Managing and distributing a single SSH key pair to all team members is inefficient and insecure. If the private key is compromised, it would be difficult to revoke access without disrupting all users.
+   - **Auditing:** This method lacks the ability to track individual user access, as all team members would be using the same credentials.
+
+2. **Ask each member of the team to generate a new SSH key pair and to send you their public key. Use a configuration management tool to deploy those keys on each instance.**
+   - **Operational Efficiency:** While this method centralizes key deployment, it still involves significant manual effort in collecting and deploying individual keys.
+   - **Auditing:** This approach can track individual access, but it is more complex and less efficient compared to using Google accounts with their associated audit logs.
+
+4. **Generate a new SSH key pair. Give the private key to each member of your team. Configure the public key as a project-wide public SSH key in your Cloud Platform project and allow project-wide public SSH keys on each instance.**
+   - **Operational Efficiency:** Similar to Option 1, distributing the same SSH key pair to all team members is inefficient and poses security risks.
+   - **Auditing:** This method also lacks the ability to track individual user access, as all team members would be using the same credentials.
+
+### Conclusion:
+Option 3 provides a balanced solution that ensures operational efficiency, individual accountability, and robust security. By leveraging Google accounts and the `compute.osAdminLogin` role, you can manage access effectively and maintain detailed audit logs.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to deploy an application, which is packaged in a container image, in a new project. The application exposes an HTTP endpoint and receives very few requests per day. You want to minimize costs. What should you do?
@@ -848,6 +901,30 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Deploy the container on Cloud Run on GK.
 - [ ] Deploy the container on App Engine Flexible.
 - [ ] Deploy the container on Google Kubernetes Engine, with cluster autoscaling and horizontal pod autoscaling enabled.
+
+To minimize costs while deploying an application that receives very few requests per day and is packaged in a container image, the most suitable option would be:
+
+- [1] **Deploy the container on Cloud Run.**
+
+### Here's why Cloud Run is the recommended choice:
+
+- **Cost Efficiency:** Cloud Run offers a serverless platform where you pay only for the exact compute resources consumed by your application per request and the duration of each request. It scales down to zero when there are no requests, which can result in significant cost savings for applications with low traffic.
+
+- **Ease of Deployment:** Deploying a container image on Cloud Run is straightforward. You simply deploy your container, and Cloud Run manages the rest, including scaling based on incoming requests.
+
+- **Automatic Scaling:** Cloud Run automatically scales your containers up and down based on traffic, ensuring that you don't over-provision resources when traffic is low.
+
+### Comparison with Other Options:
+
+- **Option 2:** Deploying on Cloud Run on Google Kubernetes Engine (GKE) adds unnecessary complexity and overhead for an application with minimal traffic. GKE involves managing Kubernetes clusters, which is more suitable for applications with complex orchestration needs or higher traffic volumes.
+
+- **Option 3:** App Engine Flexible environment offers scalability and automatic scaling, but it may be more expensive compared to Cloud Run for low-traffic applications because it requires maintaining instances running continuously.
+
+- **Option 4:** Deploying on Google Kubernetes Engine (GKE) with cluster autoscaling and horizontal pod autoscaling enabled is overkill for an application with very few requests per day. It involves managing a Kubernetes cluster, which adds operational complexity and potentially higher costs due to maintaining cluster nodes even during low traffic periods.
+
+### Conclusion:
+
+Deploying your container on **Cloud Run (option 1)** is the most cost-effective and straightforward approach for an application that receives very few requests per day. It leverages serverless computing benefits, such as automatic scaling and pay-per-use pricing, while minimizing operational overhead and ensuring efficient resource utilization.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -866,6 +943,30 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Cloud Spanner.
 - [ ] Cloud Firestore.
 - [ ] Cloud Datastore.
+
+Based on the requirement to implement a database solution that can scale with user growth with minimum configuration changes, the most suitable option from the provided choices would be **Cloud Spanner** (option 2).
+
+Here's why Cloud Spanner is appropriate:
+
+- **Horizontal Scalability:** Cloud Spanner is a fully managed, horizontally scalable relational database service. It is designed to automatically handle sharding and distribution of data across multiple nodes, allowing it to scale out seamlessly as your application's workload grows.
+
+- **Global Distribution:** It provides strong consistency and high availability across regions and continents. This is particularly beneficial for applications with users distributed globally, ensuring low-latency access to data.
+
+- **ACID Transactions:** Cloud Spanner supports ACID (Atomicity, Consistency, Isolation, Durability) transactions, which are essential for applications that require strong data consistency guarantees.
+
+- **Schema Flexibility:** While Cloud Spanner is a relational database, it offers some schema flexibility compared to traditional relational databases, making it easier to adapt to evolving application requirements without major schema changes.
+
+- **Managed Service:** Like other Google Cloud services, Cloud Spanner is fully managed, meaning Google handles the underlying infrastructure, backups, patches, and updates. This reduces operational overhead and allows developers to focus on application development.
+
+### Other Options Considered:
+
+- **Cloud SQL (option 1):** While Cloud SQL is a good choice for traditional relational databases, it may require more manual effort to scale horizontally compared to Cloud Spanner. It's suitable for smaller-scale applications or when strict relational schema requirements are necessary but doesn't offer the same level of global scalability and automatic sharding.
+
+- **Cloud Firestore (option 3) and Cloud Datastore (option 4):** These are NoSQL document databases. They are more suitable for semi-structured data and applications that benefit from flexibility in schema design. However, they may not provide the same level of relational data consistency and transactional support required for some applications storing relational data.
+
+### Conclusion:
+
+Given the requirement for global scalability, relational data consistency, and minimal configuration changes as the user base grows, **Cloud Spanner** is the best choice among the options provided. It provides a scalable and globally distributed relational database solution with strong consistency and transaction support, making it well-suited for modern applications with global user bases.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -894,6 +995,23 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a second App Engine application in the existing GCP project and specify asia-northeast1 as the region to serve your application.
 - [x] Create a new GCP project and create an App Engine application inside this new project. Specify asia-northeast1 as the region to serve your application.
 
+The correct answer is:
+
+- [x] Create a new GCP project and create an App Engine application inside this new project. Specify asia-northeast1 as the region to serve your application.
+
+Here's why the other options are not suitable:
+
+1. **Change the default region property setting in the existing GCP project to asia-northeast1:**
+   - This option changes the default region setting for the entire GCP project, which affects other resources as well, not just the App Engine application. It does not allow for specific regional configuration of individual App Engine services.
+
+2. **Change the region property setting in the existing App Engine application from us-central to asia-northeast1:**
+   - App Engine does not allow changing the region of an existing application once it has been set. Therefore, this option is not feasible because you cannot alter the region setting of an already deployed App Engine application.
+
+3. **Create a second App Engine application in the existing GCP project and specify asia-northeast1 as the region to serve your application:**
+   - You cannot change an app's region after you set it.
+
+Therefore, the recommended approach is to create a new GCP project specifically for the App Engine application that needs to be served from the asia-northeast1 region. This keeps your deployments clean, separate, and aligned with Google Cloud's best practices for regional deployment management.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Several employees at your company have been creating projects with Cloud Platform and paying for it with their personal credit cards, which the company reimburses. The company wants to centralize all these projects under a single, new billing account. What should you do?
@@ -912,6 +1030,33 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Create a docker image from the Dockerfile and upload it to Container Registry. Create a Deployment YAML file to point to that image. Use kubectl to create the deployment with that file.
 - [ ] Create a docker image from the Dockerfile and upload it to Cloud Storage. Create a Deployment YAML file to point to that image. Use kubectl to create the deployment with that file.
 
+The correct approach to deploy a Dockerfile on Kubernetes Engine is:
+
+- [3] **Create a docker image from the Dockerfile and upload it to Container Registry. Create a Deployment YAML file to point to that image. Use kubectl to create the deployment with that file.**
+
+Here's why this option is the correct choice:
+
+- **Create a docker image:** You need to build a Docker image from your Dockerfile. This involves using the `docker build` command locally on your machine where the Dockerfile is located.
+
+- **Upload it to Container Registry:** Once the Docker image is built, you should upload it to Google Container Registry (GCR). GCR is a managed Docker registry service provided by Google Cloud Platform where you can store and manage your Docker images.
+
+- **Create a Deployment YAML file:** Kubernetes uses YAML configuration files to define resources such as Deployments, Services, and Pods. You need to create a Deployment YAML file that specifies the details of your application deployment, including the Docker image location in GCR.
+
+- **Use kubectl to create the deployment:** Finally, you use `kubectl` (Kubernetes command-line tool) to apply the Deployment YAML file to your Kubernetes cluster. This command instructs Kubernetes to create the necessary resources (in this case, a Deployment) based on your configuration.
+
+Now, let's briefly explain why the other options are incorrect:
+
+- [1] **Use kubectl app deploy `<dockerfilename>`:**
+  - There is no direct `kubectl` command like `kubectl app deploy` for deploying Dockerfiles. Kubernetes deployments are configured using YAML files that reference Docker images.
+
+- [2] **Use gcloud app deploy `<dockerfilename>`:**
+  - `gcloud app deploy` is used for deploying applications to Google App Engine, not Kubernetes Engine. It's not suitable for deploying Docker images to Kubernetes.
+
+- [4] **Create a docker image from the Dockerfile and upload it to Cloud Storage. Create a Deployment YAML file to point to that image. Use kubectl to create the deployment with that file:**
+  - Docker images are typically stored in a Docker registry like Google Container Registry (GCR), not in Cloud Storage. Kubernetes directly pulls Docker images from container registries, not Cloud Storage buckets.
+
+Therefore, option [3] is the correct and recommended approach for deploying a Dockerfile on Kubernetes Engine.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have a project for your App Engine application that serves a development environment. The required testing has succeeded and you want to create a new project to serve as your production environment. What should you do?
@@ -920,6 +1065,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use gcloud to create the new project and to copy the deployed application to the new project.
 - [ ] Create a Deployment Manager configuration file that copies the current App Engine deployment into a new project.
 - [ ] Deploy your application again using gcloud and specify the project parameter with the new project name to create the new project.
+
+For creating a new project to serve as your App Engine production environment after successful testing in the development environment, the recommended approach is:
+
+- [1] **Use gcloud to create the new project, and then deploy your application to the new project.**
+
+Here’s why this option is the correct choice:
+
+- **Creating the new project first:** Using `gcloud` to create a new project ensures that you have a dedicated environment separate from your development project, specifically tailored for production use.
+  
+- **Deploying your application:** Once the project is created, you can deploy your application using `gcloud app deploy` or similar commands. This allows you to specify the new project where the application should be deployed, ensuring that it is deployed correctly in the production environment.
+
+Now, let's briefly explain why the other options are not the best choices:
+
+- [2] **Use gcloud to create the new project and to copy the deployed application to the new project.**
+  - While creating the project first is correct, "copying" the deployed application isn't a straightforward process via `gcloud`. You typically deploy applications to a new project rather than copying them between projects.
+
+- [3] **Create a Deployment Manager configuration file that copies the current App Engine deployment into a new project.**
+  - Deployment Manager is used for managing infrastructure deployments, templates, and configurations. It’s not typically used to copy or migrate entire applications between projects.
+
+- [4] **Deploy your application again using gcloud and specify the project parameter with the new project name to create the new project.**
+  - This option is confusing because deploying an application doesn't create a new project. Projects are created separately using `gcloud projects create` or through the GCP Console.
+
+Therefore, option [1] is the correct choice as it aligns with best practices for creating a new production environment project and deploying your application to that project using `gcloud` commands.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -930,6 +1098,18 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set up direct interconnect between your data center and Google Cloud Platform to enable authentication for your on-premises applications.
 - [ ] Go to the IAM & admin console, grant a user account permissions similar to the service account permissions, and use this user account for authentication from your data center.
 
+The correct approach to enable authentication to Google Cloud Platform (GCP) APIs from your on-premises environment, using a service account that has appropriate access to AutoML, is to **use `gcloud` to create a key file for the service account that has appropriate permissions**.
+
+Here's why this approach is correct:
+
+1. **Service Account Credentials**: Service accounts are a recommended way to authenticate applications and services when interacting with GCP APIs. They provide a mechanism to securely authenticate and authorize API requests.
+
+2. **Creating a Key File**: When you create a service account key file using `gcloud`, you obtain a JSON file that contains the private key and other necessary information. This key file is used to authenticate API requests made from your application running in the on-premises environment.
+
+3. **Using the Key File**: Your application can then use this key file to authenticate with GCP APIs, including AutoML. The key file is loaded by your application to obtain access tokens, which are then used to authenticate API requests.
+
+Therefore, the correct step in this scenario is to use `gcloud` to generate a key file for your service account and then configure your on-premises application to use this key file for authentication when accessing AutoML or other GCP services.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You host a static website on Cloud Storage. Recently, you began to include links to PDF files on this site. Currently, when users click on the links to these PDF files, their browsers prompt them to save the file onto their local system. Instead, you want the clicked PDF files to be displayed within the browser window directly, without prompting the user to save the file locally. What should you do?
@@ -938,6 +1118,26 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Enable 'Share publicly' on the PDF file objects.
 - [x] Set Content-Type metadata to application/pdf on the PDF file objects.
 - [ ] Add a label to the storage bucket with a key of Content-Type and value of application/pdf.
+
+To ensure that PDF files hosted on your static website in Cloud Storage are displayed directly within the browser window instead of prompting the user to save them locally, you should:
+
+**[3] Set Content-Type metadata to application/pdf on the PDF file objects.**
+
+Here’s why this is the correct approach:
+
+- **Content-Type Metadata**: When serving files from Cloud Storage, the browser uses the `Content-Type` header to determine how to handle the file. For PDF files, the correct `Content-Type` should be `application/pdf`. If this metadata is set correctly on your PDF file objects in Cloud Storage, the browser will interpret them as PDF documents and attempt to display them inline, rather than triggering a download prompt.
+
+- **Cloud Storage Setup**: Ensure that each PDF file stored in your Cloud Storage bucket has its `Content-Type` metadata set to `application/pdf`. You can set this metadata during file upload or update it later using the Cloud Console, gsutil command-line tool, or Cloud Storage client libraries.
+
+**Why the other options are incorrect:**
+
+- **[1] Enable Cloud CDN on the website frontend**: Cloud CDN improves website performance by caching content closer to users. While it can speed up delivery, it does not control how files are displayed in the browser.
+
+- **[2] Enable 'Share publicly' on the PDF file objects**: Enabling public access is necessary for users to view the files, but it doesn't influence how the browser handles the content-type or display behavior.
+
+- **[4] Add a label to the storage bucket with a key of Content-Type and value of application/pdf**: Labels are used for organizational purposes and do not affect how files are served or displayed by the browser.
+
+Therefore, by setting the `Content-Type` metadata to `application/pdf` on your PDF file objects in Cloud Storage, you ensure that users can view the PDF files directly in their browser windows when clicking on links from your static website.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -948,6 +1148,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use the IP 10.0.3.21 as a custom ephemeral IP address and assign it to the licensing server.
 - [ ] Start the licensing server with an automatic ephemeral IP address, and then promote it to a static internal IP address.
 
+To ensure that your application can reach the licensing server at the specific IP address (10.0.3.21) without changing the application's configuration, you should:
+
+**[1] Reserve the IP 10.0.3.21 as a static internal IP address using gcloud and assign it to the licensing server.**
+
+Here’s why this option is correct:
+
+- **Static Internal IP Address**: By reserving 10.0.3.21 as a static internal IP address, you ensure that the IP address remains consistent and does not change over time. This is crucial because your application is configured to reach the licensing server at this specific IP address.
+
+- **Using gcloud**: Google Cloud Platform (GCP) allows you to reserve static internal IP addresses for Compute Engine instances. You can do this using the `gcloud` command-line tool or through the Google Cloud Console.
+
+- **No Configuration Change Needed**: Since your application expects to find the licensing server at 10.0.3.21, using a static internal IP address ensures that the application can reliably communicate with the server without needing any configuration changes.
+
+**Why the other options are incorrect:**
+
+- **[2] Reserve the IP 10.0.3.21 as a static public IP address using gcloud and assign it to the licensing server**: This is incorrect because the IP address 10.0.3.21 is an internal IP address, not a public one. Assigning it as a static public IP address would not align with its intended use within an internal network.
+
+- **[3] Use the IP 10.0.3.21 as a custom ephemeral IP address and assign it to the licensing server**: Ephemeral IP addresses are not suitable for this scenario because they can change over time, which would cause connectivity issues for your application expecting a fixed IP address.
+
+- **[4] Start the licensing server with an automatic ephemeral IP address, and then promote it to a static internal IP address**: This option involves starting with an ephemeral IP address and then promoting it to static, but it doesn't ensure that the specific IP address 10.0.3.21 is reserved. Moreover, promoting from ephemeral to static IP address is a different process and doesn't directly address the requirement of maintaining the specific IP address.
+
+Therefore, **reserving 10.0.3.21 as a static internal IP address** is the correct approach to ensure that your application can reliably reach the licensing server without requiring any changes to the application's existing configuration.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are deploying an application to App Engine. You want the number of instances to scale based on request rate. You need at least 3 unoccupied instances at all times. Which scaling type should you use?
@@ -956,6 +1178,27 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Basic Scaling with min_instances set to 3.
 - [ ] Basic Scaling with max_instances set to 3.
 - [x] Automatic Scaling with min_idle_instances set to 3.
+
+To deploy an application to App Engine with the number of instances scaling based on request rate and ensuring at least 3 unoccupied instances at all times, you should use:
+
+**[4] Automatic Scaling with min_idle_instances set to 3.**
+
+Here's why this option is the most suitable:
+
+- **Automatic Scaling with min_idle_instances set to 3**: This setting ensures that there are always at least 3 idle instances available to handle incoming requests. This allows the system to quickly respond to spikes in traffic by keeping a buffer of unoccupied instances, while also scaling up and down based on the actual request rate.
+
+The reasons why the other options are less suitable:
+
+**[1] Manual Scaling with 3 instances**:
+- Manual scaling with a fixed number of instances does not provide the flexibility to scale based on the request rate. It keeps a constant number of instances running regardless of the traffic, which can be inefficient.
+
+**[2] Basic Scaling with min_instances set to 3**:
+- Basic scaling is designed to start and stop instances based on the request rate, but it does not maintain idle instances. Setting `min_instances` to 3 would ensure at least 3 instances are running, but they may not be unoccupied.
+
+**[3] Basic Scaling with max_instances set to 3**:
+- Setting `max_instances` to 3 in basic scaling would limit the number of instances to 3, which can lead to inadequate handling of high traffic if more than 3 instances are needed. This does not ensure the presence of idle instances.
+
+Therefore, **Automatic Scaling with min_idle_instances set to 3** is the best choice to meet your requirements of scaling based on request rate and maintaining at least 3 unoccupied instances at all times.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -966,6 +1209,27 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Storage Object Admin.
 - [ ] Storage Object Creator.
 
+To delegate control to your colleagues to manage buckets and files in Cloud Storage while following Google-recommended practices, you should grant them the:
+
+**[2] Storage Admin** role.
+
+Here's why this option is the most suitable:
+
+- **Storage Admin**: This role allows full control over Cloud Storage resources. It grants permissions to create, update, and delete buckets and objects, effectively allowing comprehensive management of both buckets and files. This aligns with your requirement to delegate control over buckets and files.
+
+The reasons why the other options are less suitable:
+
+**[1] Project Editor**:
+- This role provides broad permissions across many resources in the project, not just Cloud Storage. It’s more than what’s needed for managing Cloud Storage and could be too permissive.
+
+**[3] Storage Object Admin**:
+- This role allows full control over objects within Cloud Storage buckets, but does not provide permissions to manage the buckets themselves (e.g., creating or deleting buckets).
+
+**[4] Storage Object Creator**:
+- This role allows users to create new objects in buckets, but does not allow them to read, update, or delete existing objects, nor does it allow them to manage buckets.
+
+Therefore, granting the **Storage Admin** role to your colleagues will provide them with the necessary permissions to manage both Cloud Storage buckets and the files within them, aligning with Google-recommended practices.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to update a deployment in Deployment Manager without any resource downtime in the deployment. Which command should you use?
@@ -974,6 +1238,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] gcloud deployment-manager deployments update –config <deployment-config-path>.
 - [ ] gcloud deployment-manager resources create –config <deployment-config-path>.
 - [ ] gcloud deployment-manager resources update –config <deployment-config-path>.
+
+To update a deployment in Deployment Manager without any resource downtime, you should use the command:
+
+**[2] gcloud deployment-manager deployments update --config <deployment-config-path>.**
+
+Here's why this option is the most appropriate:
+
+- **`gcloud deployment-manager deployments update`**: This command updates an existing deployment based on the specified configuration file. The `update` operation in Deployment Manager is designed to handle updates to your resources without causing downtime, following the best practices for resource updates and managing dependencies.
+
+The reasons why the other options are less suitable:
+
+**[1] gcloud deployment-manager deployments create --config <deployment-config-path>.**
+- This command is used to create a new deployment, not update an existing one. It cannot be used to make changes to an already deployed set of resources.
+
+**[3] gcloud deployment-manager resources create --config <deployment-config-path>.**
+- This command does not exist in the context of Deployment Manager. Resources are managed within deployments, and individual resource creation is not typically handled this way.
+
+**[4] gcloud deployment-manager resources update --config <deployment-config-path>.**
+- This command does not exist either. Updates are managed at the deployment level, not the individual resource level, within Deployment Manager.
+
+Therefore, the correct command to use for updating a deployment without causing any resource downtime is:
+
+**[2] gcloud deployment-manager deployments update --config <deployment-config-path>.**
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -992,6 +1279,27 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Enable parallel composite uploads using gsutil on the file transfer.
 - [ ] Decrease the TCP window size on the machine initiating the transfer.
 - [ ] Change the storage class of the bucket from Nearline to Multi-Regional.
+
+The best option to maximize the use of your 1 Gbps connection and transfer the 32 GB file rapidly is:
+
+**[2] Enable parallel composite uploads using gsutil on the file transfer.**
+
+Here's why this option is the most suitable:
+
+- **Parallel Composite Uploads**: gsutil supports parallel composite uploads, which allows you to split a large file into smaller, more manageable chunks and upload them simultaneously. This can significantly increase the upload speed, especially when using a high-bandwidth connection like your 1 Gbps WAN connection.
+
+The reasons why the other options are less suitable:
+
+**[1] Use the GCP Console to transfer the file instead of gsutil.**
+- While the GCP Console is user-friendly, it does not offer the same level of control and optimization for large file transfers as gsutil, especially with parallel uploads.
+
+**[3] Decrease the TCP window size on the machine initiating the transfer.**
+- Decreasing the TCP window size would likely reduce the throughput, not increase it. Larger TCP window sizes are generally better for high-bandwidth, high-latency connections, as they allow more data to be in transit before requiring an acknowledgment.
+
+**[4] Change the storage class of the bucket from Nearline to Multi-Regional.**
+- Changing the storage class of the bucket will not impact the upload speed. Storage classes are primarily about the cost and availability characteristics of the data once it is stored, not the speed of data transfer to the bucket.
+
+Therefore, enabling parallel composite uploads with gsutil is the best method to utilize your 1 Gbps connection effectively and transfer your 32 GB file quickly.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1029,6 +1337,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Select Cloud Spanner. Set up your instance with 2 nodes.
 - [ ] Select Cloud Spanner. Set up your instance as multi-regional.
 
+Given your requirements—a small set of operational data, a single geographic location, and the need for point-in-time recovery—the best option would be:
+
+**[1] Select Cloud SQL (MySQL). Verify that the enable binary logging option is selected.**
+
+Here's why this option is the best fit:
+
+- **Cloud SQL (MySQL)**: Cloud SQL is a fully-managed relational database service for MySQL, PostgreSQL, and SQL Server. It is cost-effective and well-suited for smaller datasets and operational workloads.
+- **Enable Binary Logging**: Enabling binary logging in MySQL is crucial for point-in-time recovery. Binary logs contain a record of all changes to the database, allowing you to restore the database to a specific point in time.
+
+The reasons why the other options are less suitable:
+
+**[2] Select Cloud SQL (MySQL). Select the create failover replicas option.**
+- While creating failover replicas increases availability and reliability, it does not directly address point-in-time recovery, which is your primary requirement.
+
+**[3] Select Cloud Spanner. Set up your instance with 2 nodes.**
+- Cloud Spanner is a powerful, fully managed, horizontally scalable database service. However, it is designed for high-availability and high-throughput applications, making it more complex and expensive than necessary for a small set of operational data.
+
+**[4] Select Cloud Spanner. Set up your instance as multi-regional.**
+- Setting up a Cloud Spanner instance as multi-regional further increases complexity and cost. It is intended for applications requiring global availability and consistency, which exceeds your current needs.
+
+Therefore, **option [1]** is the most cost-effective and suitable solution for your requirements.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are hosting an application on bare-metal servers in your own data center. The application needs access to Cloud Storage. However, security policies prevent the servers hosting the application from having public IP addresses or access to the internet. You want to follow Google-recommended practices to provide the application with access to Cloud Storage. What should you do?
@@ -1037,6 +1367,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Using Cloud VPN, create a VPN tunnel to a Virtual Private Cloud (VPC) in Google Cloud. 2. In this VPC, create a Compute Engine instance and install the Squid proxy server on this instance. 3. Configure your servers to use that instance as a proxy to access Cloud Storage.
 - [ ] 1. Use Migrate for Compute Engine (formerly known as Velostrata) to migrate those servers to Compute Engine. 2. Create an internal load balancer (ILB) that uses storage.googleapis.com as backend. 3. Configure your new instances to use this ILB as proxy.
 - [x] 1. Using Cloud VPN or Interconnect, create a tunnel to a VPC in Google Cloud. 2. Use Cloud Router to create a custom route advertisement for 199.36.153.4/30. Announce that network to your on-premises network through the VPN tunnel. 3. In your on-premises network, configure your DNS server to resolve *.googleapis.com as a CNAME to restricted.googleapis.com.
+
+To provide your application with access to Cloud Storage while following Google-recommended practices and adhering to your security policies, you should choose:
+
+**[4] 1. Using Cloud VPN or Interconnect, create a tunnel to a VPC in Google Cloud. 2. Use Cloud Router to create a custom route advertisement for 199.36.153.4/30. Announce that network to your on-premises network through the VPN tunnel. 3. In your on-premises network, configure your DNS server to resolve *.googleapis.com as a CNAME to restricted.googleapis.com.**
+
+Here's why this option is correct:
+
+- **Cloud VPN or Interconnect**: Establishing a VPN or Interconnect tunnel provides a secure connection between your on-premises network and Google Cloud, allowing private communication without exposing your servers to the public internet.
+- **Custom Route Advertisement**: By creating a custom route advertisement for 199.36.153.4/30, you can direct traffic destined for Google's restricted VIP range for private access to Google APIs, which includes Cloud Storage.
+- **DNS Configuration**: Configuring your DNS server to resolve `*.googleapis.com` as a CNAME to `restricted.googleapis.com` ensures that requests to Google Cloud APIs, including Cloud Storage, are directed through the restricted VIP range, maintaining security and compliance with your no-public-IP policy.
+
+The reasons why the other options are incorrect:
+
+**[1] 1. Use nslookup to get the IP address for storage.googleapis.com. 2. Negotiate with the security team to be able to give a public IP address to the servers. 3. Only allow egress traffic from those servers to the IP addresses for storage.googleapis.com.**
+- This option involves giving your servers public IP addresses, which violates your security policy.
+
+**[2] 1. Using Cloud VPN, create a VPN tunnel to a Virtual Private Cloud (VPC) in Google Cloud. 2. In this VPC, create a Compute Engine instance and install the Squid proxy server on this instance. 3. Configure your servers to use that instance as a proxy to access Cloud Storage.**
+- While this solution avoids public IP addresses, it adds unnecessary complexity by introducing a proxy server, which is not the recommended approach by Google for accessing Cloud Storage.
+
+**[3] 1. Use Migrate for Compute Engine (formerly known as Velostrata) to migrate those servers to Compute Engine. 2. Create an internal load balancer (ILB) that uses storage.googleapis.com as backend. 3. Configure your new instances to use this ILB as proxy.**
+- Migrating your servers to Compute Engine is an extensive change and may not be feasible or necessary. Additionally, using an internal load balancer in this way is not a standard approach for accessing Cloud Storage.
+
+Therefore, **option [4]** provides a secure, compliant, and efficient way to access Cloud Storage from your on-premises servers without public IP addresses.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1047,6 +1400,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] 1. Create a dedicated Google group in Cloud Identity. 2. Add each data scientist's user account to the group. 3. Assign the BigQuery jobUser role to the group.
 - [ ] 1. Create a dedicated Google group in Cloud Identity. 2. Add each data scientist's user account to the group. 3. Assign the BigQuery dataViewer user role to the group.
 
+To allow members of the data science team to perform queries in BigQuery following Google-recommended practices, the best approach is:
+
+**[3] 1. Create a dedicated Google group in Cloud Identity. 2. Add each data scientist's user account to the group. 3. Assign the BigQuery jobUser role to the group.**
+
+Here’s why this option is correct:
+
+- **Dedicated Google Group**: Creating a Google group in Cloud Identity simplifies the management of user permissions, especially when team membership changes frequently. You only need to update the group membership instead of updating IAM roles individually.
+- **BigQuery jobUser Role**: The BigQuery jobUser role grants permissions to run jobs (queries) in BigQuery, which is precisely what the data science team needs to perform their work.
+- **Assigning Roles to the Group**: Assigning the BigQuery jobUser role to the group ensures that all current and future members of the group automatically inherit the necessary permissions to run queries in BigQuery.
+
+The reasons why the other options are incorrect:
+
+**[1] 1. Create an IAM entry for each data scientist's user account. 2. Assign the BigQuery jobUser role to the group.**
+- This option doesn’t make use of a Google group for managing permissions, which adds administrative overhead. Updating IAM entries for each user individually is less efficient than managing a single group.
+
+**[2] 1. Create an IAM entry for each data scientist's user account. 2. Assign the BigQuery dataViewer user role to the group.**
+- The BigQuery dataViewer role only grants permissions to view datasets and tables, not to run queries. Data scientists need to run queries, so this role is insufficient.
+
+**[4] 1. Create a dedicated Google group in Cloud Identity. 2. Add each data scientist's user account to the group. 3. Assign the BigQuery dataViewer user role to the group.**
+- Similar to option [2], the BigQuery dataViewer role is insufficient because it does not grant permissions to run queries, which is the primary requirement for the data science team.
+
+Therefore, **option [3]** is the most efficient and recommended approach to allow data scientists to perform queries in BigQuery while minimizing administrative overhead and ensuring proper permission management.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are given a project with a single Virtual Private Cloud (VPC) and a single subnetwork in the us-central1 region. There is a Compute Engine instance hosting an application in this subnetwork. You need to deploy a new instance in the same project in the europe-west1 region. This new instance needs access to the application. You want to follow Google-recommended practices. What should you do?
@@ -1055,6 +1431,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Create a VPC and a subnetwork in europe-west1. 2. Expose the application with an internal load balancer. 3. Create the new instance in the new subnetwork and use the load balancer's address as the endpoint.
 - [ ] 1. Create a subnetwork in the same VPC, in europe-west1. 2. Use Cloud VPN to connect the two subnetworks. 3. Create the new instance in the new subnetwork and use the first instance's private address as the endpoint.
 - [ ] 1. Create a VPC and a subnetwork in europe-west1. 2. Peer the 2 VPCs. 3. Create the new instance in the new subnetwork and use the first instance's private address as the endpoint.
+
+To deploy a new instance in the europe-west1 region and allow it to access the application on an existing instance in the us-central1 region, while following Google-recommended practices, you should choose:
+
+**[1] 1. Create a subnetwork in the same VPC, in europe-west1. 2. Create the new instance in the new subnetwork and use the first instance's private address as the endpoint.**
+
+Here's why this option is correct:
+
+- **Same VPC, Different Subnetwork**: By creating a new subnetwork in the same VPC, you ensure that both instances (in different regions) are part of the same VPC. This simplifies networking and security management, as they can communicate with each other using their internal IP addresses.
+- **Regional Subnetworks**: Google Cloud allows creating regional subnetworks, which means you can have a subnetwork in us-central1 and another in europe-west1 within the same VPC. Instances in different regions but the same VPC can communicate internally without requiring VPN or VPC peering.
+
+The reasons why the other options are incorrect:
+
+**[2] 1. Create a VPC and a subnetwork in europe-west1. 2. Expose the application with an internal load balancer. 3. Create the new instance in the new subnetwork and use the load balancer's address as the endpoint.**
+- Creating a new VPC is unnecessary and adds complexity. Exposing the application with an internal load balancer is also more complex than needed for simple internal communication.
+
+**[3] 1. Create a subnetwork in the same VPC, in europe-west1. 2. Use Cloud VPN to connect the two subnetworks. 3. Create the new instance in the new subnetwork and use the first instance's private address as the endpoint.**
+- Using Cloud VPN to connect subnetworks within the same VPC is unnecessary. Subnetworks within the same VPC can communicate directly without a VPN.
+
+**[4] 1. Create a VPC and a subnetwork in europe-west1. 2. Peer the 2 VPCs. 3. Create the new instance in the new subnetwork and use the first instance's private address as the endpoint.**
+- Creating and peering two VPCs adds unnecessary complexity. It's simpler and more efficient to use the same VPC with different subnetworks in different regions.
+
+Therefore, **option [1]** is the simplest and most efficient approach that follows Google-recommended practices for deploying a new instance in a different region while allowing it to access an application on an existing instance.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1085,6 +1483,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] 1. Create a service account. 2. Give the Cloud Run Invoker role to that service account for your Cloud Run application. 3. Create a Cloud Pub/Sub subscription that uses that service account and uses your Cloud Run application as the push endpoint.
 - [ ] 1. Deploy your application on Cloud Run on GKE with the connectivity set to Internal. 2. Create a Cloud Pub/Sub subscription for that topic. 3. In the same Google Kubernetes Engine cluster as your application, deploy a container that takes the messages and sends them to your application.
 
+To deploy an application on Cloud Run that processes messages from a Cloud Pub/Sub topic, following Google-recommended practices, the best approach is:
+
+**[3] 1. Create a service account. 2. Give the Cloud Run Invoker role to that service account for your Cloud Run application. 3. Create a Cloud Pub/Sub subscription that uses that service account and uses your Cloud Run application as the push endpoint.**
+
+Here's why this option is correct:
+
+- **Service Account and Cloud Run Invoker Role**: Creating a service account and giving it the Cloud Run Invoker role ensures that only authorized services can invoke your Cloud Run application.
+- **Cloud Pub/Sub Subscription with Push Endpoint**: Configuring a Cloud Pub/Sub subscription to use your Cloud Run application as a push endpoint allows Pub/Sub to push messages directly to your application. This is a standard and efficient method for integrating Pub/Sub with Cloud Run.
+
+The reasons why the other options are incorrect:
+
+**[1] 1. Create a Cloud Function that uses a Cloud Pub/Sub trigger on that topic. 2. Call your application on Cloud Run from the Cloud Function for every message.**
+- This adds unnecessary complexity by introducing an additional Cloud Function. It's more straightforward and efficient to use a direct Pub/Sub to Cloud Run integration.
+
+**[2] 1. Grant the Pub/Sub Subscriber role to the service account used by Cloud Run. 2. Create a Cloud Pub/Sub subscription for that topic. 3. Make your application pull messages from that subscription.**
+- This approach involves pulling messages from Pub/Sub, which is less efficient than using a push subscription. Cloud Run applications are better suited to handle push-based message delivery.
+
+**[4] 1. Deploy your application on Cloud Run on GKE with the connectivity set to Internal. 2. Create a Cloud Pub/Sub subscription for that topic. 3. In the same Google Kubernetes Engine cluster as your application, deploy a container that takes the messages and sends them to your application.**
+- This approach is overly complex, involving additional infrastructure and configuration that is unnecessary for simply processing Pub/Sub messages with a Cloud Run application.
+
+Therefore, **option [3]** is the recommended practice for deploying a Cloud Run application that processes messages from a Cloud Pub/Sub topic efficiently and securely.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### Your projects incurred more costs than you expected last month. Your research reveals that a development GKE container emitted a huge number of logs, which resulted in higher costs. You want to disable the logs quickly using the minimum number of steps. What should you do?
@@ -1093,6 +1513,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. Go to the Logs ingestion window in Stackdriver Logging, and disable the log source for the GKE Cluster Operations resource.
 - [ ] 1. Go to the GKE console, and delete existing clusters. 2. Recreate a new cluster. 3. Clear the option to enable legacy Stackdriver Logging.
 - [ ] 1. Go to the GKE console, and delete existing clusters. 2. Recreate a new cluster. 3. Clear the option to enable legacy Stackdriver Monitoring.
+
+To quickly disable logs for a GKE container using the minimum number of steps, the correct option is:
+
+**[1] Go to the Logs ingestion window in Stackdriver Logging, and disable the log source for the GKE container resource.**
+
+Here’s why this option is correct:
+
+- **Logs ingestion window in Stackdriver Logging**: This is where you manage which log sources are enabled for ingestion into Stackdriver Logging.
+- **Disable the log source for the GKE container resource**: By disabling the log source specifically for the GKE container emitting the huge number of logs, you stop the logs from being ingested and therefore reduce the associated costs quickly and directly.
+
+The reasons why the other options are incorrect:
+
+**[2] Go to the Logs ingestion window in Stackdriver Logging, and disable the log source for the GKE Cluster Operations resource.**
+- This option targets GKE Cluster Operations logs, which are different from application or container logs. Disabling these logs would not address the issue caused by the GKE container emitting excessive logs.
+
+**[3] Go to the GKE console, and delete existing clusters. Recreate a new cluster. Clear the option to enable legacy Stackdriver Logging.**
+- Deleting and recreating the entire GKE cluster is an extreme and unnecessary step for simply disabling logs for a specific container. It involves significant downtime and operational overhead.
+
+**[4] Go to the GKE console, and delete existing clusters. Recreate a new cluster. Clear the option to enable legacy Stackdriver Monitoring.**
+- Similar to option [3], this involves deleting and recreating the GKE cluster, which is not needed to disable logs for a specific container. It also mentions Stackdriver Monitoring, which is different from Stackdriver Logging.
+
+Therefore, **option [1]** is the correct and efficient choice to quickly address the issue of excessive logging costs from a specific GKE container.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1114,6 +1556,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] 1. In GKE, create a Service of type LoadBalancer that uses the application's Pods as backend. 2. Add an annotation to this service: cloud.google.com/load-balancer-type: Internal 3. Peer the two VPCs together. 4. Configure the Compute Engine instance to use the address of the load balancer that has been created.
 - [ ] 1. In GKE, create a Service of type LoadBalancer that uses the application's Pods as backend. 2. Add a Cloud Armor Security Policy to the load balancer that whitelists the internal IPs of the MIG's instances. 3. Configure the Compute Engine instance to use the address of the load balancer that has been created.
 
+To minimize effort and allow a Compute Engine instance from a different VPC to connect to an application running in Google Kubernetes Engine (GKE), where the application exposes a TCP endpoint and has cluster autoscaling enabled, the best approach is:
+
+**[1]**
+1. In GKE, create a Service of type LoadBalancer that uses the application's Pods as backend.
+2. Set the service's externalTrafficPolicy to Cluster.
+3. Configure the Compute Engine instance to use the address of the load balancer that has been created.
+
+Here’s why this option is correct:
+
+- **LoadBalancer Service**: Creating a Service of type LoadBalancer in GKE automatically provisions a Google Cloud Load Balancer (either internal or external, depending on your configuration).
+- **externalTrafficPolicy: Cluster**: This setting ensures that the source IP address of incoming traffic to the LoadBalancer is preserved, which is important for your scenario where the Compute Engine instance needs to connect and maintain the source IP integrity.
+- **Compute Engine Instance Configuration**: By configuring the Compute Engine instance to use the address of the LoadBalancer, you ensure that traffic from the instance is correctly directed to the application running in GKE, regardless of the backend Pod's location (even with autoscaling).
+
+The reasons why the other options are incorrect:
+
+**[2]**
+- Creating a Compute Engine instance with two network interfaces in different VPCs and using iptables for traffic forwarding adds unnecessary complexity and management overhead. It's not the minimal effort approach.
+
+**[3]**
+- Peering the two VPCs together and creating an Internal Load Balancer would require additional networking setup and configuration, which is more complex and not directly related to minimizing effort in this scenario.
+
+**[4]**
+- Adding a Cloud Armor Security Policy to whitelist internal IPs of Managed Instance Groups (MIGs) is focused on security rather than simplifying connectivity between a Compute Engine instance and a GKE application. It's not directly addressing the connectivity requirements stated in the scenario.
+
+Therefore, **option [1]** is the most straightforward and efficient approach to enable connectivity from a Compute Engine instance in a separate VPC to an application running in GKE with cluster autoscaling enabled.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are using Container Registry to centrally store your company's container images in a separate project. In another project, you want to create a Google Kubernetes Engine (GKE) cluster. You want to ensure that Kubernetes can download images from Container Registry. What should you do?
@@ -1122,6 +1590,28 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] When you create the GKE cluster, choose the Allow full access to all Cloud APIs option under 'Access scopes'.
 - [ ] Create a service account, and give it access to Cloud Storage. Create a P12 key for this service account and use it as an imagePullSecrets in Kubernetes.
 - [ ] Configure the ACLs on each image in Cloud Storage to give read-only access to the default Compute Engine service account.
+
+To ensure that Google Kubernetes Engine (GKE) can download container images from Container Registry in a separate project, the correct approach is:
+
+**[1] In the project where the images are stored, grant the Storage Object Viewer IAM role to the service account used by the Kubernetes nodes.**
+
+Here’s why this option is correct:
+
+- **Storage Object Viewer IAM role**: This role grants read access to objects (in this case, container images stored in Container Registry) in Cloud Storage buckets. Container Registry uses Cloud Storage buckets to store container images.
+- By granting the Storage Object Viewer role to the service account used by the GKE nodes (usually the Compute Engine default service account), you allow the Kubernetes nodes to fetch container images stored in Container Registry.
+
+The reasons why the other options are incorrect:
+
+**[2] When you create the GKE cluster, choose the Allow full access to all Cloud APIs option under 'Access scopes'.**
+- This option grants wide-ranging access to all Cloud APIs but does not specifically grant access to Container Registry images stored in a separate project. It's not the recommended approach for securing access to Container Registry.
+
+**[3] Create a service account, and give it access to Cloud Storage. Create a P12 key for this service account and use it as an imagePullSecrets in Kubernetes.**
+- While you can create a service account and generate a key, using a P12 key as an imagePullSecret in Kubernetes is not the standard way to authenticate to Container Registry. Kubernetes typically uses Docker configuration file-based secrets (`docker-registry`) to authenticate to private registries like Container Registry.
+
+**[4] Configure the ACLs on each image in Cloud Storage to give read-only access to the default Compute Engine service account.**
+- Manually configuring ACLs on each image in Cloud Storage is not scalable and not necessary when using IAM roles to manage access. Granting the Storage Object Viewer role to the service account is a more efficient and manageable approach.
+
+Therefore, to ensure that Kubernetes can download images from Container Registry in another project, you should implement **option [1]** by granting the Storage Object Viewer IAM role to the appropriate service account in the project where Container Registry is located.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1145,6 +1635,27 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] When creating the VM, add metadata to the instance using 'windows-password' as the key and a password as the value.
 - [ ] After the VM has been created, download the JSON Private Key for the default Compute Engine service account. Use the credentials in the JSON file to log in to the VM.
 
+To ensure you can log in to a Windows VM on Compute Engine via RDP, the correct approach is:
+
+**[2] After the VM has been created, use gcloud compute reset-windows-password to retrieve the login credentials for the VM.**
+
+Here’s why this option is correct:
+
+- **gcloud compute reset-windows-password**: This command allows you to reset the password for the specified Windows VM instance and retrieve the new password. This is necessary because Compute Engine does not display or store the initial Windows password after VM creation for security reasons.
+
+The reasons why the other options are incorrect:
+
+**[1] After the VM has been created, use your Google Account credentials to log in into the VM.**
+- Google Account credentials are not used to log in to a Windows VM via RDP. You need a specific Windows password.
+
+**[3] When creating the VM, add metadata to the instance using 'windows-password' as the key and a password as the value.**
+- This metadata option does not exist. Compute Engine does not support adding 'windows-password' metadata to set the password for a Windows VM during creation.
+
+**[4] After the VM has been created, download the JSON Private Key for the default Compute Engine service account. Use the credentials in the JSON file to log in to the VM.**
+- The JSON private key for the Compute Engine service account is used for accessing Google Cloud APIs programmatically, not for logging in to a Windows VM via RDP. RDP requires a specific Windows username and password.
+
+Therefore, to log in to your Windows VM via RDP after creation, you should use option **[2]** and run the `gcloud compute reset-windows-password` command to obtain the necessary credentials.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to configure an SSH connection to a single Compute Engine instance for users in the dev1 group. This instance is the only resource in this particular Google Cloud Platform project that the dev1 users should be able to connect to. What should you do?
@@ -1153,6 +1664,29 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Set metadata to enable-oslogin=true for the instance. Set the service account to no service account for that instance. Direct them to use the Cloud Shell to ssh to that instance.
 - [ ] Enable block project wide keys for the instance. Generate an SSH key for each user in the dev1 group. Distribute the keys to dev1 users and direct them to use their third-party tools to connect.
 - [ ] Enable block project wide keys for the instance. Generate an SSH key and associate the key with that instance. Distribute the key to dev1 users and direct them to use their third-party tools to connect.
+
+To configure an SSH connection to a single Compute Engine instance for users in the dev1 group, where this instance is the only resource they should connect to, the best approach is:
+
+**[1] Set metadata to enable-oslogin=true for the instance. Grant the dev1 group the compute.osLogin role. Direct them to use the Cloud Shell to ssh to that instance.**
+
+Here's why this option is correct:
+
+- **enable-oslogin=true**: This metadata setting enables OS Login, which allows users to authenticate using their Google Cloud credentials rather than traditional SSH keys. This simplifies SSH access management.
+- **Grant compute.osLogin role to dev1 group**: This role allows members of the dev1 group to use OS Login to authenticate to the instance.
+- **Use Cloud Shell**: Users can use the Cloud Shell environment, which automatically handles authentication and connection to the instance using OS Login.
+
+The reasons why the other options are incorrect:
+
+**[2] Set metadata to enable-oslogin=true for the instance. Set the service account to no service account for that instance. Direct them to use the Cloud Shell to ssh to that instance.**
+- Setting the service account to no service account would disable any service account access, which is not necessary for SSH access by users. This option does not provide a mechanism for user authentication via OS Login.
+
+**[3] Enable block project wide keys for the instance. Generate an SSH key for each user in the dev1 group. Distribute the keys to dev1 users and direct them to use their third-party tools to connect.**
+- Using block project wide keys is a legacy method and is not suitable when OS Login is available. It involves managing SSH keys manually, which is less secure and more complex compared to OS Login.
+
+**[4] Enable block project wide keys for the instance. Generate an SSH key and associate the key with that instance. Distribute the key to dev1 users and direct them to use their third-party tools to connect.**
+- Similar to option [3], this involves managing SSH keys manually, which is less preferable when OS Login can be used for more secure and manageable access control.
+
+Therefore, **option [1]** is the correct and recommended approach to configure SSH access for users in the dev1 group to the specified Compute Engine instance.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1163,6 +1697,36 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Run gcloud info to view the account value, and then run gcloud services list --account <Account>.
 - [ ] Run gcloud projects describe <project ID> to verify the project value, and then run gcloud services list --available.
 
+To produce a list of the enabled Google Cloud Platform APIs for a GCP project using the gcloud command line in the Cloud Shell, the best option is:
+
+**[1] Run gcloud projects list to get the project ID, and then run gcloud services list --project <project ID>.**
+
+This is the correct choice because:
+- **`gcloud projects list`**: This command helps you retrieve the project ID of your project named "my-project".
+- **`gcloud services list --project <project ID>`**: This command lists all the enabled APIs for the specified project.
+
+The reasons why the other options are incorrect:
+
+**[2] Run gcloud init to set the current project to my-project, and then run gcloud services list --available.**
+- The `gcloud services list --available` command lists all available APIs that you can enable, not the ones currently enabled.
+
+**[3] Run gcloud info to view the account value, and then run gcloud services list --account <Account>.**
+- The account value is not relevant to listing the enabled APIs for a specific project. This option does not correctly target the project-specific enabled services.
+
+**[4] Run gcloud projects describe <project ID> to verify the project value, and then run gcloud services list --available.**
+- `gcloud services list --available` lists all available APIs, not the enabled ones. The `gcloud projects describe` command is useful for getting project details but unnecessary for listing enabled APIs when you already know the project ID.
+
+Therefore, the correct command sequence is:
+
+1. **Get the project ID**:
+   ```bash
+   gcloud projects list
+   ```
+2. **List the enabled APIs**:
+   ```bash
+   gcloud services list --project <project ID>
+   ```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are building a new version of an application hosted in an App Engine environment. You want to test the new version with 1% of users before you completely switch your application over to the new version. What should you do?
@@ -1171,6 +1735,25 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Deploy a new version of your application in a Compute Engine instance instead of App Engine and then use GCP Console to split traffic.
 - [ ] Deploy a new version as a separate app in App Engine. Then configure App Engine using GCP Console to split traffic between the two apps.
 - [x] Deploy a new version of your application in App Engine. Then go to App Engine settings in GCP Console and split traffic between the current version and newly deployed versions accordingly.
+
+To test the new version of your application with 1% of users before completely switching over, the best option is:
+
+**[4] Deploy a new version of your application in App Engine. Then go to App Engine settings in GCP Console and split traffic between the current version and newly deployed versions accordingly.**
+
+This option is correct because:
+- App Engine provides built-in traffic splitting capabilities, allowing you to gradually roll out new versions by directing a percentage of traffic to the new version.
+- You can configure traffic splitting in the GCP Console, specifying the percentage of traffic to be directed to each version of your application.
+
+The reasons why the other options are incorrect:
+
+**[1] Deploy a new version of your application in Google Kubernetes Engine instead of App Engine and then use GCP Console to split traffic.**
+- This option involves moving your application to a completely different environment (Kubernetes Engine) which is unnecessary and more complex for the task of testing a new version with a subset of users.
+
+**[2] Deploy a new version of your application in a Compute Engine instance instead of App Engine and then use GCP Console to split traffic.**
+- Similar to option [1], this involves unnecessary complexity by moving your application to Compute Engine. App Engine has built-in traffic splitting capabilities that are more suitable.
+
+**[3] Deploy a new version as a separate app in App Engine. Then configure App Engine using GCP Console to split traffic between the two apps.**
+- Deploying the new version as a separate app is not necessary. You can deploy it as a new version within the same app and use App Engine’s traffic splitting features directly.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1181,6 +1764,25 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Select Add GPUs. Fill in persistent disk storage and snapshot storage.
 - [ ] Select Add GPUs. Add estimated cost for cluster management.
 
+Given the requirements of high IOPs and the use of disk snapshots, the next step in the GCP pricing calculator for Kubernetes would be:
+
+**[1] Fill in local SSD. Fill in persistent disk storage and snapshot storage.**
+
+This option is correct because:
+- **Local SSD**: High IOPs can be achieved using local SSDs, which provide low-latency, high-throughput storage directly attached to the virtual machine instances in your Kubernetes cluster.
+- **Persistent Disk Storage and Snapshot Storage**: Since you will be using disk snapshots, it is essential to include the cost of persistent disk storage and the additional cost of snapshot storage.
+
+The reasons why the other options are incorrect:
+
+**[2] Fill in local SSD. Add estimated cost for cluster management.**
+- While local SSD is necessary for high IOPs, this option ignores the need to account for persistent disk storage and snapshot storage costs, which are essential given your requirements.
+
+**[3] Select Add GPUs. Fill in persistent disk storage and snapshot storage.**
+- GPUs are not mentioned as a requirement for your workload. This option is irrelevant unless your application specifically requires GPU resources.
+
+**[4] Select Add GPUs. Add estimated cost for cluster management.**
+- Similar to option [3], this option is irrelevant unless your workload requires GPUs. Additionally, it does not account for the need for persistent disk storage and snapshot storage.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are using Google Kubernetes Engine with autoscaling enabled to host a new application. You want to expose this new application to the public, using HTTPS on a public IP address. What should you do?
@@ -1190,6 +1792,25 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create a Kubernetes Service of type NodePort to expose the application on port 443 of each node of the Kubernetes cluster. Configure the public DNS name of your application with the IP of every node of the cluster to achieve load-balancing.
 - [ ] Create a HAProxy pod in the cluster to load-balance the traffic to all the pods of the application. Forward the public traffic to HAProxy with an iptable rule. Configure the DNS name of your application using the public IP of the node HAProxy is running on.
 
+To expose your new application to the public using HTTPS on a public IP address in Google Kubernetes Engine (GKE) with autoscaling enabled, the best option is:
+
+**[1] Create a Kubernetes Service of type NodePort for your application, and a Kubernetes Ingress to expose this Service via a Cloud Load Balancer.**
+
+This is the correct choice because:
+- **Kubernetes Service of type NodePort**: This service type exposes the application on a port on each node in your cluster, which is necessary for the Ingress resource to route traffic to the correct pods.
+- **Kubernetes Ingress**: Ingress allows you to define rules for routing external HTTP and HTTPS traffic to your services. It can be used to configure a Cloud Load Balancer, which will handle HTTPS termination and provide a public IP address for your application.
+
+The reasons why the other options are incorrect:
+
+**[2] Create a Kubernetes Service of type ClusterIP for your application. Configure the public DNS name of your application using the IP of this Service.**
+- A ClusterIP service is only accessible within the cluster and does not have a public IP address. This type of service cannot be used to expose your application to the public.
+
+**[3] Create a Kubernetes Service of type NodePort to expose the application on port 443 of each node of the Kubernetes cluster. Configure the public DNS name of your application with the IP of every node of the cluster to achieve load-balancing.**
+- While this exposes the application on each node, it does not provide HTTPS termination or a single public IP address. Manually configuring DNS with the IPs of each node is not efficient and does not scale well.
+
+**[4] Create a HAProxy pod in the cluster to load-balance the traffic to all the pods of the application. Forward the public traffic to HAProxy with an iptable rule. Configure the DNS name of your application using the public IP of the node HAProxy is running on.**
+- This approach is complex and involves managing HAProxy and iptable rules manually. It does not leverage the built-in capabilities of Kubernetes Ingress and Cloud Load Balancers, which are designed for this purpose and provide easier management and scalability.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to enable traffic between multiple groups of Compute Engine instances that are currently running two different GCP projects. Each group of Compute Engine instances is running in its own VPC. What should you do?
@@ -1198,6 +1819,25 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Verify that both projects are in a GCP Organization. Share the VPC from one project and request that the Compute Engine instances in the other project use this shared VPC.
 - [ ] Verify that you are the Project Administrator of both projects. Create two new VPCs and add all instances.
 - [ ] Verify that you are the Project Administrator of both projects. Create a new VPC and add all instances.
+
+To enable traffic between multiple groups of Compute Engine instances running in two different GCP projects, each with its own VPC, the best option is:
+
+**[2] Verify that both projects are in a GCP Organization. Share the VPC from one project and request that the Compute Engine instances in the other project use this shared VPC.**
+
+This option is correct because:
+- **Shared VPC** allows you to connect multiple projects within the same organization to a common VPC network. This facilitates communication between instances in different projects without needing to create additional VPCs or move instances.
+- By sharing the VPC, you can manage network policies and configurations centrally, which simplifies network administration and enhances security.
+
+The reasons why the other options are incorrect:
+
+**[1] Verify that both projects are in a GCP Organization. Create a new VPC and add all instances.**
+- Creating a new VPC and adding all instances would require migrating existing instances, which is complex and potentially disruptive. It's also unnecessary when Shared VPC can achieve the same goal without moving instances.
+
+**[3] Verify that you are the Project Administrator of both projects. Create two new VPCs and add all instances.**
+- Creating two new VPCs and adding instances would duplicate effort and resources, leading to increased complexity in network management. It's not efficient when Shared VPC provides a simpler solution.
+
+**[4] Verify that you are the Project Administrator of both projects. Create a new VPC and add all instances.**
+- Similar to option [1], this would require migrating instances, which is not necessary. Shared VPC offers a more efficient and less disruptive solution.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1263,6 +1903,26 @@ Therefore, **Option 2** is the correct approach to grant G Suite users access to
 - [ ] Create two configurations using gsutil config. Write a script that sets configurations as active, individually. For each configuration, use gsutil compute instances list to get a list of compute resources.
 - [ ] Go to Cloud Shell and export this information to Cloud Storage on a daily basis.
 - [ ] Go to GCP Console and export this information to Cloud SQL on a daily basis.
+
+The best option for creating an automated process to list all compute instances in both development and production projects on a daily basis is:
+
+**[x] Create two configurations using gcloud config. Write a script that sets configurations as active, individually. For each configuration, use gcloud compute instances list to get a list of compute resources.**
+
+This option is correct because:
+- Using `gcloud config`, you can create separate configurations for each project (development and production).
+- Writing a script to switch between these configurations and list the compute instances ensures that you are correctly accessing and listing resources from the intended project.
+- `gcloud compute instances list` is the appropriate command for listing compute instances.
+
+The reasons why the other options are incorrect:
+
+**[ ] Create two configurations using gsutil config. Write a script that sets configurations as active, individually. For each configuration, use gsutil compute instances list to get a list of compute resources.**
+- `gsutil` is a command-line tool for interacting with Google Cloud Storage, not for managing compute resources. You should use `gcloud` for compute instances.
+
+**[ ] Go to Cloud Shell and export this information to Cloud Storage on a daily basis.**
+- While you could manually do this, it does not automate the process. Additionally, this option does not specify how to handle the project configurations or the actual listing of compute instances.
+
+**[ ] Go to GCP Console and export this information to Cloud SQL on a daily basis.**
+- This option involves manual steps and does not automate the process. It also does not address the need to list compute instances from multiple projects.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -1344,6 +2004,25 @@ Therefore, **Option 3** is the correct approach to ensure that your LDAP server 
 - [ ] Verify that you are the project administrator. Select the associated billing account and create a budget for the appropriate project.
 - [ ] Verify that you are project administrator. Select the associated billing account and create a budget and a custom alert.
 
+The best option for setting a budget alert for the use of Compute Engine services on one of the Google Cloud Platform projects is:
+
+**[1] Verify that you are the project billing administrator. Select the associated billing account and create a budget and alert for the appropriate project.**
+
+This is the correct choice because:
+- You need to be the project billing administrator to manage budgets and alerts related to billing.
+- Once you have verified your role, you can select the associated billing account and create a budget and alert specifically for the appropriate project.
+
+The reasons why the other options are incorrect:
+
+**[2] Verify that you are the project billing administrator. Select the associated billing account and create a budget and a custom alert.**
+- This option is almost correct, but it includes the term "custom alert," which is unnecessary. The standard budget alert will suffice for monitoring the Compute Engine services' costs.
+
+**[3] Verify that you are the project administrator. Select the associated billing account and create a budget for the appropriate project.**
+- Being a project administrator does not necessarily grant permissions to manage billing settings. You need to be the project billing administrator to create budgets and alerts.
+
+**[4] Verify that you are the project administrator. Select the associated billing account and create a budget and a custom alert.**
+- Similar to option [3], being a project administrator is not sufficient for managing billing. Additionally, "custom alert" is unnecessary in this context. The correct role is the project billing administrator.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are migrating a production-critical on-premises application that requires 96 vCPUs to perform its task. You want to make sure the application runs in a similar environment on GCP. What should you do?
@@ -1352,6 +2031,25 @@ Therefore, **Option 3** is the correct approach to ensure that your LDAP server 
 - [ ] When creating the VM, use Intel Skylake as the CPU platform.
 - [ ] Create the VM using Compute Engine default settings. Use gcloud to modify the running instance to have 96 vCPUs.
 - [ ] Start the VM using Compute Engine default settings, and adjust as you go based on Rightsizing Recommendations.
+
+To ensure the application runs in a similar environment on GCP, the best option is:
+
+**[1] When creating the VM, use machine type n1-standard-96.**
+
+This is the correct choice because:
+- The n1-standard-96 machine type directly provides 96 vCPUs, matching the required specifications of your on-premises application.
+- This machine type is designed for high-performance tasks and should provide the computational resources needed for your application.
+
+The reasons why the other options are incorrect:
+
+**[2] When creating the VM, use Intel Skylake as the CPU platform.**
+- While selecting a specific CPU platform like Intel Skylake can optimize performance for some applications, it does not guarantee that the VM will have 96 vCPUs. The machine type must be specified to ensure the correct number of vCPUs.
+
+**[3] Create the VM using Compute Engine default settings. Use gcloud to modify the running instance to have 96 vCPUs.**
+- Compute Engine default settings do not provision a VM with 96 vCPUs. Modifying the instance after creation is more complex and not a best practice for a production-critical application, as it can lead to downtime or configuration errors.
+
+**[4] Start the VM using Compute Engine default settings, and adjust as you go based on Rightsizing Recommendations.**
+- Starting with default settings means the VM will not have the required 96 vCPUs initially. Rightsizing Recommendations are more suitable for optimizing resource usage after monitoring the application’s performance. This approach is not suitable for a production-critical application that requires specific resources from the start.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -4100,3 +4798,28 @@ In Google Cloud Platform (GCP), BigQuery offers several IAM (Identity and Access
    - **Permissions**: Includes all permissions in BigQuery. This role can manage all aspects of BigQuery, including creating and deleting datasets, tables, and jobs. It also includes permissions to set IAM policies and manage storage used by BigQuery.
 
 These roles can be assigned at various levels within GCP, including project level, dataset level, and specific resources within BigQuery. Assigning these roles correctly ensures that users and service accounts have appropriate access to BigQuery resources based on their responsibilities and needs.
+
+
+Google App Engine offers several scaling types to accommodate different workload patterns and performance needs:
+
+1. **Automatic Scaling**:
+   - **Description**: Scales based on request rate, automatically adjusting the number of instances needed to handle incoming traffic.
+   - **Configuration**:
+     - `min_idle_instances`: Specifies the minimum number of idle instances to keep running and ready to serve requests.
+     - `max_instances`: Sets an upper limit on the number of instances that can be running at any given time.
+   - **Use Case**: Ideal for applications with varying traffic patterns where you want App Engine to handle scaling automatically based on demand.
+
+2. **Basic Scaling**:
+   - **Description**: Scales based on request rate, but allows for a more controlled environment with a consistent number of instances.
+   - **Configuration**:
+     - `max_instances`: Sets the maximum number of instances that can be running.
+     - Automatically spins up new instances as traffic increases and stops them when traffic decreases, but does not maintain idle instances.
+   - **Use Case**: Suitable for applications that have predictable traffic patterns and can benefit from cost control with a fixed number of instances.
+
+3. **Manual Scaling**:
+   - **Description**: Allows you to manually specify the number of instances that should be running at all times.
+   - **Configuration**:
+     - `instances`: Specifies the exact number of instances that should be running continuously.
+   - **Use Case**: Useful for applications with consistent workloads where you want full control over the number of instances and their resource allocation.
+
+Each scaling type offers different levels of control and automation, catering to various application requirements and workload characteristics. Choosing the appropriate scaling type depends on factors such as traffic variability, cost considerations, and the need for instance availability.
