@@ -669,6 +669,23 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Configure a single Stackdriver account, and link all projects to the same account.
 - [ ] Configure a single Stackdriver account for one of the projects. In Stackdriver, create a Group and add the other project names as criteria for that Group.
 
+To consolidate reporting under the same Stackdriver (now Google Cloud Monitoring) dashboard for resources distributed over different projects, you should:
+
+- **[3] Configure a single Stackdriver account, and link all projects to the same account.**
+
+### Explanation:
+- **Single Stackdriver Account**: By configuring a single Stackdriver Monitoring account and linking all projects to this account, you can consolidate and view metrics from all projects in one place. This approach simplifies monitoring and management by centralizing the data.
+
+### Why Other Options are Wrong:
+- **[1] Use Shared VPC to connect all projects, and link Stackdriver to one of the projects.**
+  - Shared VPC is used for sharing networks across projects, not for monitoring purposes. Linking Stackdriver to one project won't automatically include metrics from other projects.
+
+- **[2] For each project, create a Stackdriver account. In each project, create a service account for that project and grant it the role of Stackdriver Account Editor in all other projects.**
+  - This option is overly complex and unnecessary. It involves creating multiple Stackdriver accounts and managing service account permissions, which can be cumbersome and does not inherently consolidate the monitoring data into a single dashboard.
+
+- **[4] Configure a single Stackdriver account for one of the projects. In Stackdriver, create a Group and add the other project names as criteria for that Group.**
+  - While creating a group in Stackdriver might help organize resources, it doesn't inherently link multiple projects to a single Stackdriver account for consolidated reporting. Groups are more about organizing resources within a project rather than across multiple projects.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need a dynamic way of provisioning VMs on Compute Engine. The exact specifications will be in a dedicated configuration file. You want to follow Google's recommended practices. Which method should you use?
@@ -704,6 +721,23 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] Deploy the monitoring pod in a DaemonSet object.
 - [ ] Reference the monitoring pod in a Deployment object.
 - [ ] Reference the monitoring pod in a cluster initializer at the GKE cluster creation time.
+
+To ensure that each node of the GKE cluster runs a monitoring pod that sends container metrics to a third-party monitoring solution, you should:
+
+- **[2] Deploy the monitoring pod in a DaemonSet object.**
+
+### Explanation:
+- **DaemonSet**: A DaemonSet ensures that a copy of a pod runs on all (or some) nodes in the cluster. When you create a DaemonSet, it automatically adds the monitoring pod to each new node added to the cluster, which is ideal for running monitoring agents.
+
+### Why Other Options are Wrong:
+- **[1] Deploy the monitoring pod in a StatefulSet object.**
+  - A StatefulSet is used for stateful applications, where each pod has a unique identity and stable storage. It's not intended for ensuring that each node runs a pod.
+
+- **[3] Reference the monitoring pod in a Deployment object.**
+  - A Deployment ensures that a specified number of replicas of a pod are running, but it doesn't ensure that one pod runs on each node. It distributes pods across the cluster based on available resources.
+
+- **[4] Reference the monitoring pod in a cluster initializer at the GKE cluster creation time.**
+  - While you can initialize certain settings at the cluster creation time, this option doesn't provide a way to ensure that a monitoring pod runs on each node. DaemonSets are specifically designed for this purpose and are the standard Kubernetes solution for running a pod on every node.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -741,6 +775,14 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Migrate the acquired company's projects into your company's GCP organization. Link the migrated projects to your company's billing account.
 - [ ] Create a new GCP organization and a new billing account. Migrate the acquired company's projects and your company's projects into the new GCP organization and link the projects to the new billing account.
 
+To consolidate all GCP costs of both organizations onto a single invoice by tomorrow, the most straightforward and immediate action would be to:
+
+- **[1] Link the acquired company's projects to your company's billing account.**
+
+This approach allows you to quickly and efficiently consolidate billing under one account, ensuring that all costs are included in a single invoice. This option provides an immediate solution without the need for more complex reorganization or migration of projects, which would take more time and effort.
+
+Options like migrating projects to a new organization or linking billing data to a shared BigQuery dataset are more involved and wouldn't provide an immediate consolidation of invoices by tomorrow.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to configure 10 Compute Engine instances for availability when maintenance occurs. Your requirements state that these instances should attempt to automatically restart if they crash. Also, the instances should be highly available including during system maintenance. What should you do?
@@ -749,6 +791,34 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create an instance template for the instances. Set 'Automatic Restart' to off. Set 'On-host maintenance' to Terminate VM instances. Add the instance template to an instance group.
 - [ ] Create an instance group for the instances. Set the 'Autohealing' health check to healthy (HTTP).
 - [ ] Create an instance group for the instance. Verify that the 'Advanced creation options' setting for 'do not retry machine creation' is set to off.
+
+The correct option for your scenario is:
+
+**[1] Create an instance template for the instances. Set the 'Automatic Restart' to on. Set the 'On-host maintenance' to Migrate VM instance. Add the instance template to an instance group.**
+
+Here’s why this option is correct:
+
+- **Create an instance template for the instances:** Instance templates in Google Cloud allow you to define the machine type, boot disk image or container image, labels, and other instance properties. They provide a consistent way to create VM instances.
+
+- **Set the 'Automatic Restart' to on:** This ensures that if an instance crashes due to a failure, the instance will attempt to restart automatically, helping to maintain availability.
+
+- **Set the 'On-host maintenance' to Migrate VM instance:** This setting ensures that during maintenance events that require the underlying host to be updated or replaced, Google Cloud will migrate the VM instance to another host, maintaining its availability.
+
+- **Add the instance template to an instance group:** Instance groups in Google Cloud manage groups of VM instances as a single entity, providing features such as autoscaling, load balancing, and autohealing.
+
+Now, let's analyze why the other options are incorrect:
+
+- **[2] Create an instance template for the instances. Set 'Automatic Restart' to off. Set 'On-host maintenance' to Terminate VM instances. Add the instance template to an instance group:**
+  - Setting 'Automatic Restart' to off means instances won't attempt to restart automatically if they crash, which contradicts the requirement for automatic restart.
+  - Setting 'On-host maintenance' to Terminate VM instances means instances would be terminated rather than migrated during maintenance, which does not ensure availability.
+
+- **[3] Create an instance group for the instances. Set the 'Autohealing' health check to healthy (HTTP):**
+  - While instance groups do support autohealing, configuring a health check alone without specifying the instance template's settings for automatic restart and maintenance behavior does not ensure that instances will automatically restart or be migrated during maintenance.
+
+- **[4] Create an instance group for the instance. Verify that the 'Advanced creation options' setting for 'do not retry machine creation' is set to off:**
+  - This setting is unrelated to ensuring instance availability during maintenance or automatic restart. It focuses on retry behavior for creating instances.
+
+Therefore, option [1] is the correct choice as it directly addresses the requirements for instance availability during maintenance and automatic restart in Google Cloud Compute Engine instances.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -759,6 +829,23 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] In the Google Cloud Platform Console, use the 'create role from role' functionality.
 - [ ] In the Google Cloud Platform Console, use the 'create role' functionality and select all applicable permissions.
 
+The correct option for your scenario is:
+
+**[1] Use gcloud iam roles copy and specify the production project as the destination project.**
+
+Here’s why the other options are incorrect:
+
+- **[2] Use gcloud iam roles copy and specify your organization as the destination organization:**
+  This option is not necessary unless you need to copy roles across projects within the same organization. It's more specific to organizational-level IAM management rather than project-level.
+
+- **[3] In the Google Cloud Platform Console, use the 'create role from role' functionality:**
+  This option allows you to create a new role based on an existing role within the same project, but it doesn't copy roles between projects. It's useful for refining or customizing existing roles within a single project.
+
+- **[4] In the Google Cloud Platform Console, use the 'create role' functionality and select all applicable permissions:**
+  This option involves manually creating a new role and selecting permissions, which is not efficient if you want to replicate an existing role with the same permissions from another project. It's more suited for creating entirely new roles from scratch.
+
+Therefore, using `gcloud iam roles copy` with the destination project specified is the most direct and efficient method to replicate IAM roles from one project to another. It ensures that all permissions and configurations associated with the roles are copied accurately to the new project.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You are using multiple configurations for gcloud. You want to review the configured Kubernetes Engine cluster of an inactive configuration using the fewest possible steps. What should you do?
@@ -768,6 +855,35 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Use kubectl config get-contexts to review the output.
 - [x] Use kubectl config use-context and kubectl config view to review the output.
 
+To review the configured Kubernetes Engine cluster of an inactive configuration using the fewest possible steps, you should use `kubectl config view`.
+
+### Correct Answer:
+**Use kubectl config use-context and kubectl config view to review the output.**
+
+### Explanation:
+
+- **kubectl config use-context:** This command switches the current context to the specified one.
+- **kubectl config view:** This command displays the current configuration settings, including the active context, clusters, users, and other relevant information.
+
+By using `kubectl config use-context` to switch to the desired context and then `kubectl config view` to display the details, you can review the configuration effectively.
+
+### Why the Other Options Are Incorrect:
+
+1. **Use gcloud config configurations describe to review the output.**
+   - **Incorrect:** This command describes the gcloud configuration but does not directly show the Kubernetes Engine cluster information tied to it.
+
+2. **Use gcloud config configurations activate and gcloud config list to review the output.**
+   - **Inefficient:** This approach requires activating the configuration and listing the settings, which is more cumbersome and involves more steps.
+
+3. **Use kubectl config get-contexts to review the output.**
+   - **Incomplete:** This command shows the available contexts but does not provide detailed information about the specific configuration of an inactive context.
+
+4. **Use kubectl config use-context and kubectl config view to review the output.**
+   - **Correct:** This method switches to the specified context and then reviews the current configuration, providing a direct way to see the Kubernetes Engine cluster details.
+
+### Conclusion:
+Using `kubectl config use-context` to switch contexts and `kubectl config view` to display the current configuration settings is the most efficient and direct method to review the Kubernetes Engine cluster of an inactive configuration.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You need to configure IAM access audit logging in BigQuery for external auditors. You want to follow Google-recommended practices. What should you do?
@@ -776,6 +892,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Add the auditors group to two new custom IAM roles.
 - [ ] Add the auditor user accounts to the 'logging.viewer' and 'bigQuery.dataViewer' predefined IAM roles.
 - [ ] Add the auditor user accounts to two new custom IAM roles.
+
+To configure IAM access audit logging in BigQuery for external auditors while following Google-recommended practices, you should add the auditors group to the 'logging.viewer' and 'bigQuery.dataViewer' predefined IAM roles.
+
+### Correct Answer:
+**Add the auditors group to the 'logging.viewer' and 'bigQuery.dataViewer' predefined IAM roles.**
+
+### Explanation:
+
+#### Why Option 1 is Correct:
+- **Predefined Roles:** Using predefined roles (`logging.viewer` and `bigQuery.dataViewer`) is a best practice recommended by Google because these roles are designed to provide the necessary permissions without granting excessive access.
+- **Group Management:** Assigning roles to a group rather than individual users simplifies management and ensures consistency in permissions. This way, any new auditor added to the group automatically inherits the necessary permissions.
+- **Audit Logging:** The `logging.viewer` role allows auditors to view audit logs, and the `bigQuery.dataViewer` role allows them to read BigQuery data, which are typical requirements for auditing purposes.
+
+### Why the Other Options Are Incorrect:
+
+2. **Add the auditors group to two new custom IAM roles.**
+   - **Unnecessary Custom Roles:** Creating custom roles for this purpose is unnecessary when predefined roles already exist to fulfill the requirements. Custom roles add complexity without providing additional benefits in this scenario.
+
+3. **Add the auditor user accounts to the 'logging.viewer' and 'bigQuery.dataViewer' predefined IAM roles.**
+   - **Individual User Management:** Assigning roles to individual user accounts is less efficient than assigning them to a group. It requires more administrative effort and increases the risk of inconsistencies.
+
+4. **Add the auditor user accounts to two new custom IAM roles.**
+   - **Individual Users and Custom Roles:** This option combines the drawbacks of options 2 and 3. It adds unnecessary complexity by creating custom roles and managing permissions at the individual user level instead of at the group level.
+
+### Conclusion:
+Option 1 follows Google-recommended practices by using predefined IAM roles to grant the necessary permissions and managing these permissions through a group, making it the most efficient and secure approach.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -795,6 +937,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [x] On the App Engine Versions page of the GCP Console, route 100% of the traffic to the previous version.
 - [ ] Deploy the original version as a separate application. Then go to App Engine settings and split traffic between applications so that the original version serves 100% of the requests.
 
+To revert to the prior version of your application in App Engine, you should route 100% of the traffic to the previous version.
+
+### Correct Answer:
+**On the App Engine Versions page of the GCP Console, route 100% of the traffic to the previous version.**
+
+### Explanation:
+
+#### Why Option 3 is Correct:
+- **Traffic Splitting:** App Engine allows you to deploy multiple versions of your application and manage traffic between them. By routing 100% of the traffic to the previous version, you effectively revert to that version without needing to redeploy or modify the existing versions.
+- **Immediate Reversion:** This method provides an immediate solution to revert traffic back to the stable version, ensuring that users no longer encounter the bug in the new release.
+
+### Why the Other Options Are Incorrect:
+
+1. **Run gcloud app restore.**
+   - **Non-Existent Command:** There is no `gcloud app restore` command available in the Google Cloud SDK, making this option invalid.
+
+2. **On the App Engine page of the GCP Console, select the application that needs to be reverted and click Revert.**
+   - **No Revert Button:** There is no "Revert" button on the App Engine page of the GCP Console. Traffic management is done through the Versions page.
+
+4. **Deploy the original version as a separate application. Then go to App Engine settings and split traffic between applications so that the original version serves 100% of the requests.**
+   - **Unnecessary Steps:** This option is overly complex and unnecessary. You don't need to deploy the original version again. App Engine's traffic splitting feature allows you to route traffic to existing versions without redeploying.
+
+### Conclusion:
+Option 3 is the best answer because it leverages App Engine's built-in traffic management capabilities to revert to a previous version quickly and efficiently. This ensures minimal downtime and disruption for users while addressing the bug in the new release.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You want to configure Autohealing for network load balancing for a group of Compute Engine instances that run in multiple zones, using the fewest possible steps. You need to configure re-creation of VMs if they are unresponsive after 3 attempts of 10 seconds each. What should you do?
@@ -803,6 +970,32 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Create an HTTP load balancer with a backend configuration that references an existing instance group. Define a balancing mode and set the maximum RPS to 10.
 - [x] Create a Managed Instance Group. Set the Autohealing health check to healthy (HTTP).
 - [ ] Create a Managed Instance Group. Verify that the autoscaling setting is on.
+
+To configure Autohealing for network load balancing with the fewest steps, you should create a Managed Instance Group and set the Autohealing health check.
+
+### Correct Answer:
+**Create a Managed Instance Group. Set the Autohealing health check to healthy (HTTP).**
+
+### Explanation:
+
+#### Why Option 3 is Correct:
+- **Managed Instance Group (MIG):** A Managed Instance Group is the primary way to set up autohealing for instances in Google Cloud. It manages identical instances based on a template and ensures they are healthy.
+- **Autohealing Configuration:** Within the MIG, you can set up an autohealing policy that uses a health check to determine the health of the instances. If instances are deemed unhealthy, they are automatically recreated.
+- **Health Check Configuration:** You can define an HTTP health check with specific parameters (like 3 attempts of 10 seconds each) to determine if an instance is healthy.
+
+### Why the Other Options Are Incorrect:
+
+1. **Create an HTTP load balancer with a backend configuration that references an existing instance group. Set the health check to healthy (HTTP).**
+   - **Load Balancer Focus:** This option focuses on setting up a load balancer, not autohealing. While health checks are part of the load balancer, they do not directly configure autohealing for the instances.
+
+2. **Create an HTTP load balancer with a backend configuration that references an existing instance group. Define a balancing mode and set the maximum RPS to 10.**
+   - **Balancing Mode Configuration:** This option sets up a load balancer with specific request per second (RPS) limits, which is unrelated to the autohealing configuration needed for recreating unresponsive VMs.
+
+4. **Create a Managed Instance Group. Verify that the autoscaling setting is on.**
+   - **Autoscaling vs. Autohealing:** Autoscaling adjusts the number of instances based on load but does not ensure individual instance health or recreate unresponsive instances. Autohealing specifically recreates unhealthy instances based on health checks.
+
+### Conclusion:
+Option 3 is the best answer because it directly addresses the need to configure autohealing for the instances in a managed instance group with a specific HTTP health check. This approach ensures that instances are recreated if they become unresponsive according to the defined health check parameters.
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -813,6 +1006,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Download a JSON Private Key for the service account. On the Custom Metadata of the VM, add that JSON as the value for the key compute-engine-service-account.
 - [ ] Download a JSON Private Key for the service account. After creating the VM, ssh into the VM and save the JSON under ~/.gcloud/compute-engine-service-account.json.
 
+To ensure that your Linux VM uses a specific service account instead of the default Compute Engine service account, you need to assign the desired service account during the VM creation process.
+
+### Correct Answer:
+**When creating the VM via the web console, specify the service account under the 'Identity and API Access' section.**
+
+### Explanation:
+
+#### Why Option 1 is Correct:
+- **Service Account Selection:** During the VM creation process, you can specify a custom service account under the 'Identity and API Access' section. This assigns the specified service account to the VM, allowing it to access Cloud SQL and other Google Cloud resources according to the permissions granted to the service account.
+- **No Need for Key Management:** Specifying the service account at creation time eliminates the need to manually handle and manage JSON private keys, which simplifies security and reduces the risk of key exposure.
+
+### Why the Other Options Are Incorrect:
+
+2. **Download a JSON Private Key for the service account. On the Project Metadata, add that JSON as the value for the key compute-engine-service-account.**
+   - **Incorrect Metadata Use:** Project metadata is not intended for storing and distributing sensitive JSON private keys. This approach exposes the private key and does not ensure the VM uses the specified service account.
+
+3. **Download a JSON Private Key for the service account. On the Custom Metadata of the VM, add that JSON as the value for the key compute-engine-service-account.**
+   - **Incorrect Metadata Use:** Similar to project metadata, VM custom metadata is not meant for distributing JSON private keys. This method also exposes the private key and is not a secure practice.
+
+4. **Download a JSON Private Key for the service account. After creating the VM, ssh into the VM and save the JSON under ~/.gcloud/compute-engine-service-account.json.**
+   - **Manual and Insecure:** This approach requires manual intervention and handling of the private key, increasing the risk of exposure. It is not the recommended method for assigning a service account to a VM.
+
+### Conclusion:
+Option 1 is the correct approach because it securely assigns the specified service account to the VM during the creation process, leveraging built-in Google Cloud Platform features without exposing sensitive credentials.
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ### You have one project called proj-sa where you manage all your service accounts. You want to be able to use a service account from this project to take snapshots of VMs running in another project called proj-vm. What should you do?
@@ -821,6 +1039,31 @@ Performing a rolling-action start-update with `maxSurge` set to 1 and `maxUnavai
 - [ ] Download the private key from the service account, and add the private key to each VM's SSH keys.
 - [x] Grant the service account the IAM role of Compute Storage Admin in the project called proj-vm.
 - [ ] When creating the VMs, set the service account's API scope for Compute Engine to read/write.
+
+To allow a service account from one project (proj-sa) to take snapshots of VMs running in another project (proj-vm), you need to ensure that the service account has the necessary permissions to perform this task in the target project.
+
+### Correct Answer:
+**Grant the service account the IAM role of Compute Storage Admin in the project called proj-vm.**
+
+### Explanation:
+
+#### Why Option 3 is Correct:
+- **Permissions:** The `Compute Storage Admin` role includes permissions to create snapshots of disks. By granting this role to the service account in the proj-vm project, you allow the service account to perform the necessary snapshot operations.
+- **Cross-Project Permissions:** IAM roles can be assigned across projects, meaning you can grant a service account from one project permissions to resources in another project. This is a common practice in GCP to manage access and permissions efficiently.
+
+### Why the Other Options Are Incorrect:
+
+1. **Download the private key from the service account, and add it to each VM's custom metadata.**
+   - **Incorrect Approach:** Adding the private key to VM metadata is not a secure or recommended practice. It doesn't grant the necessary permissions for taking snapshots and exposes the private key, which is a security risk.
+
+2. **Download the private key from the service account, and add the private key to each VM's SSH keys.**
+   - **Incorrect Use of SSH Keys:** SSH keys are used for secure access to VM instances, not for granting API permissions like taking snapshots. This method does not address the need for proper IAM roles.
+
+4. **When creating the VMs, set the service account's API scope for Compute Engine to read/write.**
+   - **Scopes vs. Roles:** API scopes define the level of access to GCP services for a particular instance, but they do not grant the necessary IAM permissions across projects. Scopes are limited to the instance level and cannot span multiple projects.
+
+### Conclusion:
+Option 3 is the correct approach because it properly uses IAM roles to grant the required permissions to the service account, ensuring it can take snapshots of VMs in the proj-vm project securely and efficiently.
 
 **[⬆ Back to Top](#table-of-contents)**
 
